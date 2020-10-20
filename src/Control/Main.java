@@ -12,12 +12,15 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        
+        Font.loadFont(getClass().getResourceAsStream("/Resources/Fonts/PTSans-Regular.ttf"), 24);
 
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -26,6 +29,7 @@ public class Main extends Application {
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(ventana);
+            scene.getStylesheets().add("/Resources/Fonts/Skin_Fonts.css");
             primaryStage.setScene(scene);
             primaryStage.show();
             primaryStage.setResizable(false);

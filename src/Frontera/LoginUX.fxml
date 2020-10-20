@@ -25,9 +25,9 @@
             <Image url="@../Resources/Images/1200px-Universidad_Nacional_de_Colombia_-_Escudo_2016.svg.png" />
          </image>
       </ImageView>
-      <Label layoutX="347.0" layoutY="47.0" prefHeight="101.0" prefWidth="255.0" text="Préstamo Equipos de Laboratorio" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+      <Label fx:id="title" layoutX="347.0" layoutY="47.0" prefHeight="101.0" prefWidth="255.0" text="Préstamo Equipos de Laboratorio" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="Segoe UI Bold" size="24.0" />
          </font>
       </Label>
       <Label layoutX="380.0" layoutY="289.0" prefHeight="35.0" prefWidth="190.0" text="Universidad Nacional de Colombia Facultad de Ingeniería" textAlignment="CENTER" textFill="WHITE" wrapText="true">
