@@ -3,12 +3,42 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.LoginUXController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.LoginUXController">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="281.0" prefHeight="25.0" prefWidth="190.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33;" text="Iniciar Sesión" textFill="WHITE" />
-      <JFXTextField layoutX="50.0" layoutY="148.0" prefHeight="25.0" prefWidth="190.0" />
-      <JFXPasswordField layoutX="50.0" layoutY="200.0" prefHeight="25.0" prefWidth="190.0" />
+      <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="281.0" prefHeight="25.0" prefWidth="190.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33;" text="Iniciar Sesión" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <JFXTextField focusColor="#7f9a33" layoutX="50.0" layoutY="148.0" prefHeight="25.0" prefWidth="190.0" promptText="Usuario" />
+      <JFXPasswordField focusColor="#7f9a33" layoutX="50.0" layoutY="200.0" prefHeight="25.0" prefWidth="190.0" promptText="Contraseña" />
+      <Circle fill="#a9cd43" layoutX="514.0" layoutY="197.0" radius="225.0" stroke="#a9cd43" strokeType="INSIDE" />
+      <ImageView fitHeight="110.0" fitWidth="86.0" layoutX="432.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/Images/1200px-Universidad_Nacional_de_Colombia_-_Escudo_2016.svg.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="347.0" layoutY="47.0" prefHeight="101.0" prefWidth="255.0" text="Préstamo Equipos de Laboratorio" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="380.0" layoutY="289.0" prefHeight="35.0" prefWidth="190.0" text="Universidad Nacional de Colombia Facultad de Ingeniería" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+      <Label layoutX="50.0" layoutY="316.0" text="¿Sin usuario? Pruebe Registrarse aquí">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="81.0" text="Iniciar Sesión" textFill="#7f9a33">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
