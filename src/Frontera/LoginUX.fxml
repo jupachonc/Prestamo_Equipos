@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -33,7 +34,7 @@
          <font>
             <Font size="11.0" />
          </font></Label>
-      <Label fx:id="registerlabel" layoutX="50.0" layoutY="317.0" onMouseClicked="#ToRegister" text="¿Sin usuario? Pruebe Registrarse aquí">
+      <Label fx:id="registerlabel" layoutX="50.0" layoutY="317.0" text="¿Sin usuario?">
          <font>
             <Font size="10.0" />
          </font>
@@ -43,5 +44,10 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
+      <Hyperlink fx:id="registerlink" layoutX="117.0" layoutY="314.0" onAction="#ToRegisterLink" text="Regístrarse aquí">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Hyperlink>
    </children>
 </AnchorPane>
