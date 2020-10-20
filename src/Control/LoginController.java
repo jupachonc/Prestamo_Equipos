@@ -44,6 +44,19 @@ public class LoginController implements Initializable {
     private void Login(ActionEvent event) {
         System.out.println(user.getText());
         System.out.println(password.getText());
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/UserMenuUX.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            Stage stage1 = (Stage) loginbtn.getScene().getWindow();
+            stage1.close();
+
+        } catch(Exception e) {
+        e.printStackTrace();
+        }
 
     }
 
