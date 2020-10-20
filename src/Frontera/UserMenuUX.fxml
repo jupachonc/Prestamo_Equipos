@@ -10,7 +10,7 @@
 <AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="825.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.UserMenuController">
    <children>
       <Circle fill="#a9cd43" layoutX="484.0" layoutY="-379.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
-      <Label layoutX="356.0" layoutY="23.0" text="Menú Principal" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="356.0" layoutY="23.0" text="Menú Principal" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
