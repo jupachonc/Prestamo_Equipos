@@ -35,6 +35,8 @@ public class RegisterController implements Initializable {
     private JFXPasswordField confirm_password;
     @FXML
     private Hyperlink loginlink;
+    @FXML
+    private JFXTextField documento;
 
     /**
      * Initializes the controller class.
@@ -64,7 +66,8 @@ public class RegisterController implements Initializable {
         e.printStackTrace();
         }
     }
-
-
     
+
+
+  
 }
