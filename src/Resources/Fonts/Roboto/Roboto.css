@@ -1,4 +1,5 @@
 @font-face {
     font-family: 'Roboto';
-    src: url('Roboto-Medium.ttf');
+    font-style: normal;
+    src: url('Roboto-Regular.ttf');
 }

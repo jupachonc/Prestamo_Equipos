@@ -6,8 +6,6 @@
 package Control;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,24 +14,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-
-public class LoginController implements Initializable {
-    @FXML
-    private JFXTextField user;
-    @FXML
-    private JFXPasswordField password;
-    @FXML
-    private JFXButton loginbtn;
-    @FXML
-    private Hyperlink registerlink;
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }
-    private void ToPath(String path){
+/**
+ * FXML Controller class
+ *
+ * @author sebas
+ */
+public class AdminMenuController implements Initializable {
+    
+        private void ToPath(String path){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -41,27 +31,28 @@ public class LoginController implements Initializable {
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
             stage.show();
-            Stage stage1 = (Stage) loginbtn.getScene().getWindow();
+            Stage stage1 = (Stage) logoutbtn.getScene().getWindow();
             stage1.close();
 
         } catch(Exception e) {
         e.printStackTrace();
         }
     }
-    //Login Button
-    @FXML
-    private void Login(ActionEvent event) {
-        if(user.getText().equals("admin")){
-            ToPath("/Frontera/AdminMenuUX.fxml");
-        }else{
-            ToPath("/Frontera/UserMenuUX.fxml");
-        }
-    }
 
-    //Register Label Click
     @FXML
-    private void ToRegisterLink(ActionEvent event) {
-        ToPath("/Frontera/RegisterUX.fxml");
+    private JFXButton logoutbtn;
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+
+    @FXML
+    private void Logout(ActionEvent event) {
+        ToPath("/Frontera/LoginUX.fxml");
     }
     
 }

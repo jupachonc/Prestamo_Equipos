@@ -10,22 +10,22 @@
 <AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="825.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.UserMenuController">
    <children>
       <Circle fill="#a9cd43" layoutX="484.0" layoutY="-379.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
-      <Label alignment="CENTER" layoutX="356.0" layoutY="23.0" text="Menú Principal" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="379.0" layoutY="25.0" style="-fx-font-family: &quot;PT Sans&quot;;" text="Menú Principal" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <JFXButton fx:id="logoutbtn" layoutX="365.0" layoutY="468.0" onAction="#Logout" prefHeight="28.0" prefWidth="239.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336;" text="Cerrar Sesión" textFill="WHITE">
+      <JFXButton fx:id="logoutbtn" layoutX="365.0" layoutY="468.0" onAction="#Logout" pickOnBounds="false" prefHeight="28.0" prefWidth="239.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336;" text="Cerrar Sesión" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <Label layoutX="285.0" layoutY="134.0" text="¡Bienvenido! Desea acceder a...">
+      <Label layoutX="294.0" layoutY="132.0" style="-fx-font-family: Roboto;" text="¡Bienvenido! Desea acceder a...">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="285.0" layoutY="173.0" text="Está registrado como User" textAlignment="CENTER">
+      <Label layoutX="294.0" layoutY="165.0" style="-fx-font-family: Roboto;" text="Está registrado como User" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
@@ -41,7 +41,7 @@
       <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" layoutX="552.0" layoutY="495.0" size="18.0" />
       <JFXButton layoutX="532.0" layoutY="259.0" prefHeight="115.0" prefWidth="291.0" style="-fx-background-color: #ff5252;" text="Historial Préstamos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
-            <FontAwesomeIcon fill="WHITE" glyphName="HISTORY" size="64" wrappingWidth="51.571428298950195" />
+            <FontAwesomeIcon blendMode="ADD" fill="WHITE" glyphName="HISTORY" size="64" wrappingWidth="51.571428298950195" />
          </graphic>
          <font>
             <Font name="System Bold" size="24.0" />
