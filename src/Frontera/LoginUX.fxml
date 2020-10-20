@@ -12,13 +12,13 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.LoginUXController">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="281.0" prefHeight="25.0" prefWidth="190.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33;" text="Iniciar Sesión" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="281.0" onAction="#Login" prefHeight="25.0" prefWidth="190.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33;" text="Iniciar Sesión" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></JFXButton>
-      <JFXTextField focusColor="#7f9a33" layoutX="50.0" layoutY="148.0" prefHeight="25.0" prefWidth="190.0" promptText="Usuario" />
-      <JFXPasswordField focusColor="#7f9a33" layoutX="50.0" layoutY="200.0" prefHeight="25.0" prefWidth="190.0" promptText="Contraseña" />
-      <Circle fill="#a9cd43" layoutX="514.0" layoutY="197.0" radius="225.0" stroke="#a9cd43" strokeType="INSIDE" />
+      <JFXTextField fx:id="user" focusColor="#7f9a33" layoutX="50.0" layoutY="148.0" prefHeight="25.0" prefWidth="190.0" promptText="Usuario" />
+      <JFXPasswordField fx:id="password" focusColor="#7f9a33" layoutX="50.0" layoutY="200.0" prefHeight="25.0" prefWidth="190.0" promptText="Contraseña" />
+      <Circle fill="#a9cd43" layoutX="564.0" layoutY="197.0" radius="275.0" stroke="#a9cd43" strokeType="INSIDE" />
       <ImageView fitHeight="110.0" fitWidth="86.0" layoutX="432.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/Images/1200px-Universidad_Nacional_de_Colombia_-_Escudo_2016.svg.png" />
@@ -33,7 +33,7 @@
          <font>
             <Font size="11.0" />
          </font></Label>
-      <Label layoutX="55.0" layoutY="316.0" text="¿Sin usuario? Pruebe Registrarse aquí">
+      <Label layoutX="50.0" layoutY="317.0" onMouseClicked="#ToRegister" text="¿Sin usuario? Pruebe Registrarse aquí">
          <font>
             <Font size="10.0" />
          </font>

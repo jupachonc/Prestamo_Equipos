@@ -5,19 +5,37 @@
  */
 package Control;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 
-/**
- * FXML Controller class
- *
- * @author sebas
- */
+
 public class LoginUXController implements Initializable {
+
+    @FXML
+    private JFXTextField user;
+    @FXML
+    private JFXPasswordField password;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    //Login Button
+    @FXML
+    private void Login(ActionEvent event) {
+        System.out.println(user.getText());
+        System.out.println(password.getText());
+    }
+
+    //Register Label Click
+    @FXML
+    private void ToRegister(MouseEvent event) {
+        System.out.println("To Register");
+    }
     
 }
