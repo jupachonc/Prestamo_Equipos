@@ -10,9 +10,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.LoginUXController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.LoginController">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="281.0" onAction="#Login" prefHeight="25.0" prefWidth="190.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33;" text="Iniciar Sesión" textFill="WHITE">
+      <JFXButton fx:id="loginbtn" buttonType="RAISED" layoutX="50.0" layoutY="281.0" onAction="#Login" prefHeight="25.0" prefWidth="190.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33;" text="Iniciar Sesión" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></JFXButton>
@@ -33,7 +33,7 @@
          <font>
             <Font size="11.0" />
          </font></Label>
-      <Label layoutX="50.0" layoutY="317.0" onMouseClicked="#ToRegister" text="¿Sin usuario? Pruebe Registrarse aquí">
+      <Label fx:id="registerlabel" layoutX="50.0" layoutY="317.0" onMouseClicked="#ToRegister" text="¿Sin usuario? Pruebe Registrarse aquí">
          <font>
             <Font size="10.0" />
          </font>

@@ -5,22 +5,32 @@
  */
 package Control;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 
-public class LoginUXController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
     private JFXTextField user;
     @FXML
     private JFXPasswordField password;
+    @FXML
+    private JFXButton loginbtn;
+    @FXML
+    private Label registerlabel;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -30,12 +40,26 @@ public class LoginUXController implements Initializable {
     private void Login(ActionEvent event) {
         System.out.println(user.getText());
         System.out.println(password.getText());
+
     }
 
     //Register Label Click
     @FXML
     private void ToRegister(MouseEvent event) {
         System.out.println("To Register");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/RegisterUX.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            Stage stage1 = (Stage) registerlabel.getScene().getWindow();
+            stage1.close();
+
+        } catch(Exception e) {
+        e.printStackTrace();
+        }
     }
     
 }
