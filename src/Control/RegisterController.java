@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -33,7 +34,7 @@ public class RegisterController implements Initializable {
     @FXML
     private JFXPasswordField confirm_password;
     @FXML
-    private Label loginlabel;
+    private Hyperlink loginlink;
 
     /**
      * Initializes the controller class.
@@ -48,8 +49,7 @@ public class RegisterController implements Initializable {
     }
 
     @FXML
-    private void ToLogin(MouseEvent event) {
-        System.out.println("To Login");
+    private void ToLogin(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/LoginUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -57,13 +57,14 @@ public class RegisterController implements Initializable {
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
             stage.show();
-            Stage stage1 = (Stage) loginlabel.getScene().getWindow();
+            Stage stage1 = (Stage) loginlink.getScene().getWindow();
             stage1.close();
 
         } catch(Exception e) {
         e.printStackTrace();
         }
-        
     }
+
+
     
 }
