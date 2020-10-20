@@ -15,10 +15,6 @@ import javafx.fxml.Initializable;
  * @author sebas
  */
 public class LoginUXController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

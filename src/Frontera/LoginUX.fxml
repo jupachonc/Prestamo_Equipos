@@ -26,13 +26,16 @@
       </ImageView>
       <Label layoutX="347.0" layoutY="47.0" prefHeight="101.0" prefWidth="255.0" text="Préstamo Equipos de Laboratorio" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
          <font>
-            <Font name="System Bold" size="28.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="380.0" layoutY="289.0" prefHeight="35.0" prefWidth="190.0" text="Universidad Nacional de Colombia Facultad de Ingeniería" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-      <Label layoutX="50.0" layoutY="316.0" text="¿Sin usuario? Pruebe Registrarse aquí">
+      <Label layoutX="380.0" layoutY="289.0" prefHeight="35.0" prefWidth="190.0" text="Universidad Nacional de Colombia Facultad de Ingeniería" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="11.0" />
+         </font></Label>
+      <Label layoutX="55.0" layoutY="316.0" text="¿Sin usuario? Pruebe Registrarse aquí">
+         <font>
+            <Font size="10.0" />
          </font>
       </Label>
       <Label layoutX="50.0" layoutY="81.0" text="Iniciar Sesión" textFill="#7f9a33">
