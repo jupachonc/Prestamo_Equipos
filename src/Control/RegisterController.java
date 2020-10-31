@@ -21,6 +21,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+
+
+
 public class RegisterController implements Initializable {
 
     @FXML
@@ -50,6 +53,15 @@ public class RegisterController implements Initializable {
 
     @FXML
     private void Register(ActionEvent event) {
+        String nombre = nombres.getText();
+        String apellido = apellidos.getText();
+        String strDocumento = documento.getText();
+        String strEmail = email.getText();
+        String contrasena = password.getText();
+        String reContrasena = confirm_password.getText();
+        ValidarRegistro validar = new ValidarRegistro();
+        String respuesta = validar.verificarRegistro(nombre, apellido, strDocumento, strEmail, contrasena, reContrasena);
+        System.out.println(respuesta);
     }
 
     @FXML
