@@ -5,6 +5,7 @@
  */
 package DAO;
 import Entidad.Usuario;
+import Control.LoginController;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,6 +26,7 @@ public class UsuarioDAO {
         Statement statement = null;
         int resultSet;
         Usuario usuario = new Usuario();
+        LoginController LG = new LoginController();
         try {
             resultSet = -1;
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
@@ -47,6 +49,38 @@ public class UsuarioDAO {
      
             } catch (SQLException ex) {
                 System.out.println("Error en SQL" + ex);
+            }
+        }
+
+    }
+    public boolean leer(String usr, String pss) {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            resultSet = null;
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM estudianteprestatario "
+                    + "WHERE Email = '" + usr
+                    + "' AND Password ='" + pss + "'");
+            if (resultSet.next()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return false;
+        } finally {
+            try {
+                resultSet.close();
+                statement.close();
+                connection.close();
+                return resultSet.next();
+            } catch (SQLException ex) {
+
             }
         }
 

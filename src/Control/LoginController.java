@@ -19,9 +19,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
+import DAO.UsuarioDAO;
+import Control.ValidarLogin;
+import Entidad.Usuario;
 
 public class LoginController implements Initializable {
+    private UsuarioDAO dao = new UsuarioDAO();
+    private Usuario VL = new Usuario();
+    private ValidarLogin JC = new ValidarLogin();
+    
     @FXML
     private JFXTextField user;
     @FXML
@@ -51,13 +57,14 @@ public class LoginController implements Initializable {
     //Login Button
     @FXML
     private void Login(ActionEvent event) {
+        
         if(user.getText().equals("admin")){
             ToPath("/Frontera/AdminMenuUX.fxml");
-        }else{
+        }else if (dao.leer(user.getText() , password.getText())) {
             ToPath("/Frontera/UserMenuUX.fxml");
-        }
+        } 
     }
-
+    
     //Register Label Click
     @FXML
     private void ToRegisterLink(ActionEvent event) {
