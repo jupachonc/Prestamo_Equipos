@@ -6,6 +6,7 @@
 package DAO;
 import Entidad.Usuario;
 import Control.LoginController;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -53,10 +54,11 @@ public class UsuarioDAO {
         }
 
     }
-    public boolean leer(String usr, String pss) {
+    public Usuario leer(String usr, String pss) {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        Usuario usuario = null;
         try {
             resultSet = null;
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
@@ -64,26 +66,37 @@ public class UsuarioDAO {
             resultSet = statement.executeQuery("SELECT * FROM estudianteprestatario "
                     + "WHERE Email = '" + usr
                     + "' AND Password ='" + pss + "'");
+            System.out.println(resultSet);
             if (resultSet.next()) {
-                return true;
+                usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+                        resultSet.getString("Documento"), resultSet.getString("Email"),
+                        resultSet.getString("Password"), 0);
             }
             else {
-                return false;
+                resultSet = statement.executeQuery("SELECT * FROM administrador "
+                + "WHERE Email = '" + usr
+                + "' AND Password ='" + pss + "'");
+                if(resultSet.next()){
+                    usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+                    resultSet.getString("Documento"), resultSet.getString("Email"),
+                    resultSet.getString("Password"), 1);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
-            return false;
+            return null;
         } finally {
             try {
                 resultSet.close();
                 statement.close();
                 connection.close();
-                return resultSet.next();
             } catch (SQLException ex) {
 
             }
         }
+        return usuario;
 
     }
+
 }    
 

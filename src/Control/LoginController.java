@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import DAO.UsuarioDAO;
 import Control.ValidarLogin;
 import Entidad.Usuario;
+import javafx.scene.control.Alert;
 
 public class LoginController implements Initializable {
     private UsuarioDAO dao = new UsuarioDAO();
@@ -57,11 +58,23 @@ public class LoginController implements Initializable {
     //Login Button
     @FXML
     private void Login(ActionEvent event) {
-        
-        if(user.getText().equals("admin")){
-            ToPath("/Frontera/AdminMenuUX.fxml");
-        }else if (dao.leer(user.getText() , password.getText())) {
-            ToPath("/Frontera/UserMenuUX.fxml");
+        Usuario usuario = dao.leer(user.getText() , password.getText());
+        if( usuario == null   ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("Verifica la información");
+            alert.setContentText("");
+            alert.showAndWait();
+        }else{
+            switch (usuario.getType()){
+                case 0:
+                    ToPath("/Frontera/UserMenuUX.fxml");
+                    break;
+                case 1:
+                    ToPath("/Frontera/AdminMenuUX.fxml");
+                    break;
+            }
+
         } 
     }
     

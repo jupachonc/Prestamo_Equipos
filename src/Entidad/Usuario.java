@@ -15,14 +15,8 @@ public class Usuario {
     private String documento;
     private String email;
     private String contrasena;
-    private int id;
+    private int type;
     
-    public int getId(){
-        return id;
-    }
-    public void setId(){
-        this.id = id;
-    }
     public Usuario(){
     }
     public String getNombre(){
@@ -55,4 +49,24 @@ public class Usuario {
     public void setContrasena(String contrasena){
         this.contrasena = contrasena;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Usuario(String nombre, String apellido, String documento, String email, String contrasena, int type) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.documento = documento;
+        this.email = email;
+        this.contrasena = contrasena;
+        this.type = type;
+    }
+    
+    
+    
 }
