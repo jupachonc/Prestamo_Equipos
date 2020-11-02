@@ -66,7 +66,6 @@ public class UsuarioDAO {
             resultSet = statement.executeQuery("SELECT * FROM estudianteprestatario "
                     + "WHERE Email = '" + usr
                     + "' AND Password ='" + pss + "'");
-            System.out.println(resultSet);
             if (resultSet.next()) {
                 usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
                         resultSet.getString("Documento"), resultSet.getString("Email"),

@@ -73,6 +73,14 @@ public class LoginController implements Initializable {
                 case 1:
                     ToPath("/Frontera/AdminMenuUX.fxml");
                     break;
+                case 2:
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Información");
+                    alert.setHeaderText("Ingreso como SU");
+                    alert.setContentText("");
+                    alert.showAndWait();
+                    break;
+                    
             }
 
         } 
