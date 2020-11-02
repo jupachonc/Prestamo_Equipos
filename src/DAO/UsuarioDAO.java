@@ -26,8 +26,6 @@ public class UsuarioDAO {
         Connection connection = null;
         Statement statement = null;
         int resultSet;
-        Usuario usuario = new Usuario();
-        LoginController LG = new LoginController();
         try {
             resultSet = -1;
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
@@ -37,6 +35,37 @@ public class UsuarioDAO {
             System.out.println(sql);
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                
+                connection.close();
+     
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+
+    }
+    public boolean existente(Usuario object) {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM estudianteprestatario WHERE Email = '" + object.getEmail() + "'";
+            System.out.println(sql);
+            resultSet = statement.executeQuery(sql);
+            if(resultSet.next()){
+                return true;
+            }
+            return false;
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
             return false;

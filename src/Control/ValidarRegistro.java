@@ -51,7 +51,9 @@ public class ValidarRegistro {
             usuario.setContrasena(contrasena);
             System.out.println(usuario.getNombre());
             System.out.println(usuario.getContrasena());
-            
+            if(dao.existente(usuario)){
+                return("Error: Usuario ya existente");
+            }
             dao.crear(usuario);
             return ("Usuario registrado");
             
