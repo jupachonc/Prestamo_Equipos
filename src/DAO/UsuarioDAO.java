@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.apache.commons.codec.digest.DigestUtils;
 /**
  *
  * @author nguzman
@@ -31,7 +32,9 @@ public class UsuarioDAO {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
             String sql = "INSERT INTO estudianteprestatario( `Nombre`, `Apellido`,`Documento`,`Email`,`Password`) VALUES (\""
-                    + object.getNombre() + "\", \"" + object.getApellido() + "\", \"" + object.getDocumento() + "\",\"" + object.getEmail() + "\", \"" + object.getContrasena() + "\")";
+                    + object.getNombre() + "\", \"" + object.getApellido() + "\", \"" 
+                    + object.getDocumento() + "\",\"" + object.getEmail() + "\", \"" 
+                    + DigestUtils.sha256Hex(object.getContrasena()) + "\")";
             System.out.println(sql);
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
@@ -94,16 +97,17 @@ public class UsuarioDAO {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT * FROM estudianteprestatario "
                     + "WHERE Email = '" + usr
-                    + "' AND Password ='" + pss + "'");
+                    + "' AND Password ='" + DigestUtils.sha256Hex(pss) + "'");
             if (resultSet.next()) {
                 usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
                         resultSet.getString("Documento"), resultSet.getString("Email"),
                         resultSet.getString("Password"), 0);
             }
             else {
+                System.out.println(DigestUtils.sha256Hex(pss));
                 resultSet = statement.executeQuery("SELECT * FROM administrador "
                 + "WHERE Email = '" + usr
-                + "' AND Password ='" + pss + "'");
+                + "' AND Password ='" + DigestUtils.sha256Hex(pss) + "'");
                 if(resultSet.next()){
                     usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
                     resultSet.getString("Documento"), resultSet.getString("Email"),
