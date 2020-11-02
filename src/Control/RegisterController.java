@@ -16,9 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
@@ -62,6 +62,30 @@ public class RegisterController implements Initializable {
         ValidarRegistro validar = new ValidarRegistro();
         String respuesta = validar.verificarRegistro(nombre, apellido, strDocumento, strEmail, contrasena, reContrasena);
         System.out.println(respuesta);
+        if(respuesta.equals("Usuario registrado")){
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Información");
+            alert.setHeaderText(respuesta);
+            alert.setContentText(null);
+            alert.showAndWait();
+            cleanForm();
+        
+        }else{
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("Verifica la información");
+            alert.setContentText(respuesta);
+            alert.showAndWait();
+        }
+    }
+    
+    private void cleanForm(){
+        nombres.setText("");
+        apellidos.setText("");
+        documento.setText("");
+        email.setText("");
+        password.setText("");
+        confirm_password.setText(""); 
     }
 
     @FXML
