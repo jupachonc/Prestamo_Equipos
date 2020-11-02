@@ -80,6 +80,9 @@ public class UsuarioDAO {
                     usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
                     resultSet.getString("Documento"), resultSet.getString("Email"),
                     resultSet.getString("Password"), 1);
+                    if(usuario.getEmail().equals("soporteing_fibog@unal.edu.co")){
+                        usuario.setType(2);
+                    }
                 }
             }
         } catch (SQLException ex) {
