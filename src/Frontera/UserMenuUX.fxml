@@ -47,5 +47,11 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </JFXButton>
+      <FontAwesomeIcon glyphName="COG" layoutX="854.0" layoutY="89.0" onMouseClicked="#Config" size="60" />
+      <Label layoutX="812.0" layoutY="85.0" prefHeight="67.0" prefWidth="135.0" text="Configuración de Usuario" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
