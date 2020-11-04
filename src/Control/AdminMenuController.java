@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control;
 
+import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,14 +11,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author sebas
- */
+
 public class AdminMenuController implements Initializable {
+
+    @FXML
+    private Label labelname;
+
+    public void updateUser(Usuario user) {
+        labelname.setText(MessageFormat.format("Está registrado como {0} {1}", user.getNombre(), user.getApellido()));
+
+    }
     
         private void ToPath(String path){
         try {
@@ -53,6 +56,10 @@ public class AdminMenuController implements Initializable {
     @FXML
     private void Logout(ActionEvent event) {
         ToPath("/Frontera/LoginUX.fxml");
+    }
+
+    @FXML
+    private void Config(MouseEvent event) {
     }
     
 }
