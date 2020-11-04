@@ -47,10 +47,12 @@ public class LoginController implements Initializable {
                 switch (user.getType()) {
                     case 0:
                         UserMenuController controlerusr = fxmlLoader.getController();
+                        controlerusr.setUser(user);
                         controlerusr.updateUser(user);
                         break;
                     case 1:
                         AdminMenuController controleradm = fxmlLoader.getController();
+                        controleradm.setUser(user);
                         controleradm.updateUser(user);
                         break;
                     default:

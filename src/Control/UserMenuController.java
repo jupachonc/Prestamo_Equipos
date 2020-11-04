@@ -30,6 +30,9 @@ public class UserMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
+    
+
+
 
     public void updateUser(Usuario user) {
         labelname.setText(MessageFormat.format("Está registrado como {0} {1}", user.getNombre(), user.getApellido()));
@@ -55,8 +58,21 @@ public class UserMenuController implements Initializable {
 
     @FXML
     private void Config(MouseEvent event) {
-        System.out.println("Clicked");
-        System.out.println(user.getNombre());
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/UserConfigUX.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            UserConfigController controler = fxmlLoader.getController();
+            controler.setUser(user);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            Stage stage1 = (Stage) logoutbtn.getScene().getWindow();
+            stage1.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Usuario getUser() {

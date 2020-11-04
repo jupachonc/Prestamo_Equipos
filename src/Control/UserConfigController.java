@@ -5,16 +5,22 @@
  */
 package Control;
 
+import Entidad.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
-/**
- * FXML Controller class
- *
- * @author sebas
- */
 public class UserConfigController implements Initializable {
+    
+    private Usuario user;
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
 
     /**
      * Initializes the controller class.

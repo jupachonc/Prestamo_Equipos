@@ -15,8 +15,17 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-
 public class AdminMenuController implements Initializable {
+
+    private Usuario user;
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
 
     @FXML
     private Label labelname;
@@ -25,8 +34,8 @@ public class AdminMenuController implements Initializable {
         labelname.setText(MessageFormat.format("Está registrado como {0} {1}", user.getNombre(), user.getApellido()));
 
     }
-    
-        private void ToPath(String path){
+
+    private void ToPath(String path) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -37,8 +46,8 @@ public class AdminMenuController implements Initializable {
             Stage stage1 = (Stage) logoutbtn.getScene().getWindow();
             stage1.close();
 
-        } catch(Exception e) {
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -51,7 +60,7 @@ public class AdminMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void Logout(ActionEvent event) {
@@ -60,6 +69,21 @@ public class AdminMenuController implements Initializable {
 
     @FXML
     private void Config(MouseEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/UserConfigUX.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            UserConfigController controler = fxmlLoader.getController();
+            controler.setUser(user);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            Stage stage1 = (Stage) logoutbtn.getScene().getWindow();
+            stage1.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
+
 }
