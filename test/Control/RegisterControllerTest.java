@@ -59,7 +59,7 @@ public class RegisterControllerTest {
     /*  String nombre = ("Andres");
         String apellido = ("Castañeda");
         String strDocumento = ("1000000000");
-        String strEmail = ("acasta@unal.edu.co");
+        String strEmail = ("acasta@unal.edu.co"); 
         String contrasena = ("123456");
         String reContrasena = ("123456");
         assertEquals(validar.verificarRegistro(nombre,apellido,strDocumento,strEmail,contrasena,reContrasena),("Usuario registrado"));
