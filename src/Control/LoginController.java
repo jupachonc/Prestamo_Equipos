@@ -63,7 +63,7 @@ public class LoginController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
             alert.setHeaderText("Verifica la información");
-            alert.setContentText("");
+            alert.setContentText(null);
             alert.showAndWait();
         }else{
             switch (usuario.getType()){
@@ -74,11 +74,7 @@ public class LoginController implements Initializable {
                     ToPath("/Frontera/AdminMenuUX.fxml");
                     break;
                 case 2:
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Información");
-                    alert.setHeaderText("Ingreso como SU");
-                    alert.setContentText("");
-                    alert.showAndWait();
+                    ToPath("/Frontera/SUMenuUX.fxml");
                     break;
                     
             }

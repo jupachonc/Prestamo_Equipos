@@ -35,7 +35,6 @@ public class UsuarioDAO {
                     + object.getNombre() + "\", \"" + object.getApellido() + "\", \"" 
                     + object.getDocumento() + "\",\"" + object.getEmail() + "\", \"" 
                     + DigestUtils.sha256Hex(object.getContrasena()) + "\")";
-            System.out.println(sql);
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
         } catch (SQLException ex) {
@@ -104,7 +103,6 @@ public class UsuarioDAO {
                         resultSet.getString("Password"), 0);
             }
             else {
-                System.out.println(DigestUtils.sha256Hex(pss));
                 resultSet = statement.executeQuery("SELECT * FROM administrador "
                 + "WHERE Email = '" + usr
                 + "' AND Password ='" + DigestUtils.sha256Hex(pss) + "'");
