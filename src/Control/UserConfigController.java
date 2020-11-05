@@ -106,6 +106,7 @@ public class UserConfigController implements Initializable {
                 alert.setHeaderText("La contraseña fue actualizada");
                 alert.setContentText(null);
                 alert.showAndWait();
+                user.setContrasena(newpss.getText());
                 currentpss.setText("");
                 newpss.setText("");
                 cnewpss.setText("");
