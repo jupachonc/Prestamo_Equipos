@@ -5,6 +5,8 @@
  */
 package Control;
 
+import Control.User.UserMenuController;
+import Control.Admin.AdminMenuController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -84,13 +86,13 @@ public class LoginController implements Initializable {
         } else {
             switch (usuario.getType()) {
                 case 0:
-                    ToPath("/Frontera/UserMenuUX.fxml", usuario);
+                    ToPath("/Frontera/User/UserMenuUX.fxml", usuario);
                     break;
                 case 1:
-                    ToPath("/Frontera/AdminMenuUX.fxml", usuario);
+                    ToPath("/Frontera/User/AdminMenuUX.fxml", usuario);
                     break;
                 case 2:
-                    ToPath("/Frontera/SUMenuUX.fxml", usuario);
+                    ToPath("/Frontera/User/SUMenuUX.fxml", usuario);
                     break;
 
             }

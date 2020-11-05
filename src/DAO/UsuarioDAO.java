@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import org.apache.commons.codec.digest.DigestUtils;
 /**
  *
@@ -129,6 +130,35 @@ public class UsuarioDAO {
         }
         return usuario;
 
+    }
+    
+    public boolean changePassword(Usuario usuario, String newpss){
+            Connection connection = null;
+        Statement statement = null;
+        int resultSet;
+        try {
+            resultSet = -1;
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = connection.createStatement();
+            String sql = "UPDATE estudianteprestatario set Password ='" + DigestUtils.sha256Hex(newpss) + 
+                    "' Where Email = '" + usuario.getEmail() + "';";
+            resultSet = statement.executeUpdate(sql);
+            return resultSet > 0;
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                
+                connection.close();
+     
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
     }
 
 }    
