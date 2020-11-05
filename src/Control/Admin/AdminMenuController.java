@@ -75,12 +75,11 @@ public class AdminMenuController implements Initializable {
             Parent root1 = (Parent) fxmlLoader.load();
             UserConfigController controler = fxmlLoader.getController();
             controler.setUser(user);
+            controler.updateUser();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
             stage.show();
-            Stage stage1 = (Stage) logoutbtn.getScene().getWindow();
-            stage1.close();
 
         } catch (Exception e) {
             e.printStackTrace();

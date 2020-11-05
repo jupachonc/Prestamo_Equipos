@@ -7,6 +7,7 @@ package Control;
 
 import Control.User.UserMenuController;
 import Control.Admin.AdminMenuController;
+import Control.SU.SUMenuController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -57,6 +58,11 @@ public class LoginController implements Initializable {
                         controleradm.setUser(user);
                         controleradm.updateUser(user);
                         break;
+                    case 2:
+                        SUMenuController controlersu = fxmlLoader.getController();
+                        controlersu.setUser(user);
+                        controlersu.updateUser(user);
+                        break;
                     default:
                         break;
                 }
@@ -89,10 +95,10 @@ public class LoginController implements Initializable {
                     ToPath("/Frontera/User/UserMenuUX.fxml", usuario);
                     break;
                 case 1:
-                    ToPath("/Frontera/User/AdminMenuUX.fxml", usuario);
+                    ToPath("/Frontera/Admin/AdminMenuUX.fxml", usuario);
                     break;
                 case 2:
-                    ToPath("/Frontera/User/SUMenuUX.fxml", usuario);
+                    ToPath("/Frontera/SU/SUMenuUX.fxml", usuario);
                     break;
 
             }
