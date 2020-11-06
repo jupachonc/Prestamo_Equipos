@@ -35,10 +35,18 @@ public class UsuarioDAO {
             resultSet = -1;
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
-            String sql = "INSERT INTO estudianteprestatario( `Nombre`, `Apellido`,`Documento`,`Email`,`Password`) VALUES (\""
-                    + object.getNombre() + "\", \"" + object.getApellido() + "\", "
-                    + object.getDocumento() + ",\"" + object.getEmail() + "\", \""
-                    + DigestUtils.sha256Hex(object.getContrasena()) + "\")";
+            String sql;
+            if (object.getType() == 0) {
+                sql = "INSERT INTO estudiante( `Nombre`, `Apellido`,`Documento`,`Email`,`Password`) VALUES (\""
+                        + object.getNombre() + "\", \"" + object.getApellido() + "\", "
+                        + object.getDocumento() + ",\"" + object.getEmail() + "\", \""
+                        + DigestUtils.sha256Hex(object.getContrasena()) + "\")";
+            } else {
+                sql = "INSERT INTO estudiante( `Nombre`, `Apellido`,`Documento`,`Email`,`Password`) VALUES (\""
+                        + object.getNombre() + "\", \"" + object.getApellido() + "\", "
+                        + object.getDocumento() + ",\"" + object.getEmail() + "\", \""
+                        + DigestUtils.sha256Hex(object.getContrasena()) + "\")";
+            }
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
         } catch (SQLException ex) {
@@ -66,7 +74,7 @@ public class UsuarioDAO {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
-            String sql = "SELECT * FROM estudianteprestatario WHERE Email = '" + object.getEmail() + "'";
+            String sql = "SELECT * FROM estudiante WHERE Documento = " + object.getDocumento() + ";";
             System.out.println(sql);
             resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
@@ -100,7 +108,7 @@ public class UsuarioDAO {
             resultSet = null;
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM estudianteprestatario "
+            resultSet = statement.executeQuery("SELECT * FROM estudiante "
                     + "WHERE Email = '" + usr
                     + "' AND Password ='" + DigestUtils.sha256Hex(pss) + "'");
             if (resultSet.next()) {
@@ -146,11 +154,11 @@ public class UsuarioDAO {
             statement = connection.createStatement();
             String sql;
             if (usuario.getType() == 0) {
-                sql = "UPDATE estudianteprestatario set Password ='" + DigestUtils.sha256Hex(newpss)
-                        + "' Where Email = '" + usuario.getEmail() + "';";
+                sql = "UPDATE estudiante set Password ='" + DigestUtils.sha256Hex(newpss)
+                        + "' Where Documento = " + usuario.getDocumento() + ";";
             } else {
                 sql = "UPDATE administrador set Password ='" + DigestUtils.sha256Hex(newpss)
-                        + "' Where Email = '" + usuario.getEmail() + "';";
+                        + "' Where Documento = " + usuario.getDocumento() + ";";
             }
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
