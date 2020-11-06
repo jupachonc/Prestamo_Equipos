@@ -55,12 +55,12 @@ public class RegisterController implements Initializable {
     private void Register(ActionEvent event) {
         String nombre = nombres.getText();
         String apellido = apellidos.getText();
-        String strDocumento = documento.getText();
+        int intDocumento = Integer.parseInt(documento.getText());
         String strEmail = email.getText();
         String contrasena = password.getText();
         String reContrasena = confirm_password.getText();
         ValidarRegistro validar = new ValidarRegistro();
-        String respuesta = validar.verificarRegistro(nombre, apellido, strDocumento, strEmail, contrasena, reContrasena);
+        String respuesta = validar.verificarRegistro(nombre, apellido, intDocumento, strEmail, contrasena, reContrasena);
         System.out.println(respuesta);
         if(respuesta.equals("Usuario registrado")){
             Alert alert = new Alert(AlertType.INFORMATION);

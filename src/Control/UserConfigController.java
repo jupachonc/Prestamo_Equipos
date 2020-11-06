@@ -55,7 +55,7 @@ public class UserConfigController implements Initializable {
     public void updateUser() {
         names.setText(user.getNombre());
         lastnames.setText(user.getApellido());
-        documento.setText(user.getDocumento());
+        documento.setText(String.valueOf(user.getDocumento()));
     }
 
     /**
