@@ -83,7 +83,7 @@ public class Usuario {
         this.type = type;
     }
 
-    public Usuario(String nombre, String apellido, String documento, String email, String contrasena, int type) {
+    public Usuario(String nombre, String apellido, int documento, String email, String contrasena, int type) {
         this.nombre = ucFirst(nombre);
         this.apellido = ucFirst(apellido);
         this.documento = documento;

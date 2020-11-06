@@ -105,7 +105,7 @@ public class UsuarioDAO {
                     + "' AND Password ='" + DigestUtils.sha256Hex(pss) + "'");
             if (resultSet.next()) {
                 usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
-                        resultSet.getString("Documento"), resultSet.getString("Email"),
+                        resultSet.getInt("Documento"), resultSet.getString("Email"),
                         resultSet.getString("Password"), 0);
             } else {
                 resultSet = statement.executeQuery("SELECT * FROM administrador "
@@ -113,7 +113,7 @@ public class UsuarioDAO {
                         + "' AND Password ='" + DigestUtils.sha256Hex(pss) + "'");
                 if (resultSet.next()) {
                     usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
-                            resultSet.getString("Documento"), resultSet.getString("Email"),
+                            resultSet.getInt("Documento"), resultSet.getString("Email"),
                             resultSet.getString("Password"), 1);
                     if (usuario.getEmail().equals("soporteing_fibog@unal.edu.co")) {
                         usuario.setType(2);
