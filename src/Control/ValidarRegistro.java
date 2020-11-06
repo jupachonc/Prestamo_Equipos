@@ -12,11 +12,11 @@ public class ValidarRegistro {
     private final UsuarioDAO dao = new UsuarioDAO();
     Usuario usuario = new Usuario();
     
-    public String verificarRegistro(String nombre, String apellido, String documento, String email, String contrasena, String reContrasena) {
+    public String verificarRegistro(String nombre, String apellido, int documento, String email, String contrasena, String reContrasena) {
         Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
         Pattern VALID_DOCUMENT_REGEX = Pattern.compile("^[0-9]{7,10}$");
-        Matcher matcher2 = VALID_DOCUMENT_REGEX.matcher(documento);
+        Matcher matcher2 = VALID_DOCUMENT_REGEX.matcher(String.valueOf(documento));
         
         if(!verificarLongitud(nombre,64)) {
             return ("Longitud nombre incorrecta");

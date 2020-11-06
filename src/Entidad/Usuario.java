@@ -16,7 +16,7 @@ public class Usuario {
 
     private String nombre;
     private String apellido;
-    private String documento;
+    private int documento;
     private String email;
     private String contrasena;
     private int type;
@@ -51,11 +51,11 @@ public class Usuario {
         this.apellido = ucFirst(apellido);
     }
 
-    public String getDocumento() {
+    public int getDocumento() {
         return documento;
     }
 
-    public void setDocumento(String documento) {
+    public void setDocumento(int documento) {
         this.documento = documento;
     }
 

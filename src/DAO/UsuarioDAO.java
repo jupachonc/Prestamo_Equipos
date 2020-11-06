@@ -36,8 +36,8 @@ public class UsuarioDAO {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
             String sql = "INSERT INTO estudianteprestatario( `Nombre`, `Apellido`,`Documento`,`Email`,`Password`) VALUES (\""
-                    + object.getNombre() + "\", \"" + object.getApellido() + "\", \""
-                    + object.getDocumento() + "\",\"" + object.getEmail() + "\", \""
+                    + object.getNombre() + "\", \"" + object.getApellido() + "\", "
+                    + object.getDocumento() + ",\"" + object.getEmail() + "\", \""
                     + DigestUtils.sha256Hex(object.getContrasena()) + "\")";
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
