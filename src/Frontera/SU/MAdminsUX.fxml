@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: #ffffff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Control.SU.MAdminsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.SU.MAdminsController">
    <children>
       <Circle fill="#a9cd43" layoutX="306.0" layoutY="-374.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
       <Label alignment="CENTER" layoutX="105.0" layoutY="14.0" prefHeight="53.0" prefWidth="402.0" style="-fx-font-family: &quot;PT Sans&quot;;" text="Gestión Administradores" textAlignment="CENTER" textFill="WHITE" wrapText="true">
@@ -24,5 +27,25 @@
             <TreeTableColumn prefWidth="125.0" text="Email" />
          </columns>
       </JFXTreeTableView>
+      <JFXButton layoutX="740.0" layoutY="21.0" onAction="#backbtn" prefHeight="39.0" prefWidth="200.0" style="-fx-background-color: #f44336;" text="   Regresar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="ARROW_LEFT" size="25" strokeLineJoin="BEVEL" />
+         </graphic>
+      </JFXButton>
+      <Label layoutX="622.0" layoutY="134.0" prefHeight="77.0" prefWidth="236.0" style="-fx-font-family: Roboto; -fx-font-size: 30;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Crear Administrador" wrapText="true" />
+      <JFXTextField fx:id="names" focusColor="#7f9a33" layoutX="622.0" layoutY="236.0" prefHeight="25.0" prefWidth="281.0" promptText="Nombres" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXTextField fx:id="lastnames" focusColor="#7f9a33" layoutX="622.0" layoutY="274.0" prefHeight="25.0" prefWidth="281.0" promptText="Apellidos" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXTextField fx:id="document" focusColor="#7f9a33" layoutX="622.0" layoutY="311.0" prefHeight="25.0" prefWidth="281.0" promptText="Documento" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXTextField fx:id="email" focusColor="#7f9a33" layoutX="622.0" layoutY="349.0" prefHeight="25.0" prefWidth="281.0" promptText="E-mail" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXPasswordField fx:id="password" focusColor="#7f9a33" layoutX="622.0" layoutY="387.0" prefHeight="25.0" prefWidth="281.0" promptText="Contraseña" style="-fx-font-family: Roboto;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXPasswordField fx:id="cpassword" focusColor="#7f9a33" layoutX="622.0" layoutY="425.0" prefHeight="25.0" prefWidth="281.0" promptText="Confirmar Contraseña" style="-fx-font-family: Roboto;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXButton buttonType="RAISED" layoutX="628.0" layoutY="479.0" onAction="#create" prefHeight="25.0" prefWidth="270.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Crear Administrador" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
