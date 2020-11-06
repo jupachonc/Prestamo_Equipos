@@ -56,7 +56,7 @@ public class RegisterControllerTest {
         //PRIMERO HAY QUE REALIZAR EL TEST UNICAMENTE DEL CODIGO COMENTADO.
         //LUEGO COMENTARLO COMO ESTÁ, Y AHÍ SI HACER EL TESTEO DE TODO
         
-    /*  String nombre = ("Andres");
+     /* String nombre = ("Andres");
         String apellido = ("Castañeda");
         String strDocumento = ("1000000000");
         String strEmail = ("acasta@unal.edu.co"); 
