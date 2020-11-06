@@ -27,9 +27,9 @@ import javafx.stage.Stage;
  * @author sebas
  */
 public class SUMenuController implements Initializable {
-    
+
     private Usuario user;
-    
+
     @FXML
     private JFXButton logoutbtn;
     @FXML
@@ -42,23 +42,24 @@ public class SUMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
     public void updateUser(Usuario user) {
         labelname.setText(MessageFormat.format("Está registrado como {0} {1}", user.getNombre(), user.getApellido()));
-        
+
     }
-    
+
     public Usuario getUser() {
         return user;
     }
-    
+
     public void setUser(Usuario user) {
         this.user = user;
     }
-    
-    private void ToPath(String path) {
+
+    @FXML
+    private void Logout(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/LoginUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -66,18 +67,12 @@ public class SUMenuController implements Initializable {
             stage.show();
             Stage stage1 = (Stage) logoutbtn.getScene().getWindow();
             stage1.close();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
-    
-    @FXML
-    private void Logout(ActionEvent event) {
-        ToPath("/Frontera/LoginUX.fxml");
-    }
-    
+
     @FXML
     private void Config(MouseEvent event) {
         try {
@@ -90,15 +85,10 @@ public class SUMenuController implements Initializable {
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
             stage.show();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    @FXML
-    private void toMAdmins(ActionEvent event) {
-        ToPath("/Frontera/SU/MAdminsUX.fxml");
-    }
-    
+
 }

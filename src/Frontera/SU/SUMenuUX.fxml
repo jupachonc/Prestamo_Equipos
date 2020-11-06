@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="988.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.SU.SUMenuController">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="825.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.SU.SUMenuController">
    <children>
       <Circle fill="#a9cd43" layoutX="504.0" layoutY="-359.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
       <Label alignment="CENTER" layoutX="399.0" layoutY="45.0" style="-fx-font-family: &quot;PT Sans&quot;;" text="Menú Principal" textFill="WHITE">
@@ -39,7 +39,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="359.0" layoutY="279.0" onAction="#toMAdmins" prefHeight="115.0" prefWidth="270.0" style="-fx-background-color: #ff5252;" text="Gestionar Administradores" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton layoutX="359.0" layoutY="279.0" prefHeight="115.0" prefWidth="270.0" style="-fx-background-color: #ff5252;" text="Gestionar Administradores" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="USERS" size="50" wrappingWidth="51.571428298950195" />
          </graphic>
