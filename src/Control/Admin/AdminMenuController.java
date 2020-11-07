@@ -1,7 +1,6 @@
 package Control.Admin;
 
 import Control.LoginController;
-import Control.UserConfigController;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;

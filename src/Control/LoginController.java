@@ -5,9 +5,6 @@
  */
 package Control;
 
-import Control.User.UserMenuController;
-import Control.Admin.AdminMenuController;
-import Control.SU.SUMenuController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -21,7 +18,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import DAO.UsuarioDAO;
-import Control.ValidarLogin;
 import Entidad.Usuario;
 import javafx.scene.control.Alert;
 

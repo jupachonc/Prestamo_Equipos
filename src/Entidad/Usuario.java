@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Entidad;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author nguzman
- */
+
 public class Usuario {
 
     private String nombre;
@@ -20,6 +12,13 @@ public class Usuario {
     private String email;
     private String contrasena;
     private int type;
+    
+    /*
+    Types
+    0 User
+    1 Admin
+    2 SuperUser
+    */
 
     public static String ucFirst(String str) {
         if (str == null || str.isEmpty()) {

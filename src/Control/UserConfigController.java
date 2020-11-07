@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control;
 
 import DAO.UsuarioDAO;
 import Entidad.Usuario;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -23,6 +16,7 @@ public class UserConfigController implements Initializable {
 
     private Usuario user = LoginController.getUsuario();
     private UsuarioDAO dao = new UsuarioDAO();
+    
     @FXML
     private Label names;
     @FXML
@@ -35,7 +29,6 @@ public class UserConfigController implements Initializable {
     private JFXPasswordField newpss;
     @FXML
     private JFXPasswordField cnewpss;
-
 
     public boolean verificarLongitud(String x, int largo) {
         return (x.length() > 3 && x.length() <= largo);

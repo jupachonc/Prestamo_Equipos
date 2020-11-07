@@ -73,13 +73,4 @@ public class UserMenuController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
-
 }

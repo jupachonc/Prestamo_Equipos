@@ -6,14 +6,11 @@
 package DAO;
 
 import Entidad.Usuario;
-import Control.LoginController;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import org.apache.commons.codec.digest.DigestUtils;
 

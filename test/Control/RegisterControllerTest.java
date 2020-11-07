@@ -11,13 +11,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import Entidad.Usuario;
-import DAO.UsuarioDAO;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
-import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
 
 /**
  *
@@ -70,7 +63,7 @@ public class RegisterControllerTest {
         String strEmail1 = ("acasta@unal.edu.co");
         String contrasena1 = ("123456");
         String reContrasena1 = ("12345J");
-        assertEquals(validar.verificarRegistro(nombre1,apellido1,Documento1,strEmail1,contrasena1,reContrasena1),("Las contraseñas no conciden"));
+        assertEquals(validar.verificarRegistro(nombre1,apellido1,Documento1,strEmail1,contrasena1,reContrasena1, 0),("Las contraseñas no conciden"));
        
         String nombre2 = ("Andre");
         String apellido2 = ("Castañeda");
@@ -78,7 +71,7 @@ public class RegisterControllerTest {
         String strEmail2 = ("acasta@unal.edu.co");
         String contrasena2 = ("123");
         String reContrasena2 = ("123");
-        assertEquals(validar.verificarRegistro(nombre2,apellido2,Documento2,strEmail2,contrasena2,reContrasena2),("Longitud contrasena incorrecta"));
+        assertEquals(validar.verificarRegistro(nombre2,apellido2,Documento2,strEmail2,contrasena2,reContrasena2, 0),("Longitud contrasena incorrecta"));
        
         String nombre3 = ("Andre");
         String apellido3 = ("Castañeda");
@@ -86,7 +79,7 @@ public class RegisterControllerTest {
         String strEmail3 = ("acasta-unal.edu.co");
         String contrasena3 = ("123456");
         String reContrasena3 = ("123456");
-        assertEquals(validar.verificarRegistro(nombre3,apellido3,Documento3,strEmail3,contrasena3,reContrasena3),("E-mail inválido"));
+        assertEquals(validar.verificarRegistro(nombre3,apellido3,Documento3,strEmail3,contrasena3,reContrasena3, 0),("E-mail inválido"));
        /*
         String nombre4 = ("Andre");
         String apellido4 = ("Castañeda");
@@ -102,7 +95,7 @@ public class RegisterControllerTest {
         String strEmail5 = ("acasta@unal.edu.co");
         String contrasena5 = ("123456");
         String reContrasena5 = ("123456");
-        assertEquals(validar.verificarRegistro(nombre5,apellido5,Documento5,strEmail5,contrasena5,reContrasena5),("Longitud apellido incorrecta"));
+        assertEquals(validar.verificarRegistro(nombre5,apellido5,Documento5,strEmail5,contrasena5,reContrasena5, 0),("Longitud apellido incorrecta"));
        
         String nombre6 = ("San");
         String apellido6 = ("Castañeda");
@@ -110,7 +103,7 @@ public class RegisterControllerTest {
         String strEmail6 = ("acasta@unal.edu.co");
         String contrasena6 = ("123456");
         String reContrasena6 = ("123456");
-        assertEquals(validar.verificarRegistro(nombre6,apellido6,Documento5,strEmail6,contrasena6,reContrasena6),("Longitud nombre incorrecta"));
+        assertEquals(validar.verificarRegistro(nombre6,apellido6,Documento5,strEmail6,contrasena6,reContrasena6, 0),("Longitud nombre incorrecta"));
        
         String nombre7 = ("Andres");
         String apellido7 = ("Castañeda");
@@ -118,7 +111,7 @@ public class RegisterControllerTest {
         String strEmail7 = ("acasta@unal.edu.co");
         String contrasena7 = ("123456");
         String reContrasena7 = ("123456");
-        assertEquals(validar.verificarRegistro(nombre7,apellido7,Documento7,strEmail7,contrasena7,reContrasena7),("Error: Usuario ya existente"));
+        assertEquals(validar.verificarRegistro(nombre7,apellido7,Documento7,strEmail7,contrasena7,reContrasena7, 0),("Error: Usuario ya existente"));
        
         
     }
