@@ -4,11 +4,20 @@ import Control.LoginController;
 import Control.ValidarRegistro;
 import DAO.UsuarioDAO;
 import Entidad.Usuario;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
+import java.awt.Color;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,13 +25,30 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class MAdminsController implements Initializable {
 
     private Usuario user = LoginController.getUsuario();
+    private ObservableList<Usuario> data;
 
-
+    @FXML
+    private JFXTreeTableView<Usuario> adminTable;
+    @FXML
+    private TreeTableColumn<Usuario, String> TNombres;
+    @FXML
+    private TreeTableColumn<Usuario, String> TApellidos;
+    @FXML
+    private TreeTableColumn<Usuario, Integer> TDocumento;
+    @FXML
+    private TreeTableColumn<Usuario, String> TEmail;
     @FXML
     private JFXTextField names;
     @FXML
@@ -41,7 +67,78 @@ public class MAdminsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ArrayList<Usuario> admins = new UsuarioDAO().getAdmins();
+        getAdminTable();
+    }
+
+    private void getAdminTable() {
+        data = FXCollections.observableList(new UsuarioDAO().getAdmins());
+
+        JFXTreeTableColumn<Usuario, String> settingsColumn = new JFXTreeTableColumn<>("Deshabilitar");
+        settingsColumn.setPrefWidth(95);
+        Callback<TreeTableColumn<Usuario, String>, TreeTableCell<Usuario, String>> cellFactory
+                = //
+                (final TreeTableColumn<Usuario, String> param) -> {
+                    final TreeTableCell<Usuario, String> cell = new TreeTableCell<Usuario, String>() {
+
+                final JFXButton btn = new JFXButton("Deshabilitar");
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        btn.setButtonType(JFXButton.ButtonType.FLAT);
+                        btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
+                        btn.setOnAction(event -> {
+                            Usuario usr = this.getTreeTableRow().getItem();
+
+                            if (new UsuarioDAO().disableAdmin(usr)) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Información");
+                                alert.setHeaderText("Administrados deshabilitado");
+                                alert.setContentText(null);
+                                alert.showAndWait();
+                                getAdminTable();
+                            } else {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Información");
+                                alert.setHeaderText("No se pudo deshabilitar el Administrador");
+                                alert.setContentText(null);
+                                alert.showAndWait();
+                            }
+
+                        });
+                        setGraphic(btn);
+                        setText(null);
+                    }
+                }
+            };
+                    return cell;
+                };
+
+        settingsColumn.setCellFactory(cellFactory);
+
+        adminTable.getColumns().set(4, settingsColumn);
+
+        TNombres.setCellValueFactory(
+                new TreeItemPropertyValueFactory<>("nombre")
+        );
+        TApellidos.setCellValueFactory(
+                new TreeItemPropertyValueFactory<>("apellido")
+        );
+        TEmail.setCellValueFactory(
+                new TreeItemPropertyValueFactory<>("email")
+        );
+        TDocumento.setCellValueFactory(
+                new TreeItemPropertyValueFactory<>("documento")
+        );
+
+        TreeItem<Usuario> root = new RecursiveTreeItem<>(data, RecursiveTreeObject::getChildren);
+
+        adminTable.setRoot(root);
+        adminTable.setShowRoot(false);
     }
 
     @FXML
@@ -74,6 +171,7 @@ public class MAdminsController implements Initializable {
             alert.setContentText(null);
             alert.showAndWait();
             cleanForm();
+            getAdminTable();
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

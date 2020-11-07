@@ -254,5 +254,9 @@ public class UsuarioDAO {
         }
         return admins;
     }
+    
+    public boolean disableAdmin(Usuario usuario){
+        return true;
+    }
 
 }
