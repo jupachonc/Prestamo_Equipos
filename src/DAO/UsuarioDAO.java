@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -79,14 +80,15 @@ public class UsuarioDAO {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
-            String sql = "SELECT * FROM estudiante WHERE Documento = " + object.getDocumento() + ";";
+            String sql = "SELECT * FROM estudiante WHERE Documento = " + object.getDocumento()
+                    + " OR Email = \"" + object.getEmail() + "\";";
             System.out.println(sql);
             resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
                 return true;
             } else {
-                sql = "SELECT * FROM administrador WHERE Documento = " + object.getDocumento() + ";";
-                resultSet = statement.executeQuery(sql);
+                sql = "SELECT * FROM administrador WHERE Documento = " + object.getDocumento()
+                        + " OR Email = \"" + object.getEmail() + "\";";
                 if (resultSet.next()) {
                     return true;
                 }
@@ -117,7 +119,8 @@ public class UsuarioDAO {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
-            String sql = "SELECT * FROM administrador WHERE Documento = " + object.getDocumento() + " AND Estado = 0;";
+            String sql = "SELECT * FROM administrador WHERE (Documento = " + object.getDocumento()
+                    + " OR Email = \"" + object.getEmail() + "\")  AND Estado = 0;";
             System.out.println(sql);
             resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
@@ -220,6 +223,39 @@ public class UsuarioDAO {
                 System.out.println("Error en SQL" + ex);
             }
         }
+    }
+
+    public ArrayList<Usuario> getAdmins() {
+        ArrayList<Usuario> admins = new ArrayList<>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM administrador Where Estado = 1 AND Email != \"soporteing_fibog@unal.edu.co\"";
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+
+            while (resultSet.next()) {
+                admins.add(new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+                        resultSet.getInt("Documento"), resultSet.getString("Email"),
+                        resultSet.getString("Password"), 1));
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return admins;
     }
 
 }
