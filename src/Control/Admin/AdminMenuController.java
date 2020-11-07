@@ -1,5 +1,6 @@
 package Control.Admin;
 
+import Control.LoginController;
 import Control.UserConfigController;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
@@ -18,20 +19,22 @@ import javafx.stage.Stage;
 
 public class AdminMenuController implements Initializable {
 
-    private Usuario user;
-
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
+    private Usuario user = LoginController.getUsuario();
 
     @FXML
     private Label labelname;
+    @FXML
+    private JFXButton logoutbtn;
 
-    public void updateUser(Usuario user) {
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        updateUser();
+    }
+
+    public void updateUser() {
         labelname.setText(MessageFormat.format("Está registrado como {0} {1}", user.getNombre(), user.getApellido()));
 
     }
@@ -53,17 +56,6 @@ public class AdminMenuController implements Initializable {
     }
 
     @FXML
-    private JFXButton logoutbtn;
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-
-    @FXML
     private void Logout(ActionEvent event) {
         ToPath("/Frontera/LoginUX.fxml");
     }
@@ -73,9 +65,6 @@ public class AdminMenuController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/UserConfigUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
-            UserConfigController controler = fxmlLoader.getController();
-            controler.setUser(user);
-            controler.updateUser();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setResizable(false);

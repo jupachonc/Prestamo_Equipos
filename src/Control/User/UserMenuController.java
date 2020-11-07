@@ -1,5 +1,6 @@
 package Control.User;
 
+import Control.LoginController;
 import Control.UserConfigController;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
 
 public class UserMenuController implements Initializable {
 
-    private Usuario user;
+    private Usuario user = LoginController.getUsuario();
 
     @FXML
     private JFXButton logoutbtn;
@@ -30,12 +31,11 @@ public class UserMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        updateUser();
     }
     
 
-
-
-    public void updateUser(Usuario user) {
+    public void updateUser() {
         labelname.setText(MessageFormat.format("Está registrado como {0} {1}", user.getNombre(), user.getApellido()));
 
     }
@@ -63,7 +63,6 @@ public class UserMenuController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/UserConfigUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             UserConfigController controler = fxmlLoader.getController();
-            controler.setUser(user);
             controler.updateUser();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));

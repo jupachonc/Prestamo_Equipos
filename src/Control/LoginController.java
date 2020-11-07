@@ -28,8 +28,12 @@ import javafx.scene.control.Alert;
 public class LoginController implements Initializable {
 
     private UsuarioDAO dao = new UsuarioDAO();
-    private Usuario VL = new Usuario();
+    private static Usuario usuario = new Usuario();
     private ValidarLogin JC = new ValidarLogin();
+
+    public static Usuario getUsuario() {
+        return usuario;
+    }
 
     @FXML
     private JFXTextField user;
@@ -42,31 +46,10 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    private void ToPath(String path, Usuario user) {
+    private void ToPath(String path) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             Parent root1 = (Parent) fxmlLoader.load();
-            if (user != null) {
-                switch (user.getType()) {
-                    case 0:
-                        UserMenuController controlerusr = fxmlLoader.getController();
-                        controlerusr.setUser(user);
-                        controlerusr.updateUser(user);
-                        break;
-                    case 1:
-                        AdminMenuController controleradm = fxmlLoader.getController();
-                        controleradm.setUser(user);
-                        controleradm.updateUser(user);
-                        break;
-                    case 2:
-                        SUMenuController controlersu = fxmlLoader.getController();
-                        controlersu.setUser(user);
-                        controlersu.updateUser(user);
-                        break;
-                    default:
-                        break;
-                }
-            }
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -82,7 +65,7 @@ public class LoginController implements Initializable {
     //Login Button
     @FXML
     private void Login(ActionEvent event) {
-        Usuario usuario = dao.leer(user.getText(), password.getText());
+        usuario = dao.leer(user.getText(), password.getText());
         if (usuario == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
@@ -92,13 +75,13 @@ public class LoginController implements Initializable {
         } else {
             switch (usuario.getType()) {
                 case 0:
-                    ToPath("/Frontera/User/UserMenuUX.fxml", usuario);
+                    ToPath("/Frontera/User/UserMenuUX.fxml");
                     break;
                 case 1:
-                    ToPath("/Frontera/Admin/AdminMenuUX.fxml", usuario);
+                    ToPath("/Frontera/Admin/AdminMenuUX.fxml");
                     break;
                 case 2:
-                    ToPath("/Frontera/SU/SUMenuUX.fxml", usuario);
+                    ToPath("/Frontera/SU/SUMenuUX.fxml");
                     break;
 
             }
@@ -109,7 +92,7 @@ public class LoginController implements Initializable {
     //Register Label Click
     @FXML
     private void ToRegisterLink(ActionEvent event) {
-        ToPath("/Frontera/RegisterUX.fxml", null);
+        ToPath("/Frontera/RegisterUX.fxml");
     }
 
 }

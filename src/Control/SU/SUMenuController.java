@@ -5,6 +5,7 @@
  */
 package Control.SU;
 
+import Control.LoginController;
 import Control.UserConfigController;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
@@ -28,7 +29,7 @@ import javafx.stage.Stage;
  */
 public class SUMenuController implements Initializable {
 
-    private Usuario user;
+    private Usuario user = LoginController.getUsuario();
 
     @FXML
     private JFXButton logoutbtn;
@@ -40,7 +41,7 @@ public class SUMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        updateUser(user);
     }
 
     public void updateUser(Usuario user) {
@@ -48,26 +49,10 @@ public class SUMenuController implements Initializable {
 
     }
 
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
-
-    private void ToPath(String path, int idx) {
+    private void ToPath(String path) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             Parent root1 = (Parent) fxmlLoader.load();
-            switch (idx) {
-                case 0:
-                    break;
-                case 1:
-                    MAdminsController controler1 = fxmlLoader.getController();
-                    controler1.setUser(user);
-                    break;
-            }
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -83,7 +68,7 @@ public class SUMenuController implements Initializable {
 
     @FXML
     private void Logout(ActionEvent event) {
-        ToPath("/Frontera/LoginUX.fxml", 3);
+        ToPath("/Frontera/LoginUX.fxml");
     }
 
     @FXML
@@ -92,7 +77,6 @@ public class SUMenuController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/UserConfigUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             UserConfigController controler = fxmlLoader.getController();
-            controler.setUser(user);
             controler.updateUser();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -106,7 +90,7 @@ public class SUMenuController implements Initializable {
 
     @FXML
     private void toMAdmins(ActionEvent event) {
-        ToPath("/Frontera/SU/MAdminsUX.fxml", 1);
+        ToPath("/Frontera/SU/MAdminsUX.fxml");
     }
 
 }

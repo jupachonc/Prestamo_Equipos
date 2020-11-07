@@ -21,7 +21,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 public class UserConfigController implements Initializable {
 
-    private Usuario user;
+    private Usuario user = LoginController.getUsuario();
     private UsuarioDAO dao = new UsuarioDAO();
     @FXML
     private Label names;
@@ -36,13 +36,6 @@ public class UserConfigController implements Initializable {
     @FXML
     private JFXPasswordField cnewpss;
 
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
 
     public boolean verificarLongitud(String x, int largo) {
         return (x.length() > 3 && x.length() <= largo);
@@ -63,7 +56,7 @@ public class UserConfigController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        updateUser();
     }
 
     @FXML

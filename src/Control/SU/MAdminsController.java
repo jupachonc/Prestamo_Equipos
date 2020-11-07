@@ -1,12 +1,13 @@
 package Control.SU;
 
+import Control.LoginController;
 import Control.ValidarRegistro;
 import DAO.UsuarioDAO;
 import Entidad.Usuario;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,11 +20,8 @@ import javafx.stage.Stage;
 
 public class MAdminsController implements Initializable {
 
-    private Usuario user;
+    private Usuario user = LoginController.getUsuario();
 
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
 
     @FXML
     private JFXTextField names;
@@ -43,7 +41,7 @@ public class MAdminsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        new UsuarioDAO().getAdmins();
+        ArrayList<Usuario> admins = new UsuarioDAO().getAdmins();
     }
 
     @FXML
@@ -52,8 +50,6 @@ public class MAdminsController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/SU/SUMenuUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             SUMenuController controlersu = fxmlLoader.getController();
-            controlersu.setUser(user);
-            controlersu.updateUser(user);
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
