@@ -9,39 +9,42 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.User.UserMenuController">
    <children>
-      <Circle fill="#a9cd43" layoutX="484.0" layoutY="-379.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
-      <Label alignment="CENTER" layoutX="379.0" layoutY="25.0" style="-fx-font-family: &quot;PT Sans&quot;;" text="Menú Principal" textFill="WHITE">
+      <Circle fill="#a9cd43" layoutX="365.0" layoutY="-496.0" radius="608.0" stroke="#a9cd43" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="230.0" layoutY="32.0" prefHeight="23.0" prefWidth="271.0" style="-fx-font-size: 36px;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Menú Principal" textFill="WHITE">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXButton fx:id="logoutbtn" layoutX="365.0" layoutY="468.0" onAction="#Logout" pickOnBounds="false" prefHeight="28.0" prefWidth="239.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336;" text="Cerrar Sesión" textFill="WHITE">
+      <JFXButton fx:id="logoutbtn" layoutX="725.0" layoutY="474.0" onAction="#Logout" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Cerrar Sesión" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
+         <graphic>
+            <FontAwesomeIcon size="16pt" translateX="-10.0" />
+         </graphic>
       </JFXButton>
-      <Label layoutX="294.0" layoutY="132.0" style="-fx-font-family: Roboto;" text="¡Bienvenido! Desea acceder a...">
+      <Label layoutX="80.0" layoutY="132.0" style="-fx-font-family: Roboto;" text="¡Bienvenido!">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="labelname" layoutX="294.0" layoutY="165.0" style="-fx-font-family: Roboto;" text="Está registrado como User" textAlignment="CENTER">
+      <Label fx:id="UserNameLabel" layoutX="80.0" layoutY="174.0" styleClass="inputs" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Está registrado como User" textAlignment="CENTER">
          <font>
-            <Font size="18.0" />
+            <Font name="MS Outlook" size="18.0" />
          </font>
       </Label>
-      <JFXButton layoutX="140.0" layoutY="259.0" prefHeight="115.0" prefWidth="291.0" style="-fx-background-color: #ff5252;" text="Formulario Préstamos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <graphic>
-         <FontAwesomeIcon fill="WHITE" glyphName="FILE" size="64" wrappingWidth="51.571428298950195" />
-         </graphic>
+      <JFXButton layoutX="132.0" layoutY="259.0" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #ff5252; -fx-border-radius: 20pt; -jfx-button-type: RAISED; -fx-background-radius: 20pt;" text="Reservar un Elemento" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
-      </JFXButton>
-      <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" layoutX="552.0" layoutY="495.0" size="18.0" />
-      <JFXButton layoutX="532.0" layoutY="259.0" prefHeight="115.0" prefWidth="291.0" style="-fx-background-color: #ff5252;" text="Historial Préstamos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
-            <FontAwesomeIcon blendMode="ADD" fill="WHITE" glyphName="HISTORY" size="64" wrappingWidth="51.571428298950195" />
+            <FontAwesomeIcon fill="WHITE" glyphName="TICKET" size="48" translateX="20.0" wrappingWidth="48.0" />
+         </graphic>
+         
+      </JFXButton>
+      <JFXButton layoutX="525.0" layoutY="259.0" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #ff5252; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Historial de Reservas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <graphic>
+            <FontAwesomeIcon blendMode="ADD" fill="WHITE" glyphName="HISTORY" size="48" translateX="20.0" wrappingWidth="48.0" />
          </graphic>
          <font>
             <Font name="System Bold" size="24.0" />
