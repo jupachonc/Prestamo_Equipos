@@ -20,7 +20,7 @@
             <Font size="18.0" />
          </font>
          <graphic>
-            <FontAwesomeIcon size="16pt" translateX="-10.0" />
+            <FontAwesomeIcon fill="WHITE" size="16pt" translateX="-10.0" />
          </graphic>
       </JFXButton>
       <Label layoutX="80.0" layoutY="132.0" style="-fx-font-family: Roboto;" text="¡Bienvenido!">
