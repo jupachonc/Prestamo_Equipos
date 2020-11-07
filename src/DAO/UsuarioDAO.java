@@ -256,7 +256,31 @@ public class UsuarioDAO {
     }
     
     public boolean disableAdmin(Usuario usuario){
-        return true;
+                Connection connection = null;
+        Statement statement = null;
+        int resultSet;
+        try {
+            resultSet = -1;
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = connection.createStatement();
+            String sql = "UPDATE administrador set Estado = 0 Where Documento = " + usuario.getDocumento() + ";";
+            resultSet = statement.executeUpdate(sql);
+            return resultSet > 0;
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+
+                connection.close();
+
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
     }
 
 }

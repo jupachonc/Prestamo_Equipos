@@ -11,10 +11,8 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
-import java.awt.Color;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,12 +23,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -92,21 +89,31 @@ public class MAdminsController implements Initializable {
                         btn.setButtonType(JFXButton.ButtonType.FLAT);
                         btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
                         btn.setOnAction(event -> {
+
                             Usuario usr = this.getTreeTableRow().getItem();
 
-                            if (new UsuarioDAO().disableAdmin(usr)) {
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Información");
-                                alert.setHeaderText("Administrados deshabilitado");
-                                alert.setContentText(null);
-                                alert.showAndWait();
-                                getAdminTable();
-                            } else {
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setTitle("Información");
-                                alert.setHeaderText("No se pudo deshabilitar el Administrador");
-                                alert.setContentText(null);
-                                alert.showAndWait();
+                            Alert alertm = new Alert(Alert.AlertType.CONFIRMATION);
+                            alertm.setHeaderText(null);
+                            alertm.setTitle("Confirmación");
+                            alertm.setContentText("Se deshabilitará el usuario " + usr.getEmail());
+                            Optional<ButtonType> action = alertm.showAndWait();
+
+                            if (action.get() == ButtonType.OK) {
+
+                                if (new UsuarioDAO().disableAdmin(usr)) {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Información");
+                                    alert.setHeaderText("Administrador deshabilitado");
+                                    alert.setContentText(null);
+                                    alert.showAndWait();
+                                    getAdminTable();
+                                } else {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setTitle("Información");
+                                    alert.setHeaderText("No se pudo deshabilitar el Administrador");
+                                    alert.setContentText(null);
+                                    alert.showAndWait();
+                                }
                             }
 
                         });
@@ -146,7 +153,6 @@ public class MAdminsController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/SU/SUMenuUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
-            SUMenuController controlersu = fxmlLoader.getController();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
