@@ -42,10 +42,15 @@ public class UsuarioDAO {
                         + object.getDocumento() + ",\"" + object.getEmail() + "\", \""
                         + DigestUtils.sha256Hex(object.getContrasena()) + "\")";
             } else {
-                sql = "INSERT INTO estudiante( `Nombre`, `Apellido`,`Documento`,`Email`,`Password`) VALUES (\""
-                        + object.getNombre() + "\", \"" + object.getApellido() + "\", "
-                        + object.getDocumento() + ",\"" + object.getEmail() + "\", \""
-                        + DigestUtils.sha256Hex(object.getContrasena()) + "\")";
+                if (existente(object)) {
+                    sql = "UPDATE administrador set Password ='" + DigestUtils.sha256Hex(object.getContrasena())
+                            + "', Estado = 1 " + "Where Documento = " + object.getDocumento() + ";";;
+                } else {
+                    sql = "INSERT INTO administrador ( `Nombre`, `Apellido`,`Documento`,`Email`,`Password`, `Estado`) VALUES (\""
+                            + object.getNombre() + "\", \"" + object.getApellido() + "\", "
+                            + object.getDocumento() + ",\"" + object.getEmail() + "\", \""
+                            + DigestUtils.sha256Hex(object.getContrasena()) + "\", 1)";
+                }
             }
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
@@ -75,6 +80,44 @@ public class UsuarioDAO {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
             String sql = "SELECT * FROM estudiante WHERE Documento = " + object.getDocumento() + ";";
+            System.out.println(sql);
+            resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                return true;
+            } else {
+                sql = "SELECT * FROM administrador WHERE Documento = " + object.getDocumento() + ";";
+                resultSet = statement.executeQuery(sql);
+                if (resultSet.next()) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+
+                connection.close();
+
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+
+    }
+
+    public boolean reactivar(Usuario object) {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM administrador WHERE Documento = " + object.getDocumento() + " AND Estado = 0;";
             System.out.println(sql);
             resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
@@ -118,7 +161,7 @@ public class UsuarioDAO {
             } else {
                 resultSet = statement.executeQuery("SELECT * FROM administrador "
                         + "WHERE Email = '" + usr
-                        + "' AND Password ='" + DigestUtils.sha256Hex(pss) + "'");
+                        + "' AND Password ='" + DigestUtils.sha256Hex(pss) + "' AND Estado = 1;");
                 if (resultSet.next()) {
                     usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
                             resultSet.getInt("Documento"), resultSet.getString("Email"),

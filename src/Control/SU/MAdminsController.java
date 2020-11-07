@@ -1,5 +1,7 @@
 package Control.SU;
 
+import Control.ValidarRegistro;
+import DAO.UsuarioDAO;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -12,18 +14,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 public class MAdminsController implements Initializable {
-    
-    private Usuario user;
 
-    @FXML
-    private JFXTextField names;
+    private Usuario user;
 
     public void setUser(Usuario user) {
         this.user = user;
     }
+
+    @FXML
+    private JFXTextField names;
     @FXML
     private JFXTextField lastnames;
     @FXML
@@ -65,6 +68,34 @@ public class MAdminsController implements Initializable {
 
     @FXML
     private void create(ActionEvent event) {
+        String respuesta = new ValidarRegistro().verificarRegistro(names.getText(),
+                lastnames.getText(), Integer.parseInt(document.getText()), email.getText(),
+                password.getText(), cpassword.getText(), 1);
+        if (respuesta.equals("Usuario registrado") || respuesta.equals("Usuario reactivado con la contraseña asignada")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Información");
+            alert.setHeaderText(respuesta);
+            alert.setContentText(null);
+            alert.showAndWait();
+            cleanForm();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("Verifica la información");
+            alert.setContentText(respuesta);
+            alert.showAndWait();
+        }
+
+    }
+
+    private void cleanForm() {
+        names.setText("");
+        lastnames.setText("");
+        document.setText("");
+        email.setText("");
+        password.setText("");
+        cpassword.setText("");
     }
 
 }

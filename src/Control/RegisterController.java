@@ -60,7 +60,7 @@ public class RegisterController implements Initializable {
         String contrasena = password.getText();
         String reContrasena = confirm_password.getText();
         ValidarRegistro validar = new ValidarRegistro();
-        String respuesta = validar.verificarRegistro(nombre, apellido, intDocumento, strEmail, contrasena, reContrasena);
+        String respuesta = validar.verificarRegistro(nombre, apellido, intDocumento, strEmail, contrasena, reContrasena,0);
         System.out.println(respuesta);
         if(respuesta.equals("Usuario registrado")){
             Alert alert = new Alert(AlertType.INFORMATION);
