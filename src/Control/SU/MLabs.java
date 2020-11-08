@@ -113,7 +113,7 @@ public class MLabs implements Initializable {
                                 if (new LaboratorioDAO().disableLab(lab)) {
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("Información");
-                                    alert.setHeaderText("Laboratorio elimminado");
+                                    alert.setHeaderText("Laboratorio eliminado");
                                     alert.setContentText(null);
                                     alert.showAndWait();
                                     getLabsTable();
