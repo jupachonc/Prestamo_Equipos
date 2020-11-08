@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.User.UserHistoryController">
+   <children>
+      <Circle fill="#a9cd43" layoutX="241.0" layoutY="-689.0" radius="789.0" stroke="#a9cd43" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="76.0" layoutY="26.0" prefHeight="40.0" prefWidth="381.0" style="-fx-font-size: 24pt; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Historial de Reservas" textFill="WHITE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="backToMenu1" layoutX="725.0" layoutY="39.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="BACKWARD" size="16pt" translateX="-10.0" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXTreeTableView fx:id="historialTable" layoutX="37.0" layoutY="128.0" prefHeight="385.0" prefWidth="630.0" />
+      <JFXDatePicker fx:id="datePicker" layoutX="731.0" layoutY="197.0" />
+      <JFXComboBox fx:id="labList" layoutX="725.0" layoutY="275.0" prefHeight="28.0" prefWidth="188.0" promptText="Laboratorio" style="-jfx-label-float: true;" styleClass="combo-box" stylesheets="@users.css" />
+      <JFXButton fx:id="searchButton" layoutX="719.0" layoutY="375.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Aplicar Filtros" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" size="16pt" translateX="-10.0" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>

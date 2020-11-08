@@ -92,4 +92,21 @@ public class UserMenuController implements Initializable {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    private void ToHistory(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/User/UserHistoryUX.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            Stage stage1 = (Stage) logoutbtn.getScene().getWindow();
+            stage1.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

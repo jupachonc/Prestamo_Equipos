@@ -10,7 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class UserReserverController {
+public class UserHistoryController {
     private Usuario user = LoginController.getUsuario();
     
     @FXML
