@@ -6,6 +6,7 @@
 package Control.Admin;
 import Control.LoginController;
 import DAO.DBConnection;
+import Entidad.Laboratorio;
 import Entidad.Usuario;
 import java.net.URL;
 import java.sql.Connection;
@@ -41,7 +42,7 @@ public class AdminInventario implements Initializable{
                 "WHERE la.IDAdministrador = '" + this.user.getDocumento() + "'"
             );
             while (rs.next()){
-                oblist.add(new ModelTableLabs(rs.getString("ID"),rs.getString("Nombre")));
+                oblist.add(new Laboratorio(rs.getInt("ID"),rs.getString("Nombre"), rs.getInt("Telefono"), rs.getString("Ubicacion")));
             }
             col_ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
             col_Nombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
@@ -52,13 +53,13 @@ public class AdminInventario implements Initializable{
     }
 
     @FXML
-    private TableView<ModelTableLabs> table;
+    private TableView<Laboratorio> table;
     @FXML
-    private TableColumn<ModelTableLabs, String> col_ID;
+    private TableColumn<Laboratorio, String> col_ID;
     @FXML
-    private TableColumn<ModelTableLabs, String> col_Nombre;
+    private TableColumn<Laboratorio, String> col_Nombre;
     
-    ObservableList<ModelTableLabs> oblist = FXCollections.observableArrayList();
+    ObservableList<Laboratorio> oblist = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
