@@ -80,14 +80,14 @@ public class MLabs implements Initializable {
     private void getLabsTable() {
         data = FXCollections.observableList(new LaboratorioDAO().getLabs());
 
-        JFXTreeTableColumn<Laboratorio, String> settingsColumn = new JFXTreeTableColumn<>("Deshabilitar");
+        JFXTreeTableColumn<Laboratorio, String> settingsColumn = new JFXTreeTableColumn<>("Eliminar");
         settingsColumn.setPrefWidth(95);
         Callback<TreeTableColumn<Laboratorio, String>, TreeTableCell<Laboratorio, String>> cellFactory
                 = //
                 (final TreeTableColumn<Laboratorio, String> param) -> {
                     final TreeTableCell<Laboratorio, String> cell = new TreeTableCell<Laboratorio, String>() {
 
-                final JFXButton btn = new JFXButton("Deshabilitar");
+                final JFXButton btn = new JFXButton("Eliminar");
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -105,22 +105,23 @@ public class MLabs implements Initializable {
                             Alert alertm = new Alert(Alert.AlertType.CONFIRMATION);
                             alertm.setHeaderText(null);
                             alertm.setTitle("Confirmación");
-                            alertm.setContentText("Se deshabilitará el usuario " + lab.getNombre());
+                            alertm.setContentText("Se eliminará " + lab.getNombre());
                             Optional<ButtonType> action = alertm.showAndWait();
 
                             if (action.get() == ButtonType.OK) {
 
-                                if (true) {
+                                if (new LaboratorioDAO().disableLab(lab)) {
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("Información");
-                                    alert.setHeaderText("Administrador deshabilitado");
+                                    alert.setHeaderText("Laboratorio elimminado");
                                     alert.setContentText(null);
                                     alert.showAndWait();
+                                    getLabsTable();
 
                                 } else {
                                     Alert alert = new Alert(Alert.AlertType.ERROR);
                                     alert.setTitle("Información");
-                                    alert.setHeaderText("No se pudo deshabilitar el Administrador");
+                                    alert.setHeaderText("No se pudo eliminar el laboratorio");
                                     alert.setContentText(null);
                                     alert.showAndWait();
                                 }
