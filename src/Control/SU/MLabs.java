@@ -198,7 +198,9 @@ public class MLabs implements Initializable {
     }
 
     private void cleanForm() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        name.setText("");
+        phone.setText("");
+        location.setText("");
     }
 
 }
