@@ -38,8 +38,9 @@
       <JFXButton fx:id="loginbtn" buttonType="RAISED" layoutX="50.0" layoutY="281.0" onAction="#Login" prefHeight="25.0" prefWidth="190.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;;" stylesheets="@../Resources/Fonts/PT_Sans/PTSansBold.css" text="Iniciar Sesión" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
-         </font></JFXButton>
-      <Hyperlink fx:id="registerlink" layoutX="50.0" layoutY="313.0" onAction="#ToRegisterLink" style="-fx-font-family: &quot;PT Sans&quot;;" stylesheets="@../Resources/Fonts/PT_Sans/PTSansBold.css" text="Regístrese aquí">
+         </font>
+      </JFXButton>
+      <Hyperlink fx:id="registerlink" layoutX="50.0" layoutY="313.0" onAction="#ToRegisterLink" style="-fx-font-family: &quot;PT Sans&quot;; -fx-font-size: 10pt;" stylesheets="@../Resources/Fonts/PT_Sans/PTSansBold.css" text="Regístrese aquí">
          <font>
             <Font size="11.0" />
          </font>

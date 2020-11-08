@@ -24,7 +24,9 @@ public class UserMenuController implements Initializable {
     @FXML
     private JFXButton logoutbtn;
     @FXML
-    private Label labelname;
+    private JFXButton userConfigButton;
+    @FXML
+    private Label UserNameLabel;
 
     /**
      * Initializes the controller class.
@@ -36,7 +38,7 @@ public class UserMenuController implements Initializable {
     
 
     public void updateUser() {
-        labelname.setText(MessageFormat.format("Está registrado como {0} {1}", user.getNombre(), user.getApellido()));
+        UserNameLabel.setText(MessageFormat.format("Está registrado como {0} {1}", user.getNombre(), user.getApellido()));
 
     }
 
