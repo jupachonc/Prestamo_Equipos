@@ -37,7 +37,7 @@
             <Font name="MS Outlook" size="18.0" />
          </font>
       </Label>
-      <JFXButton fx:id="reserveUserButton" layoutX="132.0" layoutY="259.0" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #ff5252; -fx-border-radius: 20pt; -jfx-button-type: RAISED; -fx-background-radius: 20pt;" text="Reservar un Elemento" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton fx:id="reserveUserButton" layoutX="132.0" layoutY="259.0" onAction="#ToReserve" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #ff5252; -fx-border-radius: 20pt; -jfx-button-type: RAISED; -fx-background-radius: 20pt;" text="Reservar un Elemento" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -60,7 +60,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="userConfigButton" contentDisplay="TOP" layoutX="774.0" layoutY="40.0" onMouseClicked="#Config" style="-fx-font-family: PT_Sans; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Configuración de Usuario">
+      <JFXButton fx:id="userConfigButton" contentDisplay="TOP" layoutX="774.0" layoutY="40.0" onAction="#Config" style="-fx-font-family: PT_Sans; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Configuración de Usuario">
          <graphic>
             <FontAwesomeIcon glyphName="COG" size="60" />
          </graphic>

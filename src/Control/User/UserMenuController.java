@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
 public class UserMenuController implements Initializable {
 
@@ -60,7 +60,7 @@ public class UserMenuController implements Initializable {
     }
 
     @FXML
-    private void Config(MouseEvent event) {
+    private void Config(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/UserConfigUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -70,6 +70,23 @@ public class UserMenuController implements Initializable {
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
             stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void ToReserve(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/User/UserReserveUX.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            Stage stage1 = (Stage) logoutbtn.getScene().getWindow();
+            stage1.close();
 
         } catch (Exception e) {
             e.printStackTrace();
