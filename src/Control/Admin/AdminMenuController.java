@@ -42,6 +42,7 @@ public class AdminMenuController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             Parent root1 = (Parent) fxmlLoader.load();
+            
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -58,6 +59,11 @@ public class AdminMenuController implements Initializable {
     private void Logout(ActionEvent event) {
         ToPath("/Frontera/LoginUX.fxml");
     }
+
+    @FXML
+    private void gotoInventary(ActionEvent event) {
+        ToPath("/Frontera/Admin/AdminInventarioUX.fxml");
+    }   
 
     @FXML
     private void Config(MouseEvent event) {
