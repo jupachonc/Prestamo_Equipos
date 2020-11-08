@@ -84,4 +84,9 @@ public class SUMenuController implements Initializable {
         ToPath("/Frontera/SU/MAdminsUX.fxml");
     }
 
+    @FXML
+    private void toLabs(ActionEvent event) {
+        ToPath("/Frontera/SU/MLabsUX.fxml");
+    }
+
 }

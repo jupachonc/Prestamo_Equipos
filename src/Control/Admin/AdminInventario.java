@@ -42,7 +42,7 @@ public class AdminInventario implements Initializable{
                 "WHERE la.IDAdministrador = '" + this.user.getDocumento() + "'"
             );
             while (rs.next()){
-                oblist.add(new Laboratorio(rs.getInt("ID"),rs.getString("Nombre"), rs.getInt("Telefono"), rs.getString("Ubicacion")));
+                oblist.add(new Laboratorio(rs.getInt("ID"),rs.getString("Nombre"), rs.getString("Telefono"), rs.getString("Ubicacion")));
             }
             col_ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
             col_Nombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));

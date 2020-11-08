@@ -1,18 +1,19 @@
 package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import Entidad.Usuario;
 
 public class Laboratorio extends RecursiveTreeObject<Laboratorio>{
     private int ID;
     private String Nombre;
-    private int Telefono;
+    private String Telefono;
     private String Ubicacion;
 
-    public Laboratorio(int ID, String Nombre, int Telefono, String Ubicacion) {
+    public Laboratorio(int ID, String Nombre, String Telefono, String Ubicacion) {
         this.ID = ID;
-        this.Nombre = Nombre;
+        this.Nombre = Usuario.ucFirst(Nombre);
         this.Telefono = Telefono;
-        this.Ubicacion = Ubicacion;
+        this.Ubicacion = Usuario.ucFirst(Ubicacion);
     }
 
     public int getID() {
@@ -28,14 +29,14 @@ public class Laboratorio extends RecursiveTreeObject<Laboratorio>{
     }
 
     public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+        this.Nombre = Usuario.ucFirst(Nombre);
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return Telefono;
     }
 
-    public void setTelefono(int Telefono) {
+    public void setTelefono(String Telefono) {
         this.Telefono = Telefono;
     }
 
@@ -44,7 +45,7 @@ public class Laboratorio extends RecursiveTreeObject<Laboratorio>{
     }
 
     public void setUbicacion(String Ubicacion) {
-        this.Ubicacion = Ubicacion;
+        this.Ubicacion = Usuario.ucFirst(Ubicacion);
     }
     
     
