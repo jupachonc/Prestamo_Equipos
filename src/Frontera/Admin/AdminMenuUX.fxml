@@ -48,7 +48,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="507.0" layoutY="269.0" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252;" text="Inventario" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton layoutX="507.0" layoutY="269.0" prefHeight="115.0" prefWidth="203.0" onAction="#gotoInventary" style="-fx-background-color: #ff5252;" text="Inventario" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="CUBE" size="50" wrappingWidth="51.571428298950195" />
          </graphic>
