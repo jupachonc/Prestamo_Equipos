@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'PT Sans';
+    src: url('../../Resources/Fonts/PT_Sans/PTSans-Bold.ttf');
+}
+
+.combo-box,
+.choice-box {
+    -fx-font-family: 'PT Sans';
+    -fx-font-size: 12px;
+    -fx-prompt-text-fill: black;
+    -fx-text-fill: black;
+    -fx-background-color: none;
+    -fx-padding: 3 0 5 8;
+}
+
+.combo-box .list-cell:filled:selected .text,
+.choice-box .list-cell:filled:selected .text {
+    -fx-fill: black;
+}
+
+.combo-box .arrow,
+.choice-box .arrow {
+    -fx-background-color: #455716;   
+}
