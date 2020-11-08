@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Control.Admin;
+import Control.LoginController;
 import DAO.DBConnection;
 import Entidad.Usuario;
 import java.net.URL;
@@ -25,16 +26,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author nguzman
  */
 public class AdminInventario implements Initializable{
-    private Usuario user;
-
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-        loadTable();
-    }
+   
+    private Usuario user = LoginController.getUsuario();
 
     public void loadTable(){
         // System.out.println("AdminInventario => setUser => " + this.user.getDocumento());
@@ -69,7 +62,9 @@ public class AdminInventario implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //System.out.println(this.user.getDocumento());
+        
+        System.out.println("AdminInventario => " + this.user.getDocumento());
+        loadTable();
         /*
         */
     }
