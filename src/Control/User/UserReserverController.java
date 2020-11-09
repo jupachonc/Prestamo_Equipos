@@ -13,8 +13,11 @@ import javafx.stage.Stage;
 public class UserReserverController {
     private Usuario user = LoginController.getUsuario();
     
-    @FXML
     private JFXButton backToMenu1;
+    @FXML
+    private JFXButton reserveButton;
+    @FXML
+    private JFXButton reserveButton1;
     
     private void ToPath(String path) {
         try {

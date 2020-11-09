@@ -7,9 +7,7 @@ package Control.SU;
 
 import Control.ValidarRegistro;
 import DAO.LaboratorioDAO;
-import DAO.UsuarioDAO;
 import Entidad.Laboratorio;
-import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -71,6 +69,8 @@ public class MLabs implements Initializable {
 
     @FXML
     private JFXTextField location;
+    @FXML
+    private JFXButton backbtn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -180,8 +180,14 @@ public class MLabs implements Initializable {
         }
     }
 
+    private void cleanForm() {
+        name.setText("");
+        phone.setText("");
+        location.setText("");
+    }
+
     @FXML
-    private void backbtn(ActionEvent event) {
+    private void BackToMenu(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/SU/SUMenuUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -195,12 +201,6 @@ public class MLabs implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void cleanForm() {
-        name.setText("");
-        phone.setText("");
-        location.setText("");
     }
 
 }

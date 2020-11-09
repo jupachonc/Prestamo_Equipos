@@ -58,6 +58,8 @@ public class MAdminsController implements Initializable {
     private JFXPasswordField password;
     @FXML
     private JFXPasswordField cpassword;
+    @FXML
+    private JFXButton backbtn;
 
     /**
      * Initializes the controller class.
@@ -149,23 +151,6 @@ public class MAdminsController implements Initializable {
     }
 
     @FXML
-    private void backbtn(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/SU/SUMenuUX.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.setResizable(false);
-            stage.show();
-            Stage stage1 = (Stage) names.getScene().getWindow();
-            stage1.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     private void create(ActionEvent event) {
         String respuesta = new ValidarRegistro().verificarRegistro(names.getText(),
                 lastnames.getText(), Integer.parseInt(document.getText()), email.getText(),
@@ -196,6 +181,23 @@ public class MAdminsController implements Initializable {
         email.setText("");
         password.setText("");
         cpassword.setText("");
+    }
+
+    @FXML
+    private void BackToMenu(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/SU/SUMenuUX.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            Stage stage1 = (Stage) names.getScene().getWindow();
+            stage1.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
