@@ -6,6 +6,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
@@ -29,26 +30,40 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXComboBox layoutX="44.0" layoutY="120.0" prefHeight="27.0" prefWidth="180.0" promptText="Laboratorio" style="-jfx-label-float: true;" stylesheets="@../User/users.css" />
-      <JFXTreeTableView layoutX="44.0" layoutY="171.0" prefHeight="340.0" prefWidth="400.0" />
-      <JFXButton fx:id="reserveButton" layoutX="455.0" layoutY="241.0" prefHeight="40.0" prefWidth="60.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXComboBox fx:id="labList" layoutX="44.0" layoutY="120.0" onAction="#onSelectItem" prefHeight="27.0" prefWidth="180.0" promptText="Laboratorio" style="-jfx-label-float: true;" stylesheets="@../User/users.css" />
+      <JFXTreeTableView fx:id="InTable" layoutX="44.0" layoutY="171.0" prefHeight="340.0" prefWidth="400.0">
+         <columns>
+            <TreeTableColumn fx:id="INombres" prefWidth="150.0" text="Nombres" />
+            <TreeTableColumn fx:id="IApellidos" prefWidth="150.0" text="Apellidos" />
+            <TreeTableColumn fx:id="IDocumento" prefWidth="99.0" text="Documento" />
+         </columns></JFXTreeTableView>
+      <JFXButton contentDisplay="CENTER" layoutX="455.0" layoutY="241.0" onAction="#toLeft" prefHeight="40.0" prefWidth="60.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="ARROW_LEFT" size="16pt" />
+         </graphic>
       </JFXButton>
-      <JFXTreeTableView layoutX="526.0" layoutY="171.0" prefHeight="340.0" prefWidth="400.0" />
-      <JFXButton fx:id="reserveButton1" layoutX="455.0" layoutY="314.0" prefHeight="40.0" prefWidth="60.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton contentDisplay="CENTER" layoutX="455.0" layoutY="314.0" onAction="#toRight" prefHeight="40.0" prefWidth="60.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text=" " textAlignment="RIGHT" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="ARROW_RIGHT" nodeOrientation="RIGHT_TO_LEFT" size="16pt" />
+         </graphic>
       </JFXButton>
-      <FontAwesomeIcon fill="WHITE" glyphName="ARROW_LEFT" layoutX="477.0" layoutY="268.0" size="16pt" />
-      <FontAwesomeIcon fill="WHITE" glyphName="ARROW_RIGHT" layoutX="477.0" layoutY="343.0" size="16pt" />
+      <JFXTreeTableView fx:id="OutTable" layoutX="526.0" layoutY="171.0" prefHeight="340.0" prefWidth="400.0">
+         <columns>
+            <TreeTableColumn fx:id="ONombres" prefWidth="150.0" text="Nombres" />
+            <TreeTableColumn fx:id="OApellidos" prefWidth="150.0" text="Apellidos" />
+            <TreeTableColumn fx:id="ODocumento" prefWidth="99.0" text="Documento" />
+         </columns></JFXTreeTableView>
    </children>
 </AnchorPane>
