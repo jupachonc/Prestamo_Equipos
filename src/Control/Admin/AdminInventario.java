@@ -51,6 +51,11 @@ public class AdminInventario implements Initializable{
         }
         table.setItems(oblist);
     }
+    public void goToCategorias(){
+        System.out.println("ir a categorias");
+    
+    
+    }
 
     @FXML
     private TableView<Laboratorio> table;
@@ -66,6 +71,7 @@ public class AdminInventario implements Initializable{
         
         System.out.println("AdminInventario => " + this.user.getDocumento());
         loadTable();
+   
         /*
         */
     }
