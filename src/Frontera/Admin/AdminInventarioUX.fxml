@@ -45,5 +45,10 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
+      <JFXButton buttonType="RAISED" onAction = "#goToInventary"  layoutX="700.0" layoutY="390.0" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Ir a Inventario" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

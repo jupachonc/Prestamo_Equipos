@@ -56,6 +56,11 @@ public class AdminInventario implements Initializable{
     
     
     }
+    public void goToInventary(){
+        System.out.println("ir a inventario");
+    
+    
+    }
 
     @FXML
     private TableView<Laboratorio> table;
