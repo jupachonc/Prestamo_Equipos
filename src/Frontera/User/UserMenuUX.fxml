@@ -21,7 +21,7 @@
             <Font size="18.0" />
          </font>
          <graphic>
-            <FontAwesomeIcon fill="WHITE" glyphName="BACKWARD" size="16pt" translateX="-10.0" />
+            <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" size="16pt" translateX="-10.0" />
          </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import Entidad.Laboratorio;
@@ -12,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javafx.collections.ObservableList;
 
 public class LaboratorioDAO {
 
@@ -158,8 +152,9 @@ public class LaboratorioDAO {
             resultSet = -1;
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "INSERT INTO laboratorio_administrador_1 (`IDLaboratorio`, `IDAdministrador`) Values("
-                    + lab.getID() + "," + usr.getDocumento() + ");";
+            String sql = String.format("INSERT INTO laboratorio_administrador_1 "
+                    + "(`IDLaboratorio`, `IDAdministrador`) Values( %s , %s);",
+                    lab.getID(), usr.getDocumento());
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
         } catch (SQLException ex) {
@@ -187,8 +182,9 @@ public class LaboratorioDAO {
             resultSet = -1;
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "DELETE FROM laboratorio_administrador_1 WHERE IDLaboratorio =" + lab.getID() +
-                    " AND IDAdministrador =" + usr.getDocumento() + ";" ;
+            String sql = String.format("DELETE FROM laboratorio_administrador_1 "
+                    + "WHERE IDLaboratorio = %s AND IDAdministrador = %s;",
+                    lab.getID(), usr.getDocumento()) ;
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
         } catch (SQLException ex) {
@@ -215,7 +211,7 @@ public class LaboratorioDAO {
             resultSet = -1;
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "UPDATE laboratorio SET Estado = 0 WHERE ID =" + lab.getID() + ";";
+            String sql = String.format("UPDATE laboratorio SET Estado = 0 WHERE ID = %s;", lab.getID());
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
         } catch (SQLException ex) {

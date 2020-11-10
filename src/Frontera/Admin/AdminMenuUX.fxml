@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
@@ -15,11 +16,6 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXButton fx:id="logoutbtn" layoutX="375.0" layoutY="478.0" onAction="#Logout" pickOnBounds="false" prefHeight="28.0" prefWidth="239.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336;" text="Cerrar Sesión" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXButton>
       <Label layoutX="304.0" layoutY="142.0" style="-fx-font-family: Roboto;" text="¡Bienvenido! Desea acceder a...">
          <font>
             <Font name="System Bold" size="27.0" />
@@ -32,7 +28,7 @@
       </Label>
       <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" layoutX="562.0" layoutY="505.0" size="18.0" />
       <FontAwesomeIcon blendMode="ADD" fill="WHITE" glyphName="HISTORY" layoutX="10.0" layoutY="10.0" size="64" wrappingWidth="51.571428298950195" />
-      <JFXButton layoutX="33.0" layoutY="269.0" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252;" text="Préstamos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton buttonType="RAISED" layoutX="33.0" layoutY="269.0" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Préstamos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="ARROW_CIRCLE_LEFT" size="50" wrappingWidth="51.571428298950195" />
          </graphic>
@@ -40,7 +36,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="270.0" layoutY="269.0" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252;" text="Reporte Entrega" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton buttonType="RAISED" layoutX="270.0" layoutY="269.0" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reporte Entrega" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="ARROW_CIRCLE_RIGHT" size="50" wrappingWidth="51.571428298950195" />
          </graphic>
@@ -48,7 +44,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="507.0" layoutY="269.0" prefHeight="115.0" prefWidth="203.0" onAction="#gotoInventary" style="-fx-background-color: #ff5252;" text="Inventario" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton buttonType="RAISED" layoutX="507.0" layoutY="269.0" onAction="#gotoInventary" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Inventario" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="CUBE" size="50" wrappingWidth="51.571428298950195" />
          </graphic>
@@ -56,7 +52,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="742.0" layoutY="269.0" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252;" text="Reportes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton buttonType="RAISED" layoutX="742.0" layoutY="269.0" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reportes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="LIST" size="50" wrappingWidth="51.571428298950195" />
          </graphic>
@@ -70,5 +66,16 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <JFXButton fx:id="logoutbtn" layoutX="745.0" layoutY="475.0" onAction="#Logout" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Cerrar Sesión" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" size="16pt" translateX="-10.0" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>
