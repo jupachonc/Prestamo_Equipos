@@ -79,8 +79,8 @@ public class LaboratorioDAO {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "SELECT * FROM laboratorio_administrador_1, active_admins "
-                    + "WHERE IDAdministrador = Documento "
+            String sql = "SELECT * FROM laboratorio_administrador, active_admins "
+                    + "WHERE AdministradorDocumento = Documento "
                     + "AND IDLaboratorio = " + lab.getID() + ";";
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
@@ -115,7 +115,7 @@ public class LaboratorioDAO {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
             String sql = "SELECT * FROM (SELECT Documento as DOC FROM "
-                    + "laboratorio_administrador_1, active_admins WHERE IDAdministrador = Documento AND IDLaboratorio ="
+                    + "laboratorio_administrador, active_admins WHERE AdministradorDocumento = Documento AND IDLaboratorio ="
                     + lab.getID() + ") IL RIGHT JOIN active_admins ADM"
                     + " ON IL.DOC = ADM.Documento WHERE IL.DOC IS NULL;";
             System.out.println(sql);
@@ -152,8 +152,8 @@ public class LaboratorioDAO {
             resultSet = -1;
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = String.format("INSERT INTO laboratorio_administrador_1 "
-                    + "(`IDLaboratorio`, `IDAdministrador`) Values( %s , %s);",
+            String sql = String.format("INSERT INTO laboratorio_administrador "
+                    + "(`IDLaboratorio`, `AdministradorDocumento`) Values( %s , %s);",
                     lab.getID(), usr.getDocumento());
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
@@ -182,8 +182,8 @@ public class LaboratorioDAO {
             resultSet = -1;
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = String.format("DELETE FROM laboratorio_administrador_1 "
-                    + "WHERE IDLaboratorio = %s AND IDAdministrador = %s;",
+            String sql = String.format("DELETE FROM laboratorio_administrador "
+                    + "WHERE IDLaboratorio = %s AND AdministradorDocumento = %s;",
                     lab.getID(), usr.getDocumento()) ;
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;

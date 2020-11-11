@@ -230,7 +230,7 @@ public class UsuarioDAO {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
-            String sql = "SELECT * FROM administrador Where Estado = 1 AND Email != \"soporteing_fibog@unal.edu.co\"";
+            String sql = "SELECT * FROM active_admins";
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
 
