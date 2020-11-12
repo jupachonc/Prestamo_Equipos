@@ -9,6 +9,7 @@ package Control.Admin;
  *
  * @author nguzman
  */
+import Entidad.Laboratorio;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
@@ -27,10 +28,16 @@ public class AdminMacroCategoriasController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    private Laboratorio lab;
     
     public void createCategory(){
     
     } 
+    
+    public void setLaboratorio(Laboratorio lab){
+        this.lab=lab;
+        System.out.println(this.lab.getNombre());
+    }
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {

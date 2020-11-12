@@ -100,10 +100,13 @@ public class AdminInventario implements Initializable{
         Table.setShowRoot(false);
         
     }
-    private void ToPath(String path) {
+    private void ToMacroCategorias(String path, Laboratorio lab) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             Parent root1 = (Parent) fxmlLoader.load();
+            
+            AdminMacroCategoriasController amc  = fxmlLoader.getController();
+            amc.setLaboratorio(lab);
             
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -117,7 +120,13 @@ public class AdminInventario implements Initializable{
         }
     }
     public void goToMacroCategorias(){
-        ToPath("/Frontera/Admin/AdminMacroCategorias.fxml"); 
+        System.out.println(Table);
+        TreeItem ti =  Table.getSelectionModel().selectedItemProperty().get();
+        //Si object es nulo saque alerta pidiendo selección
+        Laboratorio lab = Table.getSelectionModel().getSelectedItem().getValue();
+        
+        System.out.println(lab.getID());
+        ToMacroCategorias("/Frontera/Admin/AdminMacroCategorias.fxml", lab); 
     }
     public void goToInventary(){
         System.out.println("ir a inventario");
