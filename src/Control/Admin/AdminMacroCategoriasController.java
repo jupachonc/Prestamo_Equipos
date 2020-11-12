@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  *
  * @author nguzman
  */
-public class AdminCategoriasController implements Initializable {
+public class AdminMacroCategoriasController implements Initializable {
 
     /**
      * Initializes the controller class.

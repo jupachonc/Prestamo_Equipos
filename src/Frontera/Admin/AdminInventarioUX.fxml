@@ -2,18 +2,14 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-
+<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.AdminInventario">
    <children>
      <Circle fill="#a9cd43" layoutX="251.0" layoutY="-679.0" radius="789.0" stroke="#a9cd43" strokeType="INSIDE" />
@@ -34,13 +30,13 @@
          </cursor>
       </JFXButton>       
 
-      <TableView fx:id="table" layoutX="40.0" layoutY="172.0" prefHeight="335.0" prefWidth="620.0">
+      <JFXTreeTableView fx:id="Table" layoutX="40.0" layoutY="172.0" prefHeight="335.0" prefWidth="620.0">
         <columns>
-          <TableColumn fx:id="col_ID" prefWidth="299.0" text="ID Laboratorio" />
-          <TableColumn fx:id="col_Nombre" prefWidth="300.0" text="Nombre Laboratorio" />
+          <TreeTableColumn fx:id="col_ID" prefWidth="299.0" text="ID Laboratorio" />
+          <TreeTableColumn fx:id="col_Nombre" prefWidth="300.0" text="Nombre Laboratorio" />
         </columns>
-      </TableView>
-      <JFXButton buttonType="RAISED" onAction = "#goToCategorias"  layoutX="700.0" layoutY="439.0" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Ir a categorías" textFill="WHITE">
+      </JFXTreeTableView>
+      <JFXButton buttonType="RAISED" onAction = "#goToMacroCategorias"  layoutX="700.0" layoutY="439.0" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Ir a categorías" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
