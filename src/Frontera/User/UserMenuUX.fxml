@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.User.UserMenuController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.User.UserMenuController">
    <children>
       <Circle fill="#a9cd43" layoutX="365.0" layoutY="-496.0" radius="608.0" stroke="#a9cd43" strokeType="INSIDE" />
       <Label alignment="CENTER" layoutX="230.0" layoutY="23.0" prefHeight="23.0" prefWidth="271.0" style="-fx-font-size: 36px; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Menú Principal" textFill="WHITE">
