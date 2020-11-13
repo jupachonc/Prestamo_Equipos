@@ -13,13 +13,13 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.AdminMacroCategoriasController">
    <children>
-      <Circle fill="#a9cd43" layoutX="251.0" layoutY="-679.0" radius="789.0" stroke="#a9cd43" strokeType="INSIDE" />
-      <Label alignment="CENTER" layoutX="71.0" layoutY="24.0" prefHeight="40.0" prefWidth="381.0" style="-fx-font-size: 26pt; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="MacroCategorías" textFill="WHITE">
+      <Circle fill="#a9cd43" layoutX="332.0" layoutY="-387.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="142.0" layoutY="23.0" prefHeight="40.0" prefWidth="381.0" style="-fx-font-size: 26pt; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="MacroCategorías" textFill="WHITE">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXButton fx:id="backbtn" layoutX="735.0" layoutY="49.0"  prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton fx:id="backbtn" layoutX="735.0" layoutY="49.0" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -51,4 +51,3 @@
       <Label layoutX="42.0" layoutY="120.0" prefHeight="53.0" prefWidth="290.0" style="-fx-font-family: Roboto; -fx-font-size: 30;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/Roboto/Roboto.css" text="Lista MacroCategorías" wrapText="true" />
    </children>
 </AnchorPane>
-
