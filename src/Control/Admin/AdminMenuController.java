@@ -1,29 +1,40 @@
 package Control.Admin;
 
 import Control.LoginController;
+import DAO.LaboratorioDAO;
+import Entidad.Laboratorio;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 public class AdminMenuController implements Initializable {
 
     private Usuario user = LoginController.getUsuario();
+    private ObservableList<Laboratorio> dataLabs;
+    public static Laboratorio currentLab = null;
 
     @FXML
     private Label labelname;
     @FXML
     private JFXButton logoutbtn;
+    @FXML
+    private JFXComboBox<Laboratorio> labList;
 
     /**
      * Initializes the controller class.
@@ -31,6 +42,7 @@ public class AdminMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         updateUser();
+        getLabs();
     }
 
     public void updateUser() {
@@ -38,11 +50,29 @@ public class AdminMenuController implements Initializable {
 
     }
 
+    private void getLabs() {
+        dataLabs = FXCollections.observableList(new LaboratorioDAO().getLabsperAdmin(user));
+
+        labList.setItems(dataLabs);
+        labList.setConverter(new StringConverter<Laboratorio>() {
+            @Override
+            public String toString(Laboratorio object) {
+                return object.getID() + "-" + object.getNombre();
+            }
+
+            @Override
+            public Laboratorio fromString(String string) {
+                return findID(Integer.parseInt(string.split("-")[0]));
+            }
+        });
+
+    }
+
     private void ToPath(String path) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             Parent root1 = (Parent) fxmlLoader.load();
-            
+
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -55,6 +85,18 @@ public class AdminMenuController implements Initializable {
         }
     }
 
+    private void SafeRoute(String path) {
+        if (currentLab != null) {
+            ToPath(path);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("No se ha seleccionado un laboratorio");
+            alert.setContentText(null);
+            alert.showAndWait();
+        }
+    }
+
     @FXML
     private void Logout(ActionEvent event) {
         ToPath("/Frontera/LoginUX.fxml");
@@ -62,8 +104,8 @@ public class AdminMenuController implements Initializable {
 
     @FXML
     private void gotoInventary(ActionEvent event) {
-        ToPath("/Frontera/Admin/AdminInventarioUX.fxml");
-    }   
+        SafeRoute("/Frontera/Admin/AdminInventarioUX.fxml");
+    }
 
     @FXML
     private void Config(MouseEvent event) {
@@ -78,6 +120,22 @@ public class AdminMenuController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Laboratorio findID(int id) {
+        for (Laboratorio lab : dataLabs) {
+            if (lab.getID() == id) {
+                return lab;
+            }
+
+        }
+        return null;
+    }
+
+    @FXML
+    private void onSelectItem(ActionEvent event) {
+        currentLab = labList.getSelectionModel().getSelectedItem();
+
     }
 
 }

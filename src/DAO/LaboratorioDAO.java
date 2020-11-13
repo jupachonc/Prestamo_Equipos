@@ -81,7 +81,7 @@ public class LaboratorioDAO {
             statement = connection.createStatement();
             String sql = "SELECT * FROM laboratorio_administrador, active_admins "
                     + "WHERE AdministradorDocumento = Documento "
-                    + "AND IDLaboratorio = " + lab.getID() + ";";
+                    + "AND LaboratorioID = " + lab.getID() + ";";
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
 
@@ -115,7 +115,7 @@ public class LaboratorioDAO {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
             String sql = "SELECT * FROM (SELECT Documento as DOC FROM "
-                    + "laboratorio_administrador, active_admins WHERE AdministradorDocumento = Documento AND IDLaboratorio ="
+                    + "laboratorio_administrador, active_admins WHERE AdministradorDocumento = Documento AND LaboratorioID ="
                     + lab.getID() + ") IL RIGHT JOIN active_admins ADM"
                     + " ON IL.DOC = ADM.Documento WHERE IL.DOC IS NULL;";
             System.out.println(sql);
@@ -229,5 +229,37 @@ public class LaboratorioDAO {
                 System.out.println("Error en SQL" + ex);
             }
         }
+    }
+    
+    public ArrayList<Laboratorio> getLabsperAdmin(Usuario usr){
+        ArrayList<Laboratorio> labs = new ArrayList<>();
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM laboratorio, laboratorio_administrador "
+                    + "Where ID = LaboratorioID AND AdministradorDocumento =" + usr.getDocumento() + ";";
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+
+            while (resultSet.next()) {
+                labs.add(new Laboratorio(resultSet.getInt("ID"), resultSet.getString("Nombre"),
+                        resultSet.getString("Telefono"), resultSet.getString("Ubicacion")));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return labs;
     }
 }
