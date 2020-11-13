@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -84,6 +85,18 @@ public class AdminMenuController implements Initializable {
         }
     }
 
+    private void SafeRoute(String path) {
+        if (currentLab != null) {
+            ToPath(path);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("No se ha seleccionado un laboratorio");
+            alert.setContentText(null);
+            alert.showAndWait();
+        }
+    }
+
     @FXML
     private void Logout(ActionEvent event) {
         ToPath("/Frontera/LoginUX.fxml");
@@ -91,7 +104,7 @@ public class AdminMenuController implements Initializable {
 
     @FXML
     private void gotoInventary(ActionEvent event) {
-        ToPath("/Frontera/Admin/AdminInventarioUX.fxml");
+        SafeRoute("/Frontera/Admin/AdminInventarioUX.fxml");
     }
 
     @FXML
