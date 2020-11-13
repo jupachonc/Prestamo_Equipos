@@ -231,6 +231,34 @@ public class LaboratorioDAO {
         }
     }
     
+    public boolean enableLab(Laboratorio lab) {
+        int resultSet;
+
+        
+        try {
+            resultSet = -1;
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = String.format("UPDATE laboratorio SET Estado = 1 WHERE ID = %s;", lab.getID());
+            resultSet = statement.executeUpdate(sql);
+            return resultSet > 0;
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+
+                connection.close();
+
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+    }
+    
     public ArrayList<Laboratorio> getLabsperAdmin(Usuario usr){
         ArrayList<Laboratorio> labs = new ArrayList<>();
         ResultSet resultSet = null;
