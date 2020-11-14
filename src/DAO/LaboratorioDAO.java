@@ -348,11 +348,68 @@ public class LaboratorioDAO {
 
     public ArrayList<Categoria> getCats(MacroCategoria Mcat) throws SQLException {
         ArrayList<Categoria> cats = new ArrayList<>();
-        String sql = "SELECT * FROM macrocategoria, categoria "
-                + "WHERE MacroCategoriaID = macrocategoria.ID AND macrocategoria.ID=" + Mcat.getID();
-        ResultSet resultSet = Query(sql);
-        resultSet.beforeFirst();
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM macrocategoria, categoria "
+                    + "WHERE MacroCategoriaID = macrocategoria.ID AND macrocategoria.ID=" + Mcat.getID();
+
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            while (resultSet.next()) {
+
+                cats.add(new Categoria(resultSet.getInt("categoria.ID"), resultSet.getInt("CantidadMAX"),
+                        resultSet.getString("categoria.Nombre"), resultSet.getString("categoria.Descripción")));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
         return cats;
+
+    }
+
+    public ArrayList<Elemento> getElements(Categoria cat) throws SQLException {
+        ArrayList<Elemento> elmts = new ArrayList<>();
+
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM elemento, categoria "
+                    + "WHERE CategoriaID = categoria.ID AND CategoriaID =" + cat.getID();
+
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            while (resultSet.next()) {
+
+                elmts.add(new Elemento(resultSet.getInt("EstadoElemento"), resultSet.getString("elemento.Nombre"),
+                        resultSet.getString("elemento.Descripción"), resultSet.getInt("EstadoElemento")));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return elmts;
 
     }
 }
