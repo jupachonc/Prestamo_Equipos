@@ -2,37 +2,35 @@ package Control.User;
 
 import Control.LoginController;
 import DAO.LaboratorioDAO;
-import DAO.UsuarioDAO;
 import Entidad.Categoria;
 import Entidad.Laboratorio;
 import Entidad.MacroCategoria;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -45,6 +43,7 @@ public class UserReserverController implements Initializable {
     private ObservableList<Laboratorio> dataLabs;
     private ObservableList<MacroCategoria> dataCats;
     private ObservableList<Categoria> dataElems;
+    private ObservableList<Categoria> reserveElems;
 
     @FXML
     private JFXComboBox<Laboratorio> labList;
@@ -53,7 +52,13 @@ public class UserReserverController implements Initializable {
     @FXML
     private JFXTreeTableView<Categoria> elemsTable;
     @FXML
+    private JFXTreeTableView<Categoria> reserveTable;
+    @FXML
     private TreeTableColumn<Categoria, String> TElementoL;
+    @FXML
+    private TreeTableColumn<Categoria, String> TNombreR;   
+    @FXML
+    private TreeTableColumn<Categoria, String> TCantidadR;
     @FXML
     private TreeTableColumn<Categoria, String> TCantidadL;
     @FXML
@@ -68,6 +73,7 @@ public class UserReserverController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getLabs();
+        initReserveTable();
     }
 
     private Laboratorio findID(int id) {
@@ -151,7 +157,19 @@ public class UserReserverController implements Initializable {
                         btn.setButtonType(JFXButton.ButtonType.FLAT);
                         btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
                         btn.setOnAction(event -> {
-                            System.out.println("Works!");
+                            if(reserveElems.contains(this.getTreeTableRow().getItem())){
+                                int i = reserveElems.indexOf(this.getTreeTableRow().getItem());
+                                int m = reserveElems.get(i).getCantidadMax() + 1;
+                                if(this.getTreeTableRow().getItem().getCantidadMax() >= m || this.getTreeTableRow().getItem().getCantidadLibre() >= m){
+                                    reserveElems.get(i).setCantidadMax(m);
+                                }
+                            }
+                            else{
+                                Categoria o = this.getTreeTableRow().getItem();
+                                o.setCantidadMax(1);
+                                reserveElems.add(o);
+                            }
+                            reserveTable.refresh();
                         });
                         setGraphic(btn);
                         setText(null);
@@ -176,11 +194,68 @@ public class UserReserverController implements Initializable {
         );
 
         TreeItem<Categoria> root = new RecursiveTreeItem<>(dataElems, RecursiveTreeObject::getChildren);
-
+        
         elemsTable.setRoot(root);
         elemsTable.setShowRoot(false);
     }
 
+    private void initReserveTable(){
+        reserveElems = FXCollections.observableList(new ArrayList<>());
+        
+        JFXTreeTableColumn<Categoria, String> TQuitarp = new JFXTreeTableColumn<>("Añadir");
+        TQuitarp.setPrefWidth(95);
+        Callback<TreeTableColumn<Categoria, String>, TreeTableCell<Categoria, String>> cellFactory
+                = //
+                (final TreeTableColumn<Categoria, String> param) -> {
+                    final TreeTableCell<Categoria, String> cell = new TreeTableCell<Categoria, String>() {
+
+                final JFXButton btn = new JFXButton("Quitar");
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        btn.setButtonType(JFXButton.ButtonType.FLAT);
+                        btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
+                        btn.setOnAction(event -> {
+                            
+                            this.getTreeTableRow().getItem().setCantidadMax(this.getTreeTableRow().getItem().getCantidadMax() - 1);
+                            
+                            if(this.getTreeTableRow().getItem().getCantidadMax() == 0){
+                                reserveElems.remove(this.getTreeTableRow().getItem());
+                            }
+                            
+                            reserveTable.refresh();
+                        });
+                        setGraphic(btn);
+                        setText(null);
+                    }
+                }
+            };
+                    return cell;
+                };
+
+        TQuitarp.setCellFactory(cellFactory);
+
+        reserveTable.getColumns().set(2, TQuitarp);
+        
+        TCantidadR.setCellValueFactory(
+                new TreeItemPropertyValueFactory<>("CantidadMax")
+        );
+        
+        TNombreR.setCellValueFactory(
+                new TreeItemPropertyValueFactory<>("nombre")
+        );
+        
+        TreeItem<Categoria> root = new RecursiveTreeItem<>(reserveElems, RecursiveTreeObject::getChildren);
+
+        reserveTable.setRoot(root);
+        reserveTable.setShowRoot(false);
+    }
+    
     private void ToPath(String path) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
@@ -205,6 +280,8 @@ public class UserReserverController implements Initializable {
     @FXML
     private void updateMacro(ActionEvent event) {
         getMacro();
+        reserveElems.clear();
+        reserveTable.refresh();
     }
 
     @FXML

@@ -38,7 +38,7 @@
             <TreeTableColumn fx:id="TMaxL" prefWidth="124.0" text="Cantidad Máxima" />
             <TreeTableColumn fx:id="TAnadir" prefWidth="87.0" text="Añadir" />
          </columns></JFXTreeTableView>
-      <JFXTreeTableView layoutX="559.0" layoutY="172.0" prefHeight="282.0" prefWidth="381.0">
+      <JFXTreeTableView fx:id="reserveTable" layoutX="559.0" layoutY="172.0" prefHeight="282.0" prefWidth="381.0">
          <columns>
             <TreeTableColumn fx:id="TNombreR" prefWidth="169.0" text="Nombre del Elemento" />
             <TreeTableColumn fx:id="TCantidadR" prefWidth="113.0" text="Cantidad Pedida" />
