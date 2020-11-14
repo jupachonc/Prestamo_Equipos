@@ -1,12 +1,14 @@
 package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import java.util.ArrayList;
 
 public class Laboratorio extends RecursiveTreeObject<Laboratorio>{
     private int ID;
     private String Nombre;
     private String Telefono;
     private String Ubicacion;
+    public ArrayList<MacroCategoria> macroList = new ArrayList<>();
 
     public Laboratorio(int ID, String Nombre, String Telefono, String Ubicacion) {
         this.ID = ID;

@@ -1,6 +1,7 @@
 package DAO;
 
 import Entidad.Laboratorio;
+import Entidad.MacroCategoria;
 import Entidad.Usuario;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -70,6 +71,47 @@ public class LaboratorioDAO {
             }
         }
         return labs;
+    }
+    
+    public ArrayList<MacroCategoria> getCats(int LabID) {
+        ArrayList<MacroCategoria> cats = new ArrayList<>();
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM macrocategoria Where LaboratorioID = " + LabID + ";";
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+
+            while (resultSet.next()) {
+                cats.add(new MacroCategoria(resultSet.getInt("ID"), resultSet.getString("Nombre"),
+                        resultSet.getString("Descripción")));
+            }
+            
+            sql = "SELECT * FROM macrocategoria Where LaboratorioID = " + LabID + ";";
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+
+            while (resultSet.next()) {
+                cats.add(new MacroCategoria(resultSet.getInt("ID"), resultSet.getString("Nombre"),
+                        resultSet.getString("Descripción")));
+            }
+            
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return cats;
     }
 
     public ArrayList<Usuario> getAdminsinLab(Laboratorio lab) {
