@@ -47,55 +47,55 @@ import javafx.util.StringConverter;
  */
 public class AdminPrestamo implements Initializable {
 
-    private Usuario estudiante = null;
-    private Laboratorio lab = AdminMenuController.currentLab;
-    private ObservableList<MacroCategoria> dataMCats;
-    private MacroCategoria MCSelected = null;
-    private ObservableList<Elemento> dataSearch = FXCollections.observableArrayList();
-    private ObservableList<Elemento> dataPrestamo = FXCollections.observableArrayList();
+    private static Usuario estudiante = null;
+    private static Laboratorio lab = AdminMenuController.currentLab;
+    private static ObservableList<MacroCategoria> dataMCats;
+    private static MacroCategoria MCSelected = null;
+    private static ObservableList<Elemento> dataSearch = FXCollections.observableArrayList();
+    private static ObservableList<Elemento> dataPrestamo = FXCollections.observableArrayList();
     private static ObservableList<Categoria> CatsReserva = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
      */
     @FXML
-    private JFXTreeTableView<Elemento> BusquedaTable;
+    private static JFXTreeTableView<Elemento> BusquedaTable;
 
     @FXML
-    private TreeTableColumn<Elemento, Integer> TIDL;
+    private static TreeTableColumn<Elemento, Integer> TIDL;
 
     @FXML
-    private TreeTableColumn<Elemento, String> TElementoL;
+    private static TreeTableColumn<Elemento, String> TElementoL;
 
     @FXML
-    private TreeTableColumn<?, ?> TAnadirL;
+    private static TreeTableColumn<?, ?> TAnadirL;
 
     @FXML
-    private JFXTreeTableView<Elemento> PrestamoTable;
+    private static JFXTreeTableView<Elemento> PrestamoTable;
 
     @FXML
-    private TreeTableColumn<Elemento, Integer> TIDR;
+    private static TreeTableColumn<Elemento, Integer> TIDR;
 
     @FXML
-    private TreeTableColumn<Elemento, String> TNombreR;
+    private static TreeTableColumn<Elemento, String> TNombreR;
 
     @FXML
-    private TreeTableColumn<?, ?> TQuitarR;
+    private static TreeTableColumn<?, ?> TQuitarR;
 
     @FXML
-    private JFXTextArea Observaciones;
+    private static JFXTextArea Observaciones;
 
     @FXML
-    private JFXComboBox<MacroCategoria> macroList;
+    private static JFXComboBox<MacroCategoria> macroList;
 
     @FXML
-    private Label Name;
+    private static Label Name;
     @FXML
-    private Label LastName;
+    private static Label LastName;
     @FXML
-    private Label Document;
+    private static Label Document;
     @FXML
-    private JFXTextField DocumentN;
+    private static JFXTextField DocumentN;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -231,8 +231,9 @@ public class AdminPrestamo implements Initializable {
         PrestamoTable.setRoot(root);
         PrestamoTable.setShowRoot(false);
     }
+    
 
-    private void getSearch(boolean flag) {
+    private static void getSearch(boolean flag) {
         JFXTreeTableColumn<Elemento, String> settingsColumn = new JFXTreeTableColumn<>("Añadir");
         settingsColumn.setPrefWidth(95);
         Callback<TreeTableColumn<Elemento, String>, TreeTableCell<Elemento, String>> cellFactory
