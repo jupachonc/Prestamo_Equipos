@@ -239,7 +239,7 @@ public class UsuarioDAO {
                         resultSet.getInt("Documento"), resultSet.getString("Email"),
                         resultSet.getString("Password"), 1));
             }
-            
+
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
         } finally {
@@ -254,9 +254,9 @@ public class UsuarioDAO {
         }
         return admins;
     }
-    
-    public boolean disableAdmin(Usuario usuario){
-                Connection connection = null;
+
+    public boolean disableAdmin(Usuario usuario) {
+        Connection connection = null;
         Statement statement = null;
         int resultSet;
         try {
@@ -281,6 +281,35 @@ public class UsuarioDAO {
                 System.out.println("Error en SQL" + ex);
             }
         }
+    }
+
+    public Usuario getUser(int Document) {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        Usuario usuario = null;
+        try {
+            resultSet = null;
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM estudiante Where Documento = " + Document);
+            usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+                    resultSet.getInt("Documento"), resultSet.getString("Email"),
+                    resultSet.getString("Password"), 0);
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return null;
+        } finally {
+            try {
+                resultSet.close();
+                statement.close();
+                connection.close();
+            } catch (SQLException ex) {
+
+            }
+        }
+        return usuario;
+
     }
 
 }

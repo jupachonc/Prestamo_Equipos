@@ -138,4 +138,9 @@ public class AdminMenuController implements Initializable {
 
     }
 
+    @FXML
+    private void goToPrestamos(ActionEvent event) {
+        SafeRoute("/Frontera/Admin/AdminPrestamoUX.fxml");
+    }
+
 }

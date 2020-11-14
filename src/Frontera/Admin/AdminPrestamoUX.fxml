@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Control.Admin.AdminPrestamo">
+   <children>
+      <Circle fill="#a9cd43" layoutX="251.0" layoutY="-679.0" radius="789.0" stroke="#a9cd43" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="86.0" layoutY="36.0" prefHeight="40.0" prefWidth="381.0" style="-fx-font-size: 24pt; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Préstamo" textFill="WHITE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="backToMenu1" layoutX="735.0" layoutY="49.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="BACKWARD" size="16pt" translateX="-10.0" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXComboBox fx:id="labList" layoutX="47.0" layoutY="131.0" prefHeight="27.0" prefWidth="180.0" promptText="Laboratorio" style="-jfx-label-float: true;" stylesheets="@../User/users.css" />
+      <JFXTreeTableView fx:id="BusquedaTable" layoutX="47.0" layoutY="182.0" prefHeight="341.0" prefWidth="424.0">
+         <columns>
+            <TreeTableColumn fx:id="TIDL" prefWidth="132.0" text="ID" />
+            <TreeTableColumn fx:id="TElementoL" editable="false" prefWidth="200.0" text="Nombre del Elemento" />
+            <TreeTableColumn fx:id="TAnadirL" prefWidth="87.0" text="Añadir" />
+         </columns>
+      </JFXTreeTableView>
+      <JFXTreeTableView fx:id="PrestamoTable" layoutX="524.0" layoutY="226.0" prefHeight="182.0" prefWidth="424.0">
+         <columns>
+            <TreeTableColumn fx:id="TIDR" text="ID" />
+            <TreeTableColumn fx:id="TNombreR" prefWidth="240.0" text="Nombre del Elemento" />
+            <TreeTableColumn fx:id="TQuitarR" prefWidth="97.0" text="Quitar" />
+         </columns>
+      </JFXTreeTableView>
+      <JFXButton layoutX="803.0" layoutY="451.0" onAction="#Préstamo" prefHeight="41.0" prefWidth="132.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Prestar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="BOOKMARK" size="16pt" translateX="-10.0" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="524.0" layoutY="190.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Préstamo" underline="true" />
+      <JFXComboBox fx:id="macroList" layoutX="251.0" layoutY="131.0" prefHeight="27.0" prefWidth="180.0" promptText="Macrocategoria" style="-jfx-label-float: true;" stylesheets="@../User/users.css" />
+      <JFXTextArea layoutX="524.0" layoutY="431.0" prefHeight="80.0" prefWidth="250.0" promptText="Observaciones Préstamo" />
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="822.0" layoutY="189.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToReservas" prefHeight="27.0" prefWidth="117.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 10pt;" text="Reservas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="524.0" layoutY="110.0" style="-fx-font-family: Roboto; -fx-font-size: 14pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Pepito Alejandro" />
+      <Label layoutX="524.0" layoutY="135.0" style="-fx-font-family: Roboto; -fx-font-size: 14pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Pepito Alejandro" />
+      <Label layoutX="524.0" layoutY="159.0" style="-fx-font-family: Roboto; -fx-font-size: 12pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="777777777" />
+      <JFXTextField fx:id="user" focusColor="#7f9a33" layoutX="699.0" layoutY="115.0" prefHeight="38.0" prefWidth="171.0" promptText="Documento" style="-fx-font-family: &quot;Roboto&quot;; -fx-font-size: 14pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXButton contentDisplay="CENTER" layoutX="888.0" layoutY="115.0" onAction="#searchDocument" prefHeight="40.0" prefWidth="60.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" size="16pt" />
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>
