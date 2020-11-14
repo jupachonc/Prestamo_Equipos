@@ -6,6 +6,7 @@
 package Control.Admin;
 
 import DAO.LaboratorioDAO;
+import DAO.ReservasDAO;
 import DAO.UsuarioDAO;
 import Entidad.Categoria;
 import Entidad.Elemento;
@@ -114,7 +115,7 @@ public class AdminPrestamo implements Initializable {
 
     @FXML
     void goToReservas(ActionEvent event) {
-        CatsReserva = FXCollections.observableList(new LaboratorioDAO().getReserve(1));
+        CatsReserva = FXCollections.observableList(new ReservasDAO().getReserve(1));
         getSearch(false);
 
     }
