@@ -48,12 +48,4 @@ public class Laboratorio extends RecursiveTreeObject<Laboratorio>{
     public void setUbicacion(String Ubicacion) {
         this.Ubicacion = Usuario.ucFirst(Ubicacion);
     }
-    
-    
-
-    
-    
-    
-    
-    
 }

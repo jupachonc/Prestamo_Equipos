@@ -36,6 +36,7 @@ public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {
     public void setDescripción(String descripción) {
         this.descripción = descripción;
     }
+<<<<<<< Updated upstream
 
     private class Categoria {
 
@@ -123,4 +124,7 @@ public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {
             }
         }
     }
+=======
+    
+>>>>>>> Stashed changes
 }
