@@ -6,14 +6,20 @@ import java.util.ArrayList;
 
     public class Categoria extends RecursiveTreeObject<Categoria>{
         private int ID;
+        private int CantidadLibre;
         private int CantidadMax;
         private String nombre;
         private String descripción;
         public ArrayList<Entidad.Elemento> eleList = new ArrayList<>();
+
+        public int getCantidadLibre() {
+            return CantidadLibre;
+        }
         
-         public Categoria(int ID, int CantidadMax, String nombre, String descripción) {
+        public Categoria(int ID, int CantidadMax, int CantidadLibre, String nombre, String descripción) {
             this.ID = ID;
             this.CantidadMax = CantidadMax;
+            this.CantidadLibre = CantidadLibre;
             this.nombre = nombre;
             this.descripción = descripción;
         }

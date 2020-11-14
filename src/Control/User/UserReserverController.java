@@ -131,7 +131,7 @@ public class UserReserverController implements Initializable {
         MacroCategoria Mcat = macroList.getSelectionModel().getSelectedItem();
 
         dataElems = FXCollections.observableList(new LaboratorioDAO().getCats(Mcat));
-
+        
         JFXTreeTableColumn<Categoria, String> TAnadirp = new JFXTreeTableColumn<>("Añadir");
         TAnadirp.setPrefWidth(95);
         Callback<TreeTableColumn<Categoria, String>, TreeTableCell<Categoria, String>> cellFactory
@@ -169,7 +169,7 @@ public class UserReserverController implements Initializable {
                 new TreeItemPropertyValueFactory<>("nombre")
         );
         TCantidadL.setCellValueFactory(
-                new TreeItemPropertyValueFactory<>("cantidad")
+                new TreeItemPropertyValueFactory<>("CantidadLibre")
         );
         TMaxL.setCellValueFactory(
                 new TreeItemPropertyValueFactory<>("CantidadMax")

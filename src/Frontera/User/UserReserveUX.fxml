@@ -31,7 +31,7 @@
          </cursor>
       </JFXButton>
       <JFXComboBox fx:id="labList" layoutX="37.0" layoutY="121.0" onAction="#updateMacro" prefHeight="27.0" prefWidth="180.0" promptText="Laboratorio" style="-jfx-label-float: true;" stylesheets="@users.css" />
-      <JFXTreeTableView layoutX="37.0" layoutY="172.0" prefHeight="341.0" prefWidth="492.0">
+      <JFXTreeTableView fx:id="elemsTable" layoutX="37.0" layoutY="172.0" prefHeight="341.0" prefWidth="492.0">
          <columns>
             <TreeTableColumn fx:id="TElementoL" editable="false" prefWidth="144.0" text="Nombre del Elemento" />
             <TreeTableColumn fx:id="TCantidadL" prefWidth="132.0" text="Cantidad Disponible" />

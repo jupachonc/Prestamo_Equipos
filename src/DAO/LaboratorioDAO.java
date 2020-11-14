@@ -353,15 +353,21 @@ public class LaboratorioDAO {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "SELECT * FROM macrocategoria, categoria "
-                    + "WHERE MacroCategoriaID = macrocategoria.ID AND macrocategoria.ID=" + Mcat.getID();
+            String sql = "SELECT * FROM categoria "
+                    + "WHERE MacroCategoriaID = " + Mcat.getID() + ";";
 
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
             while (resultSet.next()) {
-
-                cats.add(new Categoria(resultSet.getInt("categoria.ID"), resultSet.getInt("CantidadMAX"),
-                        resultSet.getString("categoria.Nombre"), resultSet.getString("categoria.Descripción")));
+                
+                int catID = resultSet.getInt("ID");
+                int catMax = resultSet.getInt("CantidadMax");
+                String nombre = resultSet.getString("Nombre");
+                String desc = resultSet.getString("Descripción");
+                
+                int amount = maxCatAmount(catID);
+                
+                cats.add(new Categoria(catID, catMax, amount, nombre, desc));
             }
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
@@ -379,7 +385,42 @@ public class LaboratorioDAO {
 
     }
 
+<<<<<<< Updated upstream
     public ArrayList<Elemento> getElements(Categoria cat) {
+=======
+    public int maxCatAmount(int catID){
+        int amount = 0;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = "SELECT COUNT(*) as amount FROM elemento "
+                    + "WHERE CategoriaID = " + catID + " AND EstadoElemento = 0;";
+
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            while (resultSet.next()) {
+                amount = resultSet.getInt("amount");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return amount;
+    }
+    
+    
+    public ArrayList<Elemento> getElements(Categoria cat){
+>>>>>>> Stashed changes
         ArrayList<Elemento> elmts = new ArrayList<>();
 
         ResultSet resultSet = null;
