@@ -385,9 +385,7 @@ public class LaboratorioDAO {
 
     }
 
-<<<<<<< Updated upstream
-    public ArrayList<Elemento> getElements(Categoria cat) {
-=======
+
     public int maxCatAmount(int catID){
         int amount = 0;
         ResultSet resultSet = null;
@@ -418,9 +416,7 @@ public class LaboratorioDAO {
         return amount;
     }
     
-    
     public ArrayList<Elemento> getElements(Categoria cat){
->>>>>>> Stashed changes
         ArrayList<Elemento> elmts = new ArrayList<>();
 
         ResultSet resultSet = null;
@@ -469,7 +465,7 @@ public class LaboratorioDAO {
             resultSet.beforeFirst();
             while (resultSet.next()) {
 
-                cats.add(new Categoria(resultSet.getInt("categoria.ID"), resultSet.getInt("CantidadMAX"),
+                cats.add(new Categoria(resultSet.getInt("categoria.ID"), resultSet.getInt("CantidadMAX"), 0,
                         resultSet.getString("Nombre"), resultSet.getString("Descripción")));
             }
             System.out.println(cats.get(0).getID());
