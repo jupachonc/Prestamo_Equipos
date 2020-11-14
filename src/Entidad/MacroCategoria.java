@@ -9,7 +9,7 @@ public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {
     private String nombre;
     private String descripción;
 
-    public ArrayList<Categoria> catList = new ArrayList<>();
+    public ArrayList<Entidad.Categoria> catList = new ArrayList<>();
 
     public MacroCategoria(int ID, String nombre, String descripción) {
         this.ID = ID;
@@ -36,7 +36,6 @@ public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {
     public void setDescripción(String descripción) {
         this.descripción = descripción;
     }
-<<<<<<< Updated upstream
 
     private class Categoria {
 
@@ -124,7 +123,5 @@ public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {
             }
         }
     }
-=======
-    
->>>>>>> Stashed changes
+
 }

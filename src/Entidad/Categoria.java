@@ -9,7 +9,7 @@ import java.util.ArrayList;
         private int CantidadMax;
         private String nombre;
         private String descripción;
-        public ArrayList<Elemento> eleList = new ArrayList<>();
+        public ArrayList<Entidad.Elemento> eleList = new ArrayList<>();
         
          public Categoria(int ID, int CantidadMax, String nombre, String descripción) {
             this.ID = ID;

@@ -118,7 +118,7 @@ public class LaboratorioDAO {
                 System.out.println("Error en SQL" + ex);
             }
         }
-        return cats;
+        return Mcats;
     }
 
     public ArrayList<Usuario> getAdminsinLab(Laboratorio lab) {
