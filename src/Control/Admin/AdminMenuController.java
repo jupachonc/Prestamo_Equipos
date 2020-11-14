@@ -2,6 +2,7 @@ package Control.Admin;
 
 import Control.LoginController;
 import DAO.LaboratorioDAO;
+import Entidad.Elemento;
 import Entidad.Laboratorio;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
@@ -27,6 +28,7 @@ public class AdminMenuController implements Initializable {
 
     private Usuario user = LoginController.getUsuario();
     private ObservableList<Laboratorio> dataLabs;
+    private ObservableList<Elemento> dataPrestamo;
     public static Laboratorio currentLab = null;
 
     @FXML

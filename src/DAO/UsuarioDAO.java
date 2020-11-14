@@ -293,6 +293,7 @@ public class UsuarioDAO {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT * FROM estudiante Where Documento = " + Document);
+            resultSet.next();
             usuario = new Usuario(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
                     resultSet.getInt("Documento"), resultSet.getString("Email"),
                     resultSet.getString("Password"), 0);

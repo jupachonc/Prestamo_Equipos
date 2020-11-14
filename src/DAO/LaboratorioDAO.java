@@ -16,6 +16,28 @@ public class LaboratorioDAO {
     Connection connection;
     Statement statement;
 
+    private ResultSet Query(String sql) {
+        ResultSet resultSet = null;
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return resultSet;
+    }
+
     public boolean createLab(Laboratorio lab) {
         int resultSet;
 
@@ -74,8 +96,8 @@ public class LaboratorioDAO {
         }
         return labs;
     }
-    
-    public ArrayList<MacroCategoria> getCats(int LabID) {
+
+    public ArrayList<MacroCategoria> getMCats(int LabID) {
         ArrayList<MacroCategoria> Mcats = new ArrayList<>();
         ResultSet resultSet = null;
 
@@ -90,35 +112,6 @@ public class LaboratorioDAO {
                 Mcats.add(new MacroCategoria(resultSet.getInt("ID"), resultSet.getString("Nombre"),
                         resultSet.getString("Descripción")));
             }
-            
-            for(int i = 0;i < Mcats.size(); i++){
-                ArrayList<Categoria> cats = new ArrayList<>();
-                sql = "SELECT * FROM categoria Where MacroCategoriaID = " + Mcats.get(i).getID() + ";";
-                resultSet = statement.executeQuery(sql);
-                resultSet.beforeFirst();
-
-                while (resultSet.next()) {
-                    cats.add(new Categoria(resultSet.getInt("ID"), resultSet.getInt("CantidadMax"),resultSet.getString("Nombre"),
-                            resultSet.getString("Descripción")));
-                }
-                
-                for(int j = 0;j < cats.size(); j++){
-                    ArrayList<Elemento> elems = new ArrayList<>();
-                    sql = "SELECT * FROM elemento Where CategoriaID = " + cats.get(j).getID() + ";";
-                    resultSet = statement.executeQuery(sql);
-                    resultSet.beforeFirst();
-
-                    while (resultSet.next()) {
-                        elems.add(new Elemento(resultSet.getInt("ID"),resultSet.getString("Nombre"),
-                            resultSet.getString("Descripción"), resultSet.getInt("EstadoElemento")));
-                    }
-                
-                    cats.get(i).eleList = elems;
-                }
-                
-                Mcats.get(i).catList = cats;
-            }
-            
 
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
@@ -247,7 +240,7 @@ public class LaboratorioDAO {
             statement = connection.createStatement();
             String sql = String.format("DELETE FROM laboratorio_administrador "
                     + "WHERE IDLaboratorio = %s AND AdministradorDocumento = %s;",
-                    lab.getID(), usr.getDocumento()) ;
+                    lab.getID(), usr.getDocumento());
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
         } catch (SQLException ex) {
@@ -293,11 +286,10 @@ public class LaboratorioDAO {
             }
         }
     }
-    
+
     public boolean enableLab(Laboratorio lab) {
         int resultSet;
 
-        
         try {
             resultSet = -1;
             connection = DBConnection.getConnection();
@@ -321,8 +313,8 @@ public class LaboratorioDAO {
             }
         }
     }
-    
-    public ArrayList<Laboratorio> getLabsperAdmin(Usuario usr){
+
+    public ArrayList<Laboratorio> getLabsperAdmin(Usuario usr) {
         ArrayList<Laboratorio> labs = new ArrayList<>();
         ResultSet resultSet = null;
 
@@ -352,5 +344,15 @@ public class LaboratorioDAO {
             }
         }
         return labs;
+    }
+
+    public ArrayList<Categoria> getCats(MacroCategoria Mcat) throws SQLException {
+        ArrayList<Categoria> cats = new ArrayList<>();
+        String sql = "SELECT * FROM macrocategoria, categoria "
+                + "WHERE MacroCategoriaID = macrocategoria.ID AND macrocategoria.ID=" + Mcat.getID();
+        ResultSet resultSet = Query(sql);
+        resultSet.beforeFirst();
+        return cats;
+
     }
 }
