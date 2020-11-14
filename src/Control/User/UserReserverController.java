@@ -127,11 +127,7 @@ public class UserReserverController implements Initializable{
     private void getCatsTable() {
         MacroCategoria Mcat = macroList.getSelectionModel().getSelectedItem();
         
-        try {
-            dataElems = FXCollections.observableList(new LaboratorioDAO().getCats(Mcat));
-        } catch (SQLException ex) {
-            Logger.getLogger(UserReserverController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        dataElems = FXCollections.observableList(new LaboratorioDAO().getCats(Mcat));
 
         JFXTreeTableColumn<Categoria, String> TAnadirp = new JFXTreeTableColumn<>("Añadir");
         TAnadirp.setPrefWidth(95);
