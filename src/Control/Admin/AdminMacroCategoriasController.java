@@ -28,7 +28,7 @@ public class AdminMacroCategoriasController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    private Laboratorio lab;
+    private Laboratorio lab = null;
     
     public void createCategory(){
     
@@ -37,11 +37,13 @@ public class AdminMacroCategoriasController implements Initializable {
     public void setLaboratorio(Laboratorio lab){
         this.lab=lab;
         System.out.println(this.lab.getNombre());
+        
     }
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
     
 }

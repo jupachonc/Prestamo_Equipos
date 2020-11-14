@@ -7,6 +7,7 @@ package Control.Admin;
 import Control.LoginController;
 import DAO.DBConnection;
 import Entidad.Laboratorio;
+import Entidad.MacroCategoria;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -28,6 +29,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -46,31 +48,49 @@ import javafx.util.Callback;
 public class AdminInventario implements Initializable{
    
     private Usuario user = LoginController.getUsuario();
+    private Laboratorio lab;
     @FXML
     private JFXButton backbtn;
     @FXML
-    private JFXTreeTableView<Laboratorio> Table;
+    private JFXTreeTableView<MacroCategoria> MacroTable;
     @FXML
-    private TreeTableColumn<Laboratorio, Integer> col_ID;
+    private TreeTableColumn<MacroCategoria, Integer> col_ID;
     @FXML
-    private TreeTableColumn<Laboratorio, String> col_Nombre;
+    private TreeTableColumn<MacroCategoria, String> col_Nombre;
+    @FXML
+    private TreeTableColumn<MacroCategoria, String> col_Descripcion;
+    @FXML
+    private Label lblAccion;
+    @FXML
+    private JFXButton btnGoto;
+    @FXML
+    private JFXButton btnAccion;
+    @FXML
+    private JFXTextField name;
+    @FXML
+    private JFXTextField description;
     
-    private ObservableList<Laboratorio> oblist = FXCollections.observableArrayList();
-
+    private String accion = "crear";
+    private ObservableList<MacroCategoria> oblist = FXCollections.observableArrayList();
+    
+    public void accionCategory(){
+        if(accion == "crear"){
+            
+        }
+    }
     public void loadTable(){
         // System.out.println("AdminInventario => setUser => " + this.user.getDocumento());
         Connection con;
         try {
             con = DBConnection.getConnection();
-            String sql="SELECT lab.* " + 
-                "FROM laboratorio_administrador la " +
-                "LEFT JOIN laboratorio lab ON la.LaboratorioID = lab.ID " + 
-                "WHERE la.AdministradorDocumento = '" + this.user.getDocumento() + "'";
+            String sql="SELECT * " + 
+                "FROM macrocategoria " + 
+                "WHERE LaboratorioID = '" + this.lab.getID() + "'";
             System.out.println(sql);
             ResultSet rs = con.createStatement().executeQuery(sql);
             while (rs.next()){
                 System.out.println(rs.getString("Nombre"));
-                oblist.add(new Laboratorio(rs.getInt("ID"),rs.getString("Nombre"), rs.getString("Telefono"), rs.getString("Ubicacion")));
+                oblist.add(new MacroCategoria(rs.getInt("ID"),rs.getString("Nombre"), rs.getString("Descripción"), rs.getInt("LaboratorioID")));
             }
             //col_ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
             //col_Nombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
@@ -91,13 +111,41 @@ public class AdminInventario implements Initializable{
         col_Nombre.setCellValueFactory(
                 new TreeItemPropertyValueFactory<>("Nombre")
         );
-
-        TreeItem<Laboratorio> root = new RecursiveTreeItem<>(oblist, RecursiveTreeObject::getChildren);
+        col_Descripcion.setCellValueFactory(
+                new TreeItemPropertyValueFactory<>("Descripción")
+        );
+        TreeItem<MacroCategoria> root = new RecursiveTreeItem<>(oblist, RecursiveTreeObject::getChildren);
         
         System.out.println(oblist);
         
-        Table.setRoot(root);
-        Table.setShowRoot(false);
+        MacroTable.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
+          System.out.println(o);
+          System.out.println(oldVal);
+          System.out.println(newVal);
+
+            if (newVal != null && newVal.getValue() != null) {
+                boolean itemWasSelected = true;
+                lblAccion.setText("Editar Macrocategoría");
+                btnGoto.setVisible(true);
+                btnAccion.setText("Guardar");
+                MacroCategoria cat = newVal.getValue();
+                name.setText(cat.getNombre());
+                accion = "guardar";
+                //name = MacroTable.getSelectionModel().getSelectedItem().getValue();
+                description.setText(cat.getDescripción());
+            }
+            else{
+                lblAccion.setText("Crear Macrocategoría");
+                btnGoto.setVisible(false);
+                btnAccion.setText("Crear Macrocategoría");
+                name.setText("");
+                description.setText("");
+                accion = "crear";
+            }
+        });
+        
+        MacroTable.setRoot(root);
+        MacroTable.setShowRoot(false);
         
     }
     private void ToMacroCategorias(String path, Laboratorio lab) {
@@ -120,20 +168,23 @@ public class AdminInventario implements Initializable{
         }
     }
     public void goToMacroCategorias(){
-        System.out.println(Table);
-        TreeItem ti =  Table.getSelectionModel().selectedItemProperty().get();
+        //System.out.println(Table);
+        //TreeItem ti =  Table.getSelectionModel().selectedItemProperty().get();
         //Si object es nulo saque alerta pidiendo selección
-        Laboratorio lab = Table.getSelectionModel().getSelectedItem().getValue();
+        //laboratorio lab = Table.getSelectionModel().getSelectedItem().getValue();
         
-        System.out.println(lab.getID());
-        ToMacroCategorias("/Frontera/Admin/AdminMacroCategorias.fxml", lab); 
+        //System.out.println(lab.getID());
+        //ToMacroCategorias("/Frontera/Admin/AdminMacroCategorias.fxml", lab); 
     }
     public void goToInventary(){
         System.out.println("ir a inventario");
     }
+    public void goToCategories(){
+        System.out.println("ir a Categories");
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        lab = AdminMenuController.currentLab;
         System.out.println("AdminInventario => " + this.user.getDocumento());
         loadTable();
    

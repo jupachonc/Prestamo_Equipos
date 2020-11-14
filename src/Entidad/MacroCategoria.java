@@ -8,13 +8,15 @@ public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {
     private int ID;
     private String nombre;
     private String descripción;
+    private int LaboratorioID;
 
     public ArrayList<Entidad.Categoria> catList = new ArrayList<>();
 
-    public MacroCategoria(int ID, String nombre, String descripción) {
+    public MacroCategoria(int ID, String nombre, String descripción, int LaboratorioID) {
         this.ID = ID;
         this.nombre = nombre;
         this.descripción = descripción;
+        this.LaboratorioID = LaboratorioID;
     }
 
     public int getID() {
@@ -36,6 +38,14 @@ public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {
     public void setDescripción(String descripción) {
         this.descripción = descripción;
     }
+    public int getLaboratorioID() {
+        return LaboratorioID;
+    }
+
+    public void setLaboratorioID(int LaboratorioID) {
+        this.LaboratorioID = LaboratorioID;
+    }
+    
 
     private class Categoria {
 
