@@ -346,7 +346,7 @@ public class LaboratorioDAO {
         return labs;
     }
 
-    public ArrayList<Categoria> getCats(MacroCategoria Mcat) throws SQLException {
+    public ArrayList<Categoria> getCats(MacroCategoria Mcat) {
         ArrayList<Categoria> cats = new ArrayList<>();
         ResultSet resultSet = null;
 
@@ -379,7 +379,7 @@ public class LaboratorioDAO {
 
     }
 
-    public ArrayList<Elemento> getElements(Categoria cat) throws SQLException {
+    public ArrayList<Elemento> getElements(Categoria cat){
         ArrayList<Elemento> elmts = new ArrayList<>();
 
         ResultSet resultSet = null;
@@ -394,7 +394,7 @@ public class LaboratorioDAO {
             resultSet.beforeFirst();
             while (resultSet.next()) {
 
-                elmts.add(new Elemento(resultSet.getInt("EstadoElemento"), resultSet.getString("elemento.Nombre"),
+                elmts.add(new Elemento(resultSet.getInt("elemento.ID"), resultSet.getString("elemento.Nombre"),
                         resultSet.getString("elemento.Descripción"), resultSet.getInt("EstadoElemento")));
             }
         } catch (SQLException ex) {
