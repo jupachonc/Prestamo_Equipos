@@ -52,6 +52,7 @@ public class AdminPrestamo implements Initializable {
     private MacroCategoria MCSelected = null;
     private ObservableList<Elemento> dataSearch = FXCollections.observableArrayList();
     private ObservableList<Elemento> dataPrestamo = FXCollections.observableArrayList();
+    private static ObservableList<Categoria> CatsReserva = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -113,7 +114,8 @@ public class AdminPrestamo implements Initializable {
 
     @FXML
     void goToReservas(ActionEvent event) {
-        dataPrestamo.add(new Elemento(new Random().nextInt() % 10, "random", "descripción", 0));
+        CatsReserva = FXCollections.observableList(new LaboratorioDAO().getReserve(1));
+        getSearch(false);
 
     }
 
@@ -182,6 +184,39 @@ public class AdminPrestamo implements Initializable {
     }
 
     private void getPrestamo() {
+        JFXTreeTableColumn<Elemento, String> settingsColumn = new JFXTreeTableColumn<>("Eliminar");
+        settingsColumn.setPrefWidth(95);
+        Callback<TreeTableColumn<Elemento, String>, TreeTableCell<Elemento, String>> cellFactory
+                = //
+                (final TreeTableColumn<Elemento, String> param) -> {
+                    final TreeTableCell<Elemento, String> cell = new TreeTableCell<Elemento, String>() {
+
+                final JFXButton btn = new JFXButton("Eliminar");
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    Elemento elm = this.getTreeTableRow().getItem();
+                    if (empty || elm.getID() == 0) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        btn.setButtonType(JFXButton.ButtonType.FLAT);
+                        btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
+                        btn.setOnAction(event -> {
+                            dataPrestamo.remove(elm);
+                        });
+                        setGraphic(btn);
+                        setText(null);
+                    }
+                }
+            };
+                    return cell;
+                };
+
+        settingsColumn.setCellFactory(cellFactory);
+
+        PrestamoTable.getColumns().set(2, settingsColumn);
 
         TIDR.setCellValueFactory(
                 new TreeItemPropertyValueFactory<>("ID")
@@ -196,8 +231,8 @@ public class AdminPrestamo implements Initializable {
         PrestamoTable.setShowRoot(false);
     }
 
-    private void getSearch() {
-        JFXTreeTableColumn<Elemento, String> settingsColumn = new JFXTreeTableColumn<>("Eliminar");
+    private void getSearch(boolean flag) {
+        JFXTreeTableColumn<Elemento, String> settingsColumn = new JFXTreeTableColumn<>("Añadir");
         settingsColumn.setPrefWidth(95);
         Callback<TreeTableColumn<Elemento, String>, TreeTableCell<Elemento, String>> cellFactory
                 = //
@@ -239,15 +274,26 @@ public class AdminPrestamo implements Initializable {
         TElementoL.setCellValueFactory(
                 new TreeItemPropertyValueFactory<>("Nombre")
         );
-
-        for (Categoria cat : new LaboratorioDAO().getCats(MCSelected)) {
-            Elemento Main = new Elemento(0, cat.getNombre(), "", 0);
-            for (Elemento element : new LaboratorioDAO().getElements(cat)) {
-                Main.getChildren().add(element);
+        
+        dataSearch.clear();
+        if (flag) {
+            for (Categoria cat : new LaboratorioDAO().getCats(MCSelected)) {
+                Elemento Main = new Elemento(0, cat.getNombre(), "", 0);
+                for (Elemento element : new LaboratorioDAO().getElements(cat)) {
+                    Main.getChildren().add(element);
+                }
+                dataSearch.add(Main);
             }
-            dataSearch.add(Main);
-        }
+        } else {
+            for (Categoria cat : CatsReserva) {
+                Elemento Main = new Elemento(0, cat.getNombre(), "", 0);
+                for (Elemento element : new LaboratorioDAO().getElements(cat)) {
+                    Main.getChildren().add(element);
+                }
+                dataSearch.add(Main);
+            }
 
+        }
         TreeItem<Elemento> root = new RecursiveTreeItem<>(dataSearch, RecursiveTreeObject::getChildren);
 
         BusquedaTable.setRoot(root);
@@ -257,7 +303,7 @@ public class AdminPrestamo implements Initializable {
     @FXML
     private void onSelectedMC(ActionEvent event) {
         MCSelected = macroList.getSelectionModel().getSelectedItem();
-        getSearch();
+        getSearch(true);
     }
 
 }

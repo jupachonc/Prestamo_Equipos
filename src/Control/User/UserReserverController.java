@@ -37,12 +37,15 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
-public class UserReserverController implements Initializable{
+public class UserReserverController implements Initializable {
+    
+    
+
     private Usuario user = LoginController.getUsuario();
     private ObservableList<Laboratorio> dataLabs;
     private ObservableList<MacroCategoria> dataCats;
     private ObservableList<Categoria> dataElems;
-    
+
     @FXML
     private JFXComboBox<Laboratorio> labList;
     @FXML
@@ -61,12 +64,12 @@ public class UserReserverController implements Initializable{
     private JFXButton reserveButton;
     @FXML
     private JFXButton reserveButton1;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getLabs();
     }
-    
+
     private Laboratorio findID(int id) {
         for (Laboratorio lab : dataLabs) {
             if (lab.getID() == id) {
@@ -76,7 +79,7 @@ public class UserReserverController implements Initializable{
         }
         return null;
     }
-    
+
     private MacroCategoria findCID(int id) {
         for (MacroCategoria cat : dataCats) {
             if (cat.getID() == id) {
@@ -86,7 +89,7 @@ public class UserReserverController implements Initializable{
         }
         return null;
     }
-    
+
     private void getLabs() {
         dataLabs = FXCollections.observableList(new LaboratorioDAO().getLabs());
 
@@ -104,7 +107,7 @@ public class UserReserverController implements Initializable{
         });
 
     }
-    
+
     private void getMacro() {
         int selectedLabID = labList.getSelectionModel().getSelectedItem().getID();
         dataCats = FXCollections.observableList(new LaboratorioDAO().getMCats(selectedLabID));
@@ -126,7 +129,7 @@ public class UserReserverController implements Initializable{
 
     private void getCatsTable() {
         MacroCategoria Mcat = macroList.getSelectionModel().getSelectedItem();
-        
+
         dataElems = FXCollections.observableList(new LaboratorioDAO().getCats(Mcat));
 
         JFXTreeTableColumn<Categoria, String> TAnadirp = new JFXTreeTableColumn<>("Añadir");
@@ -156,7 +159,7 @@ public class UserReserverController implements Initializable{
                 }
             };
                     return cell;
-        };
+                };
 
         TAnadirp.setCellFactory(cellFactory);
 
@@ -169,7 +172,7 @@ public class UserReserverController implements Initializable{
                 new TreeItemPropertyValueFactory<>("cantidad")
         );
         TMaxL.setCellValueFactory(
-                new TreeItemPropertyValueFactory<>("max")
+                new TreeItemPropertyValueFactory<>("CantidadMax")
         );
 
         TreeItem<Categoria> root = new RecursiveTreeItem<>(dataElems, RecursiveTreeObject::getChildren);
@@ -178,7 +181,6 @@ public class UserReserverController implements Initializable{
         elemsTable.setShowRoot(false);
     }
 
-    
     private void ToPath(String path) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
@@ -194,17 +196,17 @@ public class UserReserverController implements Initializable{
             e.printStackTrace();
         }
     }
-    
+
     @FXML
     private void BackToMenu(ActionEvent event) {
         ToPath("/Frontera/User/UserMenuUX.fxml");
     }
-    
+
     @FXML
     private void updateMacro(ActionEvent event) {
         getMacro();
     }
-    
+
     @FXML
     private void updateCats(ActionEvent event) {
         getCatsTable();
