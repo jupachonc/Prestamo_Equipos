@@ -1,6 +1,7 @@
 package DAO;
 
 import Entidad.Categoria;
+import Entidad.Elemento;
 import Entidad.Laboratorio;
 import Entidad.MacroCategoria;
 import Entidad.Usuario;
@@ -90,20 +91,33 @@ public class LaboratorioDAO {
                         resultSet.getString("Descripción")));
             }
             
-        for(int i = 0;i < Mcats.size(); i++){
-            ArrayList<Categoria> cats = new ArrayList<>();
-            sql = "SELECT * FROM macrocategoria Where LaboratorioID = " + LabID + ";";
-            resultSet = statement.executeQuery(sql);
-            resultSet.beforeFirst();
+            for(int i = 0;i < Mcats.size(); i++){
+                ArrayList<Categoria> cats = new ArrayList<>();
+                sql = "SELECT * FROM categoria Where MacroCategoriaID = " + Mcats.get(i).getID() + ";";
+                resultSet = statement.executeQuery(sql);
+                resultSet.beforeFirst();
 
-            while (resultSet.next()) {
-                cats.add(new Categoria(resultSet.getInt("ID"), resultSet.getInt("CantidadMax"),resultSet.getString("Nombre"),
-                        resultSet.getString("Descripción")));
+                while (resultSet.next()) {
+                    cats.add(new Categoria(resultSet.getInt("ID"), resultSet.getInt("CantidadMax"),resultSet.getString("Nombre"),
+                            resultSet.getString("Descripción")));
+                }
+                
+                for(int j = 0;j < cats.size(); j++){
+                    ArrayList<Elemento> elems = new ArrayList<>();
+                    sql = "SELECT * FROM elemento Where CategoriaID = " + cats.get(j).getID() + ";";
+                    resultSet = statement.executeQuery(sql);
+                    resultSet.beforeFirst();
+
+                    while (resultSet.next()) {
+                        elems.add(new Elemento(resultSet.getInt("ID"),resultSet.getString("Nombre"),
+                            resultSet.getString("Descripción"), resultSet.getInt("EstadoElemento")));
+                    }
+                
+                    cats.get(i).eleList = elems;
+                }
+                
+                Mcats.get(i).catList = cats;
             }
-            Mcats.get(i).catList = cats;
-        }
-            
-            
             
 
         } catch (SQLException ex) {
