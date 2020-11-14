@@ -5,7 +5,9 @@
  */
 package Control.Admin;
 
+import Control.LoginController;
 import DAO.LaboratorioDAO;
+import DAO.PrestamoDAO;
 import DAO.ReservasDAO;
 import DAO.UsuarioDAO;
 import Entidad.Categoria;
@@ -22,6 +24,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -49,8 +52,12 @@ public class AdminPrestamo implements Initializable {
 
     private static Usuario estudiante = null;
     private static Laboratorio lab = AdminMenuController.currentLab;
-    private static ObservableList<MacroCategoria> dataMCats;
+    private static Usuario admin = LoginController.getUsuario();
+    private static int reserve = 0;
+    public static boolean flag = true;
     private static MacroCategoria MCSelected = null;
+
+    private static ObservableList<MacroCategoria> dataMCats;
     private static ObservableList<Elemento> dataSearch = FXCollections.observableArrayList();
     private static ObservableList<Elemento> dataPrestamo = FXCollections.observableArrayList();
     private static ObservableList<Categoria> CatsReserva = FXCollections.observableArrayList();
@@ -59,43 +66,33 @@ public class AdminPrestamo implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private static JFXTreeTableView<Elemento> BusquedaTable;
-
+    private JFXTreeTableView<Elemento> BusquedaTable;
     @FXML
-    private static TreeTableColumn<Elemento, Integer> TIDL;
-
+    private TreeTableColumn<Elemento, Integer> TIDL;
     @FXML
-    private static TreeTableColumn<Elemento, String> TElementoL;
-
+    private TreeTableColumn<Elemento, String> TElementoL;
     @FXML
-    private static TreeTableColumn<?, ?> TAnadirL;
-
+    private JFXTreeTableView<Elemento> PrestamoTable;
     @FXML
-    private static JFXTreeTableView<Elemento> PrestamoTable;
-
+    private TreeTableColumn<Elemento, Integer> TIDR;
     @FXML
-    private static TreeTableColumn<Elemento, Integer> TIDR;
-
+    private TreeTableColumn<Elemento, String> TNombreR;
     @FXML
-    private static TreeTableColumn<Elemento, String> TNombreR;
-
+    private JFXTextArea Observaciones;
     @FXML
-    private static TreeTableColumn<?, ?> TQuitarR;
-
+    private Label Name;
     @FXML
-    private static JFXTextArea Observaciones;
-
+    private Label LastName;
     @FXML
-    private static JFXComboBox<MacroCategoria> macroList;
-
+    private Label Document;
     @FXML
-    private static Label Name;
+    private JFXTextField DocumentN;
     @FXML
-    private static Label LastName;
+    private TreeTableColumn<?, ?> TAnadirL;
     @FXML
-    private static Label Document;
+    private TreeTableColumn<?, ?> TQuitarR;
     @FXML
-    private static JFXTextField DocumentN;
+    private JFXComboBox<MacroCategoria> macroLista;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -110,13 +107,36 @@ public class AdminPrestamo implements Initializable {
 
     @FXML
     void Prestamo(ActionEvent event) {
+        if (!dataPrestamo.isEmpty() && estudiante != null) {
+            int rs = new PrestamoDAO().doPrestamo(new ArrayList<Elemento>(dataPrestamo),
+                    estudiante, admin, Observaciones.getText(), reserve);
+            if (rs != 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Información");
+                alert.setHeaderText("Se añadió el préstamo con el ID " + rs);
+                alert.setContentText(null);
+                alert.showAndWait();
 
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Información");
+                alert.setHeaderText("Ocurrió un error, inténtelo de nuevo");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("Verifique la información");
+            alert.setContentText(null);
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void goToReservas(ActionEvent event) {
         CatsReserva = FXCollections.observableList(new ReservasDAO().getReserve(1));
-        getSearch(false);
+        getSearch();
 
     }
 
@@ -145,8 +165,10 @@ public class AdminPrestamo implements Initializable {
     private void getMCats() {
         dataMCats = FXCollections.observableList(new LaboratorioDAO().getMCats(lab.getID()));
 
-        macroList.setItems(dataMCats);
-        macroList.setConverter(new StringConverter<MacroCategoria>() {
+        System.out.println(dataMCats);
+
+        macroLista.setItems(dataMCats);
+        macroLista.setConverter(new StringConverter<MacroCategoria>() {
             @Override
             public String toString(MacroCategoria object) {
                 return object.getID() + "-" + object.getNombre();
@@ -160,7 +182,7 @@ public class AdminPrestamo implements Initializable {
 
     }
 
-    private MacroCategoria findID(int id) {
+    private static MacroCategoria findID(int id) {
         for (MacroCategoria MCat : dataMCats) {
             if (MCat.getID() == id) {
                 return MCat;
@@ -231,9 +253,8 @@ public class AdminPrestamo implements Initializable {
         PrestamoTable.setRoot(root);
         PrestamoTable.setShowRoot(false);
     }
-    
 
-    private static void getSearch(boolean flag) {
+    private void getSearch() {
         JFXTreeTableColumn<Elemento, String> settingsColumn = new JFXTreeTableColumn<>("Añadir");
         settingsColumn.setPrefWidth(95);
         Callback<TreeTableColumn<Elemento, String>, TreeTableCell<Elemento, String>> cellFactory
@@ -276,7 +297,7 @@ public class AdminPrestamo implements Initializable {
         TElementoL.setCellValueFactory(
                 new TreeItemPropertyValueFactory<>("Nombre")
         );
-        
+
         dataSearch.clear();
         if (flag) {
             for (Categoria cat : new LaboratorioDAO().getCats(MCSelected)) {
@@ -304,8 +325,8 @@ public class AdminPrestamo implements Initializable {
 
     @FXML
     private void onSelectedMC(ActionEvent event) {
-        MCSelected = macroList.getSelectionModel().getSelectedItem();
-        getSearch(true);
+        MCSelected = macroLista.getSelectionModel().getSelectedItem();
+        getSearch();
     }
 
 }

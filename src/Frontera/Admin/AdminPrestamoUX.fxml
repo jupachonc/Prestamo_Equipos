@@ -59,7 +59,7 @@
          </cursor>
       </JFXButton>
       <Label layoutX="524.0" layoutY="190.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Préstamo" underline="true" />
-      <JFXComboBox fx:id="macroList" layoutX="47.0" layoutY="142.0" onAction="#onSelectedMC" prefHeight="27.0" prefWidth="180.0" promptText="Macrocategoria" style="-jfx-label-float: true;" stylesheets="@../User/users.css" />
+      <JFXComboBox fx:id="macroLista" layoutX="47.0" layoutY="142.0" onAction="#onSelectedMC" prefHeight="27.0" prefWidth="180.0" promptText="Macrocategoria" style="-jfx-label-float: true;" stylesheets="@../User/users.css" />
       <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="822.0" layoutY="189.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToReservas" prefHeight="27.0" prefWidth="117.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 10pt;" text="Reservas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
