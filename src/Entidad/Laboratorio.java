@@ -1,7 +1,6 @@
 package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import Entidad.Usuario;
 
 public class Laboratorio extends RecursiveTreeObject<Laboratorio>{
     private int ID;

@@ -36,6 +36,7 @@ public class UserReserverController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getLabs();
+        getMacro();
     }
     
     private Laboratorio findID(int id) {
@@ -49,6 +50,24 @@ public class UserReserverController implements Initializable{
     }
     
     private void getLabs() {
+        dataLabs = FXCollections.observableList(new LaboratorioDAO().getLabs());
+
+        labList.setItems(dataLabs);
+        labList.setConverter(new StringConverter<Laboratorio>() {
+            @Override
+            public String toString(Laboratorio object) {
+                return object.getID() + "-" + object.getNombre();
+            }
+
+            @Override
+            public Laboratorio fromString(String string) {
+                return findID(Integer.parseInt(string.split("-")[0]));
+            }
+        });
+
+    }
+    
+    private void getMacro() {
         dataLabs = FXCollections.observableList(new LaboratorioDAO().getLabs());
 
         labList.setItems(dataLabs);
