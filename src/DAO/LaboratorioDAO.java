@@ -110,7 +110,7 @@ public class LaboratorioDAO {
 
             while (resultSet.next()) {
                 Mcats.add(new MacroCategoria(resultSet.getInt("ID"), resultSet.getString("Nombre"),
-                        resultSet.getString("Descripción")));
+                        resultSet.getString("Descripción"), resultSet.getInt("LaboratorioID")));
             }
 
         } catch (SQLException ex) {

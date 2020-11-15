@@ -5,6 +5,7 @@
  */
 package Control.Admin;
 import Control.LoginController;
+import DAO.DAOMacroCategorias;
 import DAO.DBConnection;
 import Entidad.Laboratorio;
 import Entidad.MacroCategoria;
@@ -49,6 +50,9 @@ public class AdminInventario implements Initializable{
    
     private Usuario user = LoginController.getUsuario();
     private Laboratorio lab;
+    
+    private MacroCategoria selectedMacroCategoria = null;
+            
     @FXML
     private JFXButton backbtn;
     @FXML
@@ -75,7 +79,8 @@ public class AdminInventario implements Initializable{
     
     public void accionCategory(){
         if(accion == "crear"){
-            
+            selectedMacroCategoria=new MacroCategoria(0,name.getText(),description.getText(), lab.getID() );
+            new DAOMacroCategorias().create(selectedMacroCategoria);
         }
     }
     public void loadTable(){
@@ -128,11 +133,11 @@ public class AdminInventario implements Initializable{
                 lblAccion.setText("Editar Macrocategoría");
                 btnGoto.setVisible(true);
                 btnAccion.setText("Guardar");
-                MacroCategoria cat = newVal.getValue();
-                name.setText(cat.getNombre());
+                selectedMacroCategoria = newVal.getValue();
+                name.setText(selectedMacroCategoria.getNombre());
                 accion = "guardar";
                 //name = MacroTable.getSelectionModel().getSelectedItem().getValue();
-                description.setText(cat.getDescripción());
+                description.setText(selectedMacroCategoria.getDescripción());
             }
             else{
                 lblAccion.setText("Crear Macrocategoría");
@@ -141,6 +146,7 @@ public class AdminInventario implements Initializable{
                 name.setText("");
                 description.setText("");
                 accion = "crear";
+                selectedMacroCategoria=null;
             }
         });
         
