@@ -8,7 +8,6 @@ package Control.Admin;
 import Control.LoginController;
 import DAO.LaboratorioDAO;
 import DAO.PrestamoDAO;
-import DAO.ReservasDAO;
 import DAO.UsuarioDAO;
 import Entidad.Categoria;
 import Entidad.Elemento;
@@ -23,16 +22,18 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -40,6 +41,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
@@ -50,17 +52,17 @@ import javafx.util.StringConverter;
  */
 public class AdminPrestamo implements Initializable {
 
-    private static Usuario estudiante = null;
+    public static Usuario estudiante = null;
     private static Laboratorio lab = AdminMenuController.currentLab;
     private static Usuario admin = LoginController.getUsuario();
-    private static int reserve = 0;
-    public static boolean flag = true;
+    public static int reserve = 0;
+    public static boolean flag;
     private static MacroCategoria MCSelected = null;
 
     private static ObservableList<MacroCategoria> dataMCats;
     private static ObservableList<Elemento> dataSearch = FXCollections.observableArrayList();
     private static ObservableList<Elemento> dataPrestamo = FXCollections.observableArrayList();
-    private static ObservableList<Categoria> CatsReserva = FXCollections.observableArrayList();
+    public static ObservableList<Categoria> CatsReserva = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -94,15 +96,38 @@ public class AdminPrestamo implements Initializable {
     @FXML
     private JFXComboBox<MacroCategoria> macroLista;
 
+    private void ToPath(String path) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            Stage stage1 = (Stage) Name.getScene().getWindow();
+            stage1.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getMCats();
         getPrestamo();
+        System.out.println(flag);
+        if (!flag) {
+            getSearch();
+            updateUser();
+            System.out.println("executed");
+        }
     }
 
     @FXML
     void BackToMenu(ActionEvent event) {
-
+        ToPath("/Frontera/Admin/AdminMenuUX.fxml");
     }
 
     @FXML
@@ -135,9 +160,7 @@ public class AdminPrestamo implements Initializable {
 
     @FXML
     void goToReservas(ActionEvent event) {
-        CatsReserva = FXCollections.observableList(new ReservasDAO().getReserve(1));
-        getSearch();
-
+        ToPath("/Frontera/Admin/AdminReservasUserUX.fxml");
     }
 
     @FXML
