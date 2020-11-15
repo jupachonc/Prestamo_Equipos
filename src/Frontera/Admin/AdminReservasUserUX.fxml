@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Control.Admin.AdminReservasUser">
+   <children>
+      <JFXTreeTableView fx:id="reservaTable" layoutX="278.0" layoutY="74.0" prefHeight="302.0" prefWidth="298.0">
+         <columns>
+            <TreeTableColumn fx:id="idreserva" prefWidth="75.0" text="ID" />
+            <TreeTableColumn fx:id="timereserva" prefWidth="145.0" text="Tiempo Reserva" />
+            <TreeTableColumn fx:id="usarreserva" prefWidth="75.0" text="Usar" />
+         </columns>
+      </JFXTreeTableView>
+      <Label fx:id="Name" layoutX="35.0" layoutY="112.0" style="-fx-font-family: Roboto; -fx-font-size: 14pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Selecciona" />
+      <Label fx:id="LastName" layoutX="35.0" layoutY="137.0" style="-fx-font-family: Roboto; -fx-font-size: 14pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Un Usuario" />
+      <Label fx:id="Document" layoutX="35.0" layoutY="161.0" style="-fx-font-family: Roboto; -fx-font-size: 12pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="*" />
+      <JFXTextField fx:id="DocumentN" focusColor="#7f9a33" layoutX="31.0" layoutY="200.0" prefHeight="38.0" prefWidth="190.0" promptText="Documento" style="-fx-font-family: &quot;Roboto&quot;; -fx-font-size: 14pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXButton layoutX="31.0" layoutY="263.0" onAction="#searchDocument" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Buscar Reservas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" size="16pt" />
+         </graphic>
+      </JFXButton>
+      <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" layoutX="-489.0" layoutY="32.0" size="16pt" />
+      <Circle fill="#a9cd43" layoutX="186.0" layoutY="-176.0" radius="259.0" stroke="#a9cd43" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="81.0" layoutY="-13.0" prefHeight="104.0" prefWidth="210.0" style="-fx-font-size: 20pt; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Búsqueda Reservas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="56.0" layoutY="325.0" onAction="#BackToMenu" prefHeight="41.0" prefWidth="140.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="BACKWARD" size="16pt" translateX="-10.0" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>
