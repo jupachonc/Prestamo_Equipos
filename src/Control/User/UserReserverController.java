@@ -167,9 +167,11 @@ public class UserReserverController implements Initializable {
                                 }
                             }
                             else{
-                                Categoria o = this.getTreeTableRow().getItem();
-                                o.setCantidadMax(1);
-                                reserveElems.add(o);
+                                if(this.getTreeTableRow().getItem().getCantidadMax() > 0 && this.getTreeTableRow().getItem().getCantidadLibre() > 0){
+                                    Categoria o = this.getTreeTableRow().getItem();
+                                    o.setCantidadMax(1);
+                                    reserveElems.add(o);
+                                }
                             }
                             reserveTable.refresh();
                         });
@@ -301,7 +303,7 @@ public class UserReserverController implements Initializable {
             alert.showAndWait();
         }
         else {
-            if (new ReservasDAO().makeReserve(reserveElems, labList.getSelectionModel().getSelectedItem().getID(), 0)) {
+            if (new ReservasDAO().makeReserve(reserveElems, labList.getSelectionModel().getSelectedItem().getID(), LoginController.getUsuario().getDocumento())) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Información");
                 alert.setHeaderText("Reserva realizada.");

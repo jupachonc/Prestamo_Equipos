@@ -101,7 +101,7 @@ public class ReservasDAO {
             statement = connection.createStatement();
             
             String sql = "INSERT INTO reservas (EstadoReserva, TiempoDeReserva, EstudianteDocumento) "
-                        + "VALUES ( 0,\"" + new Timestamp(new Date().getTime()) + "," + userID + ");";
+                        + "VALUES ( 0,\"" + new Timestamp(new Date().getTime()) + "\"," + userID + ");";
             statement.executeUpdate(sql);
             
             resultSet = statement.executeQuery("SELECT LAST_INSERT_ID() as ID");
@@ -111,7 +111,7 @@ public class ReservasDAO {
             
             for(Categoria e : cats) {
                 String sql_ = "INSERT INTO categoria_reservas (CategoriaID, ReservasID, Cantidad, LaboratorioID)"
-                            + "VALUES ("+ e.getID() + "," + id + "," + e.getCantidadMax() + "," + e.getID() + ");";
+                            + "VALUES ("+ e.getID() + "," + id + "," + e.getCantidadMax() + "," + LabID + ");";
                 statement.executeUpdate(sql_);
             }
             
