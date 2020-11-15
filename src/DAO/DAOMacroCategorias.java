@@ -32,4 +32,27 @@ public class DAOMacroCategorias {
             Logger.getLogger(DAOMacroCategorias.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public boolean delete(MacroCategoria mc){
+        try {
+            con = DBConnection.getConnection();
+            String sql="DELETE FROM macrocategoria WHERE ID = '" + mc.getID()+"'";
+            System.out.println(sql);
+            con.createStatement().executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOMacroCategorias.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    public void update(MacroCategoria mc){
+        try {
+            con = DBConnection.getConnection();
+            String sql="UPDATE macrocategoria SET " + 
+                "Nombre =  '" + mc.getNombre()+ "', Descripción = '" + mc.getDescripción()+ "', LaboratorioID = '" + mc.getLaboratorioID()+ "' WHERE ID = '" + mc.getID()+"'";
+            System.out.println(sql);
+            con.createStatement().executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOMacroCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

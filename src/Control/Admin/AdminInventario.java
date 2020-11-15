@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
@@ -81,7 +84,21 @@ public class AdminInventario implements Initializable{
         if(accion == "crear"){
             selectedMacroCategoria=new MacroCategoria(0,name.getText(),description.getText(), lab.getID() );
             new DAOMacroCategorias().create(selectedMacroCategoria);
+            name.setText("");
+            description.setText("");
         }
+        else if (accion == "guardar"){
+            selectedMacroCategoria.setNombre(name.getText());
+            selectedMacroCategoria.setDescripción(description.getText());
+            new DAOMacroCategorias().update(selectedMacroCategoria);
+                       
+        }
+        emptyTable();
+        loadTable();
+    }
+    public void emptyTable(){
+        System.out.println(oblist.size());
+        while(oblist.size()>0) oblist.remove(0);
     }
     public void loadTable(){
         // System.out.println("AdminInventario => setUser => " + this.user.getDocumento());
@@ -102,14 +119,69 @@ public class AdminInventario implements Initializable{
         } catch (SQLException ex) {
             Logger.getLogger(AdminInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //table.setItems(oblist);
-        /*
-        Callback<TreeTableColumn<Laboratorio, String>, TreeTableCell<Laboratorio, String>> cellFactory
+
+
+        JFXTreeTableColumn<MacroCategoria, String> settingsColumn = new JFXTreeTableColumn<>("Eliminar");
+        settingsColumn.setPrefWidth(95);
+        Callback<TreeTableColumn<MacroCategoria, String>, TreeTableCell<MacroCategoria, String>> cellFactory
                 = //
-                (final TreeTableColumn<Laboratorio, String> param) -> {
+                (final TreeTableColumn<MacroCategoria, String> param) -> {
+                    final TreeTableCell<MacroCategoria, String> cell = new TreeTableCell<MacroCategoria, String>() {
+
+                final JFXButton btn = new JFXButton("Eliminar");
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        btn.setButtonType(JFXButton.ButtonType.FLAT);
+                        btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
+                        btn.setOnAction(event -> {
+
+                            MacroCategoria macCat = this.getTreeTableRow().getItem();
+
+                            Alert alertm = new Alert(Alert.AlertType.CONFIRMATION);
+                            alertm.setHeaderText(null);
+                            alertm.setTitle("Confirmación");
+                            alertm.setContentText("Se eliminará " + macCat.getNombre());
+                            Optional<ButtonType> action = alertm.showAndWait();
+
+                            if (action.get() == ButtonType.OK) {
+
+                                if (new DAOMacroCategorias().delete(macCat)) {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Información");
+                                    alert.setHeaderText("Macrocategoría eliminada");
+                                    alert.setContentText(null);
+                                    alert.showAndWait();
+                                    emptyTable();
+                                    loadTable();
+                                } else {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setTitle("Información");
+                                    alert.setHeaderText("No se pudo eliminar la macrocategoría.");
+                                    alert.setContentText(null);
+                                    alert.showAndWait();
+                                }
+                            }
+
+                        });
+                        setGraphic(btn);
+                        setText(null);
+                    }
+                }
+            };
                     return cell;
                 };
-        */
+
+        settingsColumn.setCellFactory(cellFactory);
+
+        MacroTable.getColumns().set(3, settingsColumn);
+
+
         col_ID.setCellValueFactory(
                 new TreeItemPropertyValueFactory<>("ID")
         );
