@@ -7,7 +7,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
+import javafx.collections.ObservableList;
 
 public class ReservasDAO {
     Connection connection;
@@ -88,5 +91,46 @@ public class ReservasDAO {
     
     
     
+    }
+    
+    public boolean makeReserve(ObservableList<Categoria> cats, int LabID, int userID) {
+        ResultSet resultSet = null;
+        int id;
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            
+            String sql = "INSERT INTO reservas (EstadoReserva, TiempoDeReserva, EstudianteDocumento) "
+                        + "VALUES ( 0,\"" + new Timestamp(new Date().getTime()) + "," + userID + ");";
+            statement.executeUpdate(sql);
+            
+            resultSet = statement.executeQuery("SELECT LAST_INSERT_ID() as ID");
+            resultSet.next();
+            id = resultSet.getInt("ID");
+
+            
+            for(Categoria e : cats) {
+                String sql_ = "INSERT INTO categoria_reservas (CategoriaID, ReservasID, Cantidad, LaboratorioID)"
+                            + "VALUES ("+ e.getID() + "," + id + "," + e.getCantidadMax() + "," + e.getID() + ");";
+                statement.executeUpdate(sql_);
+            }
+            
+            return true;
+            
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+
+                connection.close();
+
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
     }
 }

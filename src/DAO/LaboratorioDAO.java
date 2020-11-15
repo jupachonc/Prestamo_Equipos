@@ -289,7 +289,7 @@ public class LaboratorioDAO {
 
     public boolean enableLab(Laboratorio lab) {
         int resultSet;
-
+        
         try {
             resultSet = -1;
             connection = DBConnection.getConnection();
@@ -384,7 +384,6 @@ public class LaboratorioDAO {
         return cats;
 
     }
-
 
     public int maxCatAmount(int catID){
         int amount = 0;

@@ -2,6 +2,7 @@ package Control.User;
 
 import Control.LoginController;
 import DAO.LaboratorioDAO;
+import DAO.ReservasDAO;
 import Entidad.Categoria;
 import Entidad.Laboratorio;
 import Entidad.MacroCategoria;
@@ -300,7 +301,20 @@ public class UserReserverController implements Initializable {
             alert.showAndWait();
         }
         else {
-            
+            if (new ReservasDAO().makeReserve(reserveElems, labList.getSelectionModel().getSelectedItem().getID(), 0)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Información");
+                alert.setHeaderText("Reserva realizada.");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Información");
+                alert.setHeaderText("No se pudo realizar la reserva.");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
         }
     }
 }
