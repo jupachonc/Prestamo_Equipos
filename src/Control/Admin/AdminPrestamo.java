@@ -56,7 +56,7 @@ public class AdminPrestamo implements Initializable {
     private static Laboratorio lab = AdminMenuController.currentLab;
     private static Usuario admin = LoginController.getUsuario();
     public static int reserve = 0;
-    public static boolean flag;
+    public static boolean flag = AdminMenuController.flag;
     private static MacroCategoria MCSelected = null;
 
     private static ObservableList<MacroCategoria> dataMCats;

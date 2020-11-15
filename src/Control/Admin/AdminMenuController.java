@@ -30,6 +30,7 @@ public class AdminMenuController implements Initializable {
     private ObservableList<Laboratorio> dataLabs;
     private ObservableList<Elemento> dataPrestamo;
     public static Laboratorio currentLab = null;
+    public static boolean flag = true;
 
     @FXML
     private Label labelname;
@@ -106,8 +107,8 @@ public class AdminMenuController implements Initializable {
 
     @FXML
     private void gotoInventary(ActionEvent event) {
-        AdminPrestamo.flag = true;
         SafeRoute("/Frontera/Admin/AdminInventarioUX.fxml");
+        AdminPrestamo.flag = true;
     }
 
     @FXML
