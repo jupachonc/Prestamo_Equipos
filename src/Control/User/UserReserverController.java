@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
@@ -42,8 +43,8 @@ public class UserReserverController implements Initializable {
     private Usuario user = LoginController.getUsuario();
     private ObservableList<Laboratorio> dataLabs;
     private ObservableList<MacroCategoria> dataCats;
-    private ObservableList<Categoria> dataElems;
-    private ObservableList<Categoria> reserveElems;
+    private ObservableList<Categoria> dataElems = FXCollections.observableList(new ArrayList<>());
+    private ObservableList<Categoria> reserveElems = FXCollections.observableList(new ArrayList<>());
 
     @FXML
     private JFXComboBox<Laboratorio> labList;
@@ -200,8 +201,6 @@ public class UserReserverController implements Initializable {
     }
 
     private void initReserveTable(){
-        reserveElems = FXCollections.observableList(new ArrayList<>());
-        
         JFXTreeTableColumn<Categoria, String> TQuitarp = new JFXTreeTableColumn<>("Añadir");
         TQuitarp.setPrefWidth(95);
         Callback<TreeTableColumn<Categoria, String>, TreeTableCell<Categoria, String>> cellFactory
@@ -279,13 +278,29 @@ public class UserReserverController implements Initializable {
 
     @FXML
     private void updateMacro(ActionEvent event) {
-        getMacro();
+        dataElems.clear();
+        elemsTable.refresh();
         reserveElems.clear();
         reserveTable.refresh();
+        getMacro();
     }
 
     @FXML
     private void updateCats(ActionEvent event) {
         getCatsTable();
+    }
+    
+    @FXML
+    private void makeReserve(ActionEvent event) {
+        if(reserveElems.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("No tienes elementos en la lista de reserva.");
+            alert.setContentText(null);
+            alert.showAndWait();
+        }
+        else {
+            
+        }
     }
 }
