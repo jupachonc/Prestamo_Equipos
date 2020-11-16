@@ -4,9 +4,25 @@
  * and open the template in the editor.
  */
 package Control.Admin;
+
+/**
+ *
+ * @author nguzman
+ */
+
+import Control.Admin.AdminInventario; 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import Control.LoginController;
+import DAO.CategoriasDAO;
 import DAO.DAOMacroCategorias;
 import DAO.DBConnection;
+import Entidad.Categoria;
 import Entidad.Laboratorio;
 import Entidad.MacroCategoria;
 import Entidad.Usuario;
@@ -42,31 +58,31 @@ import javafx.stage.Stage;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.control.TreeItem;
-
-
 import javafx.util.Callback;
-
 /**
+ * FXML Controller class
  *
  * @author nguzman
  */
-public class AdminInventario implements Initializable{
-   
-    private Usuario user = LoginController.getUsuario();
-    private Laboratorio lab;
-    
-    private MacroCategoria selectedMacroCategoria = null;
-            
+public class AdminCategoriasController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
+    private MacroCategoria mc;
+    private Categoria selectedCategoria = null;
     @FXML
     private JFXButton backbtn;
     @FXML
-    private JFXTreeTableView<MacroCategoria> MacroTable;
+    private JFXTreeTableView<Categoria> CateTable;
     @FXML
-    private TreeTableColumn<MacroCategoria, Integer> col_ID;
+    private TreeTableColumn<Categoria, Integer> col_ID;
     @FXML
-    private TreeTableColumn<MacroCategoria, String> col_Nombre;
+    private TreeTableColumn<Categoria, String> col_Nombre;
     @FXML
-    private TreeTableColumn<MacroCategoria, String> col_Descripcion;
+    private TreeTableColumn<Categoria, String> col_Descripcion;
+    @FXML
+    private TreeTableColumn<Categoria, String> col_CantMax;
     @FXML
     private Label lblAccion;
     @FXML
@@ -77,21 +93,25 @@ public class AdminInventario implements Initializable{
     private JFXTextField name;
     @FXML
     private JFXTextField description;
+    @FXML
+    private JFXTextField MaxElements;
     
     private String accion = "crear";
-    private ObservableList<MacroCategoria> oblist = FXCollections.observableArrayList();
+    private ObservableList<Categoria> oblist = FXCollections.observableArrayList();
     
     public void accionCategory(){
         if(accion == "crear"){
-            selectedMacroCategoria=new MacroCategoria(0,name.getText(),description.getText(), lab.getID() );
-            new DAOMacroCategorias().create(selectedMacroCategoria);
+            
+            selectedCategoria=new Categoria(0,Integer.parseInt(MaxElements.getText()),Integer.parseInt(MaxElements.getText()),name.getText(),description.getText());
+            selectedCategoria.setMacroCategoriaID(mc.getID());
+            new CategoriasDAO().create(selectedCategoria);
             name.setText("");
             description.setText("");
         }
         else if (accion == "guardar"){
-            selectedMacroCategoria.setNombre(name.getText());
-            selectedMacroCategoria.setDescripción(description.getText());
-            new DAOMacroCategorias().update(selectedMacroCategoria);
+            selectedCategoria.setNombre(name.getText());
+            selectedCategoria.setDescripción(description.getText());
+            new CategoriasDAO().update(selectedCategoria);
                        
         }
         emptyTable();
@@ -107,27 +127,25 @@ public class AdminInventario implements Initializable{
         try {
             con = DBConnection.getConnection();
             String sql="SELECT * " + 
-                "FROM macrocategoria " + 
-                "WHERE LaboratorioID = '" + this.lab.getID() + "'";
+                "FROM categoria " + 
+                "WHERE MacroCategoriaID = '" + mc.getID() + "'";
             System.out.println(sql);
             ResultSet rs = con.createStatement().executeQuery(sql);
             while (rs.next()){
                 System.out.println(rs.getString("Nombre"));
-                oblist.add(new MacroCategoria(rs.getInt("ID"),rs.getString("Nombre"), rs.getString("Descripción"), rs.getInt("LaboratorioID")));
+                oblist.add(new Categoria(rs.getInt("ID"),rs.getInt("CantidadMax"), rs.getInt("CantidadMax"), rs.getString("Nombre"),rs.getString("Descripción")));
             }
             //col_ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
             //col_Nombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         } catch (SQLException ex) {
             Logger.getLogger(AdminInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
-        JFXTreeTableColumn<MacroCategoria, String> settingsColumn = new JFXTreeTableColumn<>("Eliminar");
+        JFXTreeTableColumn<Categoria, String> settingsColumn = new JFXTreeTableColumn<>("Eliminar");
         settingsColumn.setPrefWidth(95);
-        Callback<TreeTableColumn<MacroCategoria, String>, TreeTableCell<MacroCategoria, String>> cellFactory
+        Callback<TreeTableColumn<Categoria, String>, TreeTableCell<Categoria, String>> cellFactory
                 = //
-                (final TreeTableColumn<MacroCategoria, String> param) -> {
-                    final TreeTableCell<MacroCategoria, String> cell = new TreeTableCell<MacroCategoria, String>() {
+                (final TreeTableColumn<Categoria, String> param) -> {
+                    final TreeTableCell<Categoria, String> cell = new TreeTableCell<Categoria, String>() {
 
                 final JFXButton btn = new JFXButton("Eliminar");
 
@@ -142,20 +160,20 @@ public class AdminInventario implements Initializable{
                         btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
                         btn.setOnAction(event -> {
 
-                            MacroCategoria macCat = this.getTreeTableRow().getItem();
+                            Categoria cat = this.getTreeTableRow().getItem();
 
                             Alert alertm = new Alert(Alert.AlertType.CONFIRMATION);
                             alertm.setHeaderText(null);
                             alertm.setTitle("Confirmación");
-                            alertm.setContentText("Se eliminará " + macCat.getNombre());
+                            alertm.setContentText("Se eliminará " + cat.getNombre());
                             Optional<ButtonType> action = alertm.showAndWait();
-
+                            
                             if (action.get() == ButtonType.OK) {
 
-                                if (new DAOMacroCategorias().delete(macCat)) {
+                                if (new CategoriasDAO().delete(cat)) {
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("Información");
-                                    alert.setHeaderText("Macrocategoría eliminada");
+                                    alert.setHeaderText("Categoría eliminada");
                                     alert.setContentText(null);
                                     alert.showAndWait();
                                     emptyTable();
@@ -163,7 +181,7 @@ public class AdminInventario implements Initializable{
                                 } else {
                                     Alert alert = new Alert(Alert.AlertType.ERROR);
                                     alert.setTitle("Información");
-                                    alert.setHeaderText("No se pudo eliminar la macrocategoría.");
+                                    alert.setHeaderText("No se pudo eliminar la Categoría.");
                                     alert.setContentText(null);
                                     alert.showAndWait();
                                 }
@@ -177,10 +195,9 @@ public class AdminInventario implements Initializable{
             };
                     return cell;
                 };
-
         settingsColumn.setCellFactory(cellFactory);
 
-        MacroTable.getColumns().set(3, settingsColumn);
+        CateTable.getColumns().set(4, settingsColumn);
 
 
         col_ID.setCellValueFactory(
@@ -192,11 +209,17 @@ public class AdminInventario implements Initializable{
         col_Descripcion.setCellValueFactory(
                 new TreeItemPropertyValueFactory<>("Descripción")
         );
-        TreeItem<MacroCategoria> root = new RecursiveTreeItem<>(oblist, RecursiveTreeObject::getChildren);
+        col_CantMax.setCellValueFactory(
+                new TreeItemPropertyValueFactory<>("CantidadMax")
+        );
+        
+        TreeItem<Categoria> root = new RecursiveTreeItem<>(oblist, RecursiveTreeObject::getChildren);
         
         System.out.println(oblist);
-        
-        MacroTable.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
+        CateTable.setRoot(root);
+        CateTable.setShowRoot(false);
+    
+        CateTable.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
           System.out.println(o);
           System.out.println(oldVal);
           System.out.println(newVal);
@@ -204,69 +227,51 @@ public class AdminInventario implements Initializable{
             if (newVal != null && newVal.getValue() != null) {
                 boolean itemWasSelected = true;
                 lblAccion.setText("Editar Macrocategoría");
-                btnGoto.setVisible(true);
+                //btnGoto.setVisible(true);
                 btnAccion.setText("Guardar");
-                selectedMacroCategoria = newVal.getValue();
-                name.setText(selectedMacroCategoria.getNombre());
+                selectedCategoria = newVal.getValue();
+                name.setText(selectedCategoria.getNombre());
                 accion = "guardar";
                 //name = MacroTable.getSelectionModel().getSelectedItem().getValue();
-                description.setText(selectedMacroCategoria.getDescripción());
+                description.setText(selectedCategoria.getDescripción());
+                MaxElements.setText(String.valueOf(selectedCategoria.getCantidadMax()));
             }
             else{
-                lblAccion.setText("Crear Macrocategoría");
+                lblAccion.setText("Crear Categoría");
                 btnGoto.setVisible(false);
-                btnAccion.setText("Crear Macrocategoría");
+                btnAccion.setText("Crear Categoría");
                 name.setText("");
                 description.setText("");
                 accion = "crear";
-                selectedMacroCategoria=null;
+                selectedCategoria=null;
             }
         });
-        
-        MacroTable.setRoot(root);
-        MacroTable.setShowRoot(false);
-        
-    }
-    private void ToPath(String path) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
-            Parent root1 = (Parent) fxmlLoader.load();
-            
-            AdminCategoriasController ac  = fxmlLoader.getController();
-            ac.setMacroCategoria(selectedMacroCategoria);
-            
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.setResizable(false);
-            stage.show();
-            Stage stage1 = (Stage) backbtn.getScene().getWindow();
-            stage1.close();
+    }   
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    private void goToCategories(ActionEvent event) {
-        ToPath("/Frontera/Admin/AdminCategoriasUX.fxml");
-    }
-    public void goToInventary(){
-        System.out.println("ir a inventario");
+    
+
+        
+        
+        
+        
+        
+        
+    public void setMacroCategoria(MacroCategoria mc) {
+            this.mc = mc;
+            loadTable();
     }
     
+    
+       
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        lab = AdminMenuController.currentLab;
-        System.out.println("AdminInventario => " + this.user.getDocumento());
-        loadTable();
-   
-        /*
-        */
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        
     }
     @FXML
     private void BackToMenu(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/Admin/AdminMacroCat_Elementos.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Frontera/Admin/AdminInventarioUX.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));

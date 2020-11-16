@@ -10,6 +10,7 @@ import java.util.ArrayList;
         private int CantidadMax;
         private String nombre;
         private String descripción;
+        private int MacroCategoriaID;
         public ArrayList<Entidad.Elemento> eleList = new ArrayList<>();
 
         public int getCantidadLibre() {
@@ -50,6 +51,13 @@ import java.util.ArrayList;
 
         public void setDescripción(String descripción) {
             this.descripción = descripción;
+        }
+        public int getMacroCategoriaID() {
+            return MacroCategoriaID;
+        }
+
+        public void setMacroCategoriaID(int MacroCategoriaID) {
+            this.MacroCategoriaID = MacroCategoriaID;
         }
 
     }
