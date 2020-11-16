@@ -88,10 +88,59 @@ public class ReservasDAO {
         }
         
         return reservas;
-    
-    
-    
     }
+    
+    public boolean checkReservasUser(Usuario user){
+        ArrayList<Reserva> reservas = new ArrayList<>();
+
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM reservas, categoria_reservas WHERE EstadoReserva = 0 AND EstudianteDocumento = " +  user.getDocumento()+ " AND ID = ReservasID;";
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            
+            while (resultSet.next()) {
+                reservas.add(new Reserva(resultSet.getInt("ID"),resultSet.getInt("EstadoReserva"), 
+                        resultSet.getTimestamp("TiempoDeReserva")));
+
+            }
+            
+            Date date = new Date();
+            Timestamp nw = new Timestamp(date.getTime());
+            date.setHours(0);
+            date.setMinutes(0);
+            Timestamp ts = new Timestamp(date.getTime());
+            
+            for(Reserva rv : reservas) {
+                if (rv.getTiempoReserva().after(ts) && rv.getTiempoReserva().before(nw)) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+        catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        }
+        finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            }
+            catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        
+        return false;
+    }
+    
+    
     
     public boolean makeReserve(ObservableList<Categoria> cats, int LabID, int userID) {
         ResultSet resultSet = null;

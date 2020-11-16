@@ -6,6 +6,7 @@ import DAO.ReservasDAO;
 import Entidad.Categoria;
 import Entidad.Laboratorio;
 import Entidad.MacroCategoria;
+import Entidad.Reserva;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -15,7 +16,9 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -295,6 +298,15 @@ public class UserReserverController implements Initializable {
     
     @FXML
     private void makeReserve(ActionEvent event) {
+        if(!new ReservasDAO().checkReservasUser(LoginController.getUsuario())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("Ya tienes una reserva para este laboratorio.");
+            alert.setContentText(null);
+            alert.showAndWait();
+            return;
+        }
+        
         if(reserveElems.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
