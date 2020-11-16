@@ -402,7 +402,7 @@ public class LaboratorioDAO {
             }
             
             sql = "SELECT Cantidad FROM reservas,categoria_reservas "
-                + "WHERE ID = ReservasID AND CategoriaID = " + catID + " AND DATE(TiempoDeReserva) = DATE(NOW());";
+                + "WHERE ID = ReservasID AND CategoriaID = " + catID + " AND EstadoReserva = 0 AND DATE(TiempoDeReserva) = DATE(NOW());";
 
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
