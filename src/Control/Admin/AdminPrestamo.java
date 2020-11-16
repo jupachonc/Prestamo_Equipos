@@ -254,7 +254,7 @@ public class AdminPrestamo implements Initializable {
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
                     Elemento elm = this.getTreeTableRow().getItem();
-                    if (empty || elm.getID() == 0) {
+                    if (empty) {
                         setGraphic(null);
                         setText(null);
                     } else {
@@ -269,7 +269,7 @@ public class AdminPrestamo implements Initializable {
                 }
             };
                     return cell;
-                };
+        };
 
         settingsColumn.setCellFactory(cellFactory);
 
