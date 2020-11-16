@@ -400,6 +400,17 @@ public class LaboratorioDAO {
             while (resultSet.next()) {
                 amount = resultSet.getInt("amount");
             }
+            
+            sql = "SELECT Cantidad FROM reservas,categoria_reservas "
+                + "WHERE ID = ReservasID AND CategoriaID = " + catID + " AND DATE(TiempoDeReserva) = DATE(NOW());";
+
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            while (resultSet.next()) {
+                amount -= resultSet.getInt("Cantidad");
+            }
+            
+            
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
         } finally {
