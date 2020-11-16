@@ -78,6 +78,16 @@ public class AdminReservasUser implements Initializable {
         if (isNumeric(DocumentN.getText())) {
             System.out.println(Integer.parseInt(DocumentN.getText()));
             estudiante = new UsuarioDAO().getUser(Integer.parseInt(DocumentN.getText()));
+            
+            if(estudiante == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Información");
+                alert.setHeaderText("El documento es inválido");
+                alert.setContentText(null);
+                alert.showAndWait();
+                return;
+            }
+            
             updateUser();
             getReservas();
         } else {

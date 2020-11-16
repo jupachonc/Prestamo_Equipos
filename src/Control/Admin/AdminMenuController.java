@@ -45,6 +45,11 @@ public class AdminMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         updateUser();
         getLabs();
+        
+        if(currentLab != null){
+            labList.setValue(currentLab);
+        }
+        
     }
 
     public void updateUser() {

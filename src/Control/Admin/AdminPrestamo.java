@@ -53,7 +53,7 @@ import javafx.util.StringConverter;
 public class AdminPrestamo implements Initializable {
 
     public static Usuario estudiante = null;
-    private static Laboratorio lab = AdminMenuController.currentLab;
+    private static Laboratorio lab;
     private static Usuario admin = LoginController.getUsuario();
     public static int reserve = 0;
     public static boolean flag;
@@ -115,6 +115,7 @@ public class AdminPrestamo implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        lab = AdminMenuController.currentLab;
         getMCats();
         getPrestamo();
         System.out.println(flag);
@@ -168,6 +169,16 @@ public class AdminPrestamo implements Initializable {
         if (isNumeric(DocumentN.getText())) {
             System.out.println(Integer.parseInt(DocumentN.getText()));
             estudiante = new UsuarioDAO().getUser(Integer.parseInt(DocumentN.getText()));
+            
+            if(estudiante == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Información");
+                alert.setHeaderText("El documento es inválido");
+                alert.setContentText(null);
+                alert.showAndWait();
+                return;
+            }
+            
             updateUser();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
