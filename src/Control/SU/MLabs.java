@@ -161,7 +161,7 @@ public class MLabs implements Initializable {
 
     @FXML
     private void createlab(ActionEvent event) {
-        String respuesta = new ValidarRegistro().verificarLab(new Laboratorio(0,
+        String respuesta = new ValidarRegistro().verificarLab(new Laboratorio(
                 name.getText(), phone.getText(), location.getText()));
         if (respuesta.equals("Laboratorio creado")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

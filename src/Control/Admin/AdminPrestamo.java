@@ -95,6 +95,8 @@ public class AdminPrestamo implements Initializable {
     private TreeTableColumn<?, ?> TQuitarR;
     @FXML
     private JFXComboBox<MacroCategoria> macroLista;
+    @FXML
+    private JFXButton Devolucionbtn;
 
     private void ToPath(String path) {
         try {
@@ -169,8 +171,8 @@ public class AdminPrestamo implements Initializable {
         if (isNumeric(DocumentN.getText())) {
             System.out.println(Integer.parseInt(DocumentN.getText()));
             estudiante = new UsuarioDAO().getUser(Integer.parseInt(DocumentN.getText()));
-            
-            if(estudiante == null){
+
+            if (estudiante == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Información");
                 alert.setHeaderText("El documento es inválido");
@@ -178,7 +180,7 @@ public class AdminPrestamo implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            
+
             updateUser();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -269,7 +271,7 @@ public class AdminPrestamo implements Initializable {
                 }
             };
                     return cell;
-        };
+                };
 
         settingsColumn.setCellFactory(cellFactory);
 
@@ -302,7 +304,7 @@ public class AdminPrestamo implements Initializable {
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
                     Elemento elm = this.getTreeTableRow().getItem();
-                    if (empty || elm.getID() == 0) {
+                    if (empty) {
                         setGraphic(null);
                         setText(null);
                     } else {
@@ -313,8 +315,10 @@ public class AdminPrestamo implements Initializable {
                                 dataPrestamo.add(elm);
                             }
                         });
-                        setGraphic(btn);
-                        setText(null);
+                        if (elm.getID() != 0) {
+                            setGraphic(btn);
+                            setText(null);
+                        }
                     }
                 }
             };
@@ -361,6 +365,10 @@ public class AdminPrestamo implements Initializable {
     private void onSelectedMC(ActionEvent event) {
         MCSelected = macroLista.getSelectionModel().getSelectedItem();
         getSearch();
+    }
+
+    @FXML
+    private void goToDevolucion(ActionEvent event) {
     }
 
 }

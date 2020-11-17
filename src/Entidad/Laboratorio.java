@@ -16,6 +16,12 @@ public class Laboratorio extends RecursiveTreeObject<Laboratorio>{
         this.Telefono = Telefono;
         this.Ubicacion = Usuario.ucFirst(Ubicacion);
     }
+    public Laboratorio(String Nombre, String Telefono, String Ubicacion) {
+        this.ID = ID;
+        this.Nombre = Usuario.ucFirst(Nombre);
+        this.Telefono = Telefono;
+        this.Ubicacion = Usuario.ucFirst(Ubicacion);
+    }
 
     public int getID() {
         return ID;

@@ -48,7 +48,6 @@ public class LaboratorioDAO {
             String sql = "INSERT INTO laboratorio (`Nombre`, `Telefono`, `Ubicacion`) Values(\""
                     + lab.getNombre() + "\"," + lab.getTelefono() + ", \"" + lab.getUbicacion() + "\");";
             resultSet = statement.executeUpdate(sql);
-            return resultSet > 0;
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
             return false;
@@ -64,6 +63,8 @@ public class LaboratorioDAO {
                 System.out.println("Error en SQL" + ex);
             }
         }
+        
+        return resultSet > 0;
     }
 
     public ArrayList<Laboratorio> getLabs() {
@@ -209,7 +210,7 @@ public class LaboratorioDAO {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
             String sql = String.format("INSERT INTO laboratorio_administrador "
-                    + "(`IDLaboratorio`, `AdministradorDocumento`) Values( %s , %s);",
+                    + "(`LaboratorioID`, `AdministradorDocumento`) Values( %s , %s);",
                     lab.getID(), usr.getDocumento());
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
@@ -239,7 +240,7 @@ public class LaboratorioDAO {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
             String sql = String.format("DELETE FROM laboratorio_administrador "
-                    + "WHERE IDLaboratorio = %s AND AdministradorDocumento = %s;",
+                    + "WHERE LaboratorioID = %s AND AdministradorDocumento = %s;",
                     lab.getID(), usr.getDocumento());
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
