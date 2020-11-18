@@ -216,7 +216,7 @@ public class AdminPrestamoUser implements Initializable {
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Información");
-                alert.setHeaderText("El documento es inválido");
+                alert.setHeaderText("Ha ocurrido un error al actualizar el préstamo.");
                 alert.setContentText(null);
                 alert.showAndWait();
             }

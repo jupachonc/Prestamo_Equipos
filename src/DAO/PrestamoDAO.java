@@ -111,9 +111,10 @@ public class PrestamoDAO {
             coment = coment + " " + comms;
             
             
-            String sql = "UPDATE prestamo SET EstadoPrestamo = " + state + ", Comentarios = " + coment  + ", TiempoDeEntrega = " + new Timestamp(new Date().getTime())
-                       + " WHERE ID =" + ID;
-            statement.executeQuery(sql);
+            String sql = "UPDATE prestamo SET EstadoPrestamo = " + state + ", Comentarios = \"" + coment  + "\", TiempoDeEntrega = \"" + new Timestamp(new Date().getTime())
+                       + "\" WHERE ID =" + ID + ";";
+            statement.executeUpdate(sql);
+            
             return true;
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
