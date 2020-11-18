@@ -77,6 +77,8 @@ public class AdminCategoriasController implements Initializable {
     private JFXTreeTableView<Categoria> CateTable;
     @FXML
     private TreeTableColumn<Categoria, Integer> col_ID;
+    
+    
     @FXML
     private TreeTableColumn<Categoria, String> col_Nombre;
     @FXML
