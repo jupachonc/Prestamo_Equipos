@@ -140,6 +140,7 @@ public class AdminCategoriasController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(AdminInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         JFXTreeTableColumn<Categoria, String> settingsColumn = new JFXTreeTableColumn<>("Eliminar");
         settingsColumn.setPrefWidth(95);
         Callback<TreeTableColumn<Categoria, String>, TreeTableCell<Categoria, String>> cellFactory

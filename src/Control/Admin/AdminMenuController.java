@@ -113,6 +113,11 @@ public class AdminMenuController implements Initializable {
     private void gotoInventary(ActionEvent event) {
         SafeRoute("/Frontera/Admin/AdminInventarioUX.fxml");
     }
+    
+    @FXML
+    void goToGestor(ActionEvent event) {
+            SafeRoute("/Frontera/Admin/AdminGestorClase.fxml");
+    }
 
     @FXML
     private void Config(MouseEvent event) {

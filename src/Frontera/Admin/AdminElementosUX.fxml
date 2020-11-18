@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" fx:id="elementsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Control.Admin.AdminElementosUXController">
+   <children>
+      <Circle fill="#a9cd43" layoutX="338.0" layoutY="-347.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="152.0" layoutY="33.0" prefHeight="40.0" prefWidth="381.0" style="-fx-font-size: 26pt; -fx-font-weight: bold;" stylesheets="@../../../../../proyecto_ingesoft/Prestamo_Equipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Elementos " textFill="WHITE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TreeTableView fx:id="elementsTable" layoutX="55.0" layoutY="194.0" onMouseClicked="#seleccionar" prefHeight="254.0" prefWidth="417.0">
+        <columns>
+          <TreeTableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+          <TreeTableColumn fx:id="col_Nombre" prefWidth="75.0" text="Nombre" />
+            <TreeTableColumn fx:id="col_Descrip" prefWidth="75.0" text="Descripción " />
+            <TreeTableColumn fx:id="col_Estado" prefWidth="75.0" text="Estado" />
+        </columns>
+      </TreeTableView>
+      <Label layoutX="658.0" layoutY="122.0" prefHeight="97.0" prefWidth="236.0" style="-fx-font-family: Roboto; -fx-font-size: 32;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/Roboto/Roboto.css" text="Crear Elemento" wrapText="true" />
+      <JFXTextField fx:id="txtid" focusColor="#7f9a33" layoutX="651.0" layoutY="207.0" prefHeight="25.0" prefWidth="250.0" promptText="ID" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/Roboto/Roboto.css" />
+      <JFXTextField fx:id="txtnombre" focusColor="#7f9a33" layoutX="651.0" layoutY="260.0" prefHeight="25.0" prefWidth="250.0" promptText="Nombre" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/Roboto/Roboto.css" />
+      <JFXTextField fx:id="txtdesc" focusColor="#7f9a33" layoutX="652.0" layoutY="320.0" prefHeight="25.0" prefWidth="250.0" promptText="Descripción" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/Roboto/Roboto.css" />
+      <JFXTextField fx:id="txtestado" focusColor="#7f9a33" layoutX="652.0" layoutY="369.0" prefHeight="25.0" prefWidth="250.0" promptText="estado" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/Roboto/Roboto.css" />
+      <JFXButton buttonType="RAISED" layoutX="663.0" layoutY="402.0" onAction="#createElement" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Crear elemento" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="663.0" layoutY="448.0" onAction="#modificarElemento" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Guardar " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="663.0" layoutY="499.0" onAction="#eliminarElemento" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Eliminar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
