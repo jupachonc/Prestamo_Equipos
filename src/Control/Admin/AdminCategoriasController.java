@@ -256,7 +256,7 @@ public class AdminCategoriasController implements Initializable {
 
             if (newVal != null && newVal.getValue() != null) {
                 boolean itemWasSelected = true;
-                lblAccion.setText("Editar Macrocategoría");
+                lblAccion.setText("Editar Categoría");
                 //btnGoto.setVisible(true);
                 btnAccion.setText("Guardar");
                 selectedCategoria = newVal.getValue();
