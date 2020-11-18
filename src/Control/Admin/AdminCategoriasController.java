@@ -249,8 +249,6 @@ public class AdminCategoriasController implements Initializable {
         TreeItem<Categoria> root = new RecursiveTreeItem<>(oblist, RecursiveTreeObject::getChildren);
         
         System.out.println(oblist);
-        CateTable.setRoot(root);
-        CateTable.setShowRoot(false);
     
         CateTable.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
           System.out.println(o);
@@ -260,7 +258,7 @@ public class AdminCategoriasController implements Initializable {
             if (newVal != null && newVal.getValue() != null) {
                 boolean itemWasSelected = true;
                 lblAccion.setText("Editar Categoría");
-                //btnGoto.setVisible(true);
+                btnGoto.setVisible(true);
                 btnAccion.setText("Guardar");
                 selectedCategoria = newVal.getValue();
                 name.setText(selectedCategoria.getNombre());
@@ -271,7 +269,7 @@ public class AdminCategoriasController implements Initializable {
             }
             else{
                 lblAccion.setText("Crear Categoría");
-                //btnGoto.setVisible(false);
+                btnGoto.setVisible(false);
                 btnAccion.setText("Crear Categoría");
                 name.setText("");
                 description.setText("");
@@ -279,6 +277,9 @@ public class AdminCategoriasController implements Initializable {
                 selectedCategoria=null;
             }
         });
+        
+        CateTable.setRoot(root);
+        CateTable.setShowRoot(false);
     }   
 
     
@@ -324,6 +325,30 @@ public class AdminCategoriasController implements Initializable {
         alert.setHeaderText(text);
         alert.setContentText(null);
         alert.showAndWait();
+    }
+    
+    private void ToPath(String path) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+            Parent root1 = (Parent) fxmlLoader.load();
+            
+            AdminElementosUXController ac = fxmlLoader.getController();
+            ac.setCategoria(selectedCategoria);
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            Stage stage1 = (Stage) backbtn.getScene().getWindow();
+            stage1.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void goToBtn(ActionEvent event) {
+        ToPath("/Frontera/Admin/AdminElementosUX.fxml");
     }
     
 }

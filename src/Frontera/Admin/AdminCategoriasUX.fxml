@@ -19,7 +19,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXButton fx:id="backbtn" onAction="#BackToMenu" layoutX="735.0" layoutY="49.0" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton fx:id="backbtn" layoutX="735.0" layoutY="49.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -44,7 +44,7 @@
       <JFXTextField fx:id="description" focusColor="#7f9a33" layoutX="688.0" layoutY="334.0" prefHeight="25.0" prefWidth="250.0" promptText="Descripción" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/Roboto/Roboto.css" />
       <JFXTextField fx:id="MaxElements" focusColor="#7f9a33" layoutX="688.0" layoutY="381.0" prefHeight="25.0" prefWidth="250.0" promptText="Máximos elementos prestados a la vez" style="-fx-font-family: &quot;Roboto&quot;;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/Roboto/Roboto.css" />
       
-      <JFXButton fx:id="btnAccion" text="Crear Categoría" onAction="#accionCategory" buttonType="RAISED" layoutX="700.0" layoutY="419.0" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" textFill="WHITE">
+      <JFXButton fx:id="btnAccion" buttonType="RAISED" layoutX="700.0" layoutY="419.0" onAction="#accionCategory" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Crear Categoría" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -55,5 +55,10 @@
          </font>
       </JFXButton>-->
       <Label layoutX="42.0" layoutY="120.0" prefHeight="53.0" prefWidth="290.0" style="-fx-font-family: Roboto; -fx-font-size: 30;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/Roboto/Roboto.css" text="Lista MacroCategorías" wrapText="true" />
+      <JFXButton fx:id="btnGoto" buttonType="RAISED" layoutX="700.0" layoutY="470.0" onAction="#goToBtn" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Ir a Elementos" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

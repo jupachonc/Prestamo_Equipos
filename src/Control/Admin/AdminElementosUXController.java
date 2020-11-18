@@ -45,7 +45,7 @@ public class AdminElementosUXController implements Initializable {
      * Initializes the controller class.
      */
     
-    private Categoria cat; 
+    private static Categoria cat; 
     private Elemento selectedElement = null;
     
     private ObservableList<Elemento> oblist = FXCollections.observableArrayList();
@@ -92,7 +92,7 @@ public class AdminElementosUXController implements Initializable {
     //this.col_id.setCellValueFactory(new TreeItemPropertyValueFactory<>("ID");
     
 
-       @FXML
+    @FXML
     void createElement(ActionEvent event) {
         
         if(this.txtid.getText()== null || this.txtestado.getText()==null || this.txtnombre.getText()==null){
@@ -287,9 +287,6 @@ getElementos();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        getElementos();
-        
-        
     }    
     
     public void setCategoria(Categoria cat) {

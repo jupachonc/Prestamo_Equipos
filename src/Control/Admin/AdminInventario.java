@@ -251,7 +251,7 @@ public class AdminInventario implements Initializable{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             Parent root1 = (Parent) fxmlLoader.load();
             
-            AdminCategoriasController ac  = fxmlLoader.getController();
+            AdminCategoriasController ac = fxmlLoader.getController();
             ac.setMacroCategoria(selectedMacroCategoria);
             
             Stage stage = new Stage();
