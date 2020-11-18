@@ -2,6 +2,8 @@ package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {
 
@@ -11,6 +13,19 @@ public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {
     private int LaboratorioID;
 
     public ArrayList<Entidad.Categoria> catList = new ArrayList<>();
+    
+    public String validar(){
+        
+      if(nombre==null || !Pattern.compile("^.{3,255}$", Pattern.CASE_INSENSITIVE)
+        .matcher(nombre).find()){
+          return("Nombre inválido.");
+      }
+      if(descripción!=null && !descripción.equals("") && !Pattern.compile("^.{3,255}$", Pattern.CASE_INSENSITIVE)
+        .matcher(descripción).find()){
+          return("Descripción inválida.");
+      }
+      return("OK");
+    }
 
     public MacroCategoria(int ID, String nombre, String descripción, int LaboratorioID) {
         this.ID = ID;

@@ -84,19 +84,38 @@ public class AdminInventario implements Initializable{
     public void accionCategory(){
         if(accion == "crear"){
             selectedMacroCategoria=new MacroCategoria(0,name.getText(),description.getText(), lab.getID() );
-            new DAOMacroCategorias().create(selectedMacroCategoria);
-            name.setText("");
-            description.setText("");
+            String result=selectedMacroCategoria.validar();
+            if(result=="OK"){
+                new DAOMacroCategorias().create(selectedMacroCategoria);
+                alerta("MacroCategoría creada correctamente");
+                name.setText("");
+                description.setText("");
+                emptyTable();
+                loadTable();
+            }
+            else{
+                alerta(result);
+            }
         }
+            
         else if (accion == "guardar"){
             selectedMacroCategoria.setNombre(name.getText());
             selectedMacroCategoria.setDescripción(description.getText());
-            new DAOMacroCategorias().update(selectedMacroCategoria);
-                       
+            String result2=selectedMacroCategoria.validar();
+            if(result2=="OK"){
+                new DAOMacroCategorias().update(selectedMacroCategoria);
+                alerta("MacroCategoría editada correctamente");
+                name.setText("");
+                description.setText("");
+                emptyTable();
+                loadTable();
+            }
+            else{
+                alerta(result2);
+            }
         }
-        emptyTable();
-        loadTable();
-    }
+        
+     }
     public void emptyTable(){
         System.out.println(oblist.size());
         while(oblist.size()>0) oblist.remove(0);
@@ -278,6 +297,15 @@ public class AdminInventario implements Initializable{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    private void alerta(String text){
+        System.out.println("Display error");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(text);
+        alert.setContentText(null);
+        alert.showAndWait();
     }
     
 }

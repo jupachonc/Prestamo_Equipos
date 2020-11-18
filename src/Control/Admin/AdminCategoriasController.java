@@ -101,21 +101,51 @@ public class AdminCategoriasController implements Initializable {
     
     public void accionCategory(){
         if(accion == "crear"){
-            
-            selectedCategoria=new Categoria(0,Integer.parseInt(MaxElements.getText()),Integer.parseInt(MaxElements.getText()),name.getText(),description.getText());
+            int intMaxElements=-1;
+            try {
+                intMaxElements=Integer.parseInt(MaxElements.getText());
+            } catch(NumberFormatException e) {
+                System.out.println("That is not an integer, please try again." );      
+            }
+            selectedCategoria=new Categoria(0,intMaxElements,intMaxElements,name.getText(),description.getText());
             selectedCategoria.setMacroCategoriaID(mc.getID());
-            new CategoriasDAO().create(selectedCategoria);
-            name.setText("");
-            description.setText("");
-        }
+            String result=selectedCategoria.validar();
+            if(result=="OK"){
+                new CategoriasDAO().create(selectedCategoria);
+                alerta("Categoría creada correctamente");
+                name.setText("");
+                description.setText("");
+                emptyTable();
+                loadTable();
+            }
+            else{
+                alerta(result);
+            }
+        }    
         else if (accion == "guardar"){
             selectedCategoria.setNombre(name.getText());
             selectedCategoria.setDescripción(description.getText());
-            new CategoriasDAO().update(selectedCategoria);
-                       
+            try {
+                selectedCategoria.setCantidadMax(Integer.parseInt(MaxElements.getText()));
+            } catch(NumberFormatException e) {
+                System.out.println("That is not an integer, please try again." );      
+                selectedCategoria.setCantidadMax(-1);
+            }
+            String result2=selectedCategoria.validar();
+            if(result2=="OK"){
+                new CategoriasDAO().update(selectedCategoria);
+                alerta("Categoría editada correctamente");
+                name.setText("");
+                description.setText("");
+                emptyTable();
+                loadTable();
+            }
+            else{
+                alerta(result2);
+            }
+            
         }
-        emptyTable();
-        loadTable();
+        
     }
     public void emptyTable(){
         System.out.println(oblist.size());
@@ -238,7 +268,7 @@ public class AdminCategoriasController implements Initializable {
             }
             else{
                 lblAccion.setText("Crear Categoría");
-                btnGoto.setVisible(false);
+                //btnGoto.setVisible(false);
                 btnAccion.setText("Crear Categoría");
                 name.setText("");
                 description.setText("");
@@ -283,6 +313,14 @@ public class AdminCategoriasController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private void alerta(String text){
+        System.out.println("Display error");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(text);
+        alert.setContentText(null);
+        alert.showAndWait();
     }
     
 }
