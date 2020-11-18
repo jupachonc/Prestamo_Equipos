@@ -160,7 +160,7 @@ public class AdminElementosUXController implements Initializable {
 
     @FXML
     void eliminarElemento(ActionEvent event) {
-        Elemento el= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
+       Elemento el= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
         if (el==null){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
@@ -246,10 +246,10 @@ getElementos();
         Elemento el= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
         if (el!=null){
             
-            this.colId.setText(el.getID()+"");
-            this.col_Descrip.setText(el.getDescripción());
-            this.col_Estado.setText(el.getEstado()+"");
-            this.col_Nombre.setText(el.getNombre());      
+            this.txtid.setText(el.getID()+"");
+            this.txtdesc.setText(el.getDescripción());
+            this.txtestado.setText(el.getEstado()+"");
+            this.txtnombre.setText(el.getNombre());      
         
         }
         
@@ -257,7 +257,7 @@ getElementos();
     }
     
     @FXML
-    void backbtn(ActionEvent event) {
+    void BackToMenu(ActionEvent event) {
           
         ToPath("/Frontera/Admin/AdminCategoriasUX.fxml");
         
@@ -287,6 +287,8 @@ getElementos();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    
+        
     }    
     
     public void setCategoria(Categoria cat) {

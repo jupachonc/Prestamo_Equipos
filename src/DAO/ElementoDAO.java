@@ -78,10 +78,13 @@ public ArrayList<Elemento> getElements(int id) {
             String sql = "SELECT * FROM elemento Where CategoriaID = "+id+";";
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
-
+            int i =0;
             while (resultSet.next()) {
                 labs.add(new Elemento(resultSet.getInt("ID"), resultSet.getString("Nombre"),
-                        resultSet.getString("Descripción"), resultSet.getInt("Estado")));
+                        resultSet.getString("Descripción"), resultSet.getInt("EstadoElemento")));
+                System.out.println("La mierda esta avanzando ");
+                i++;
+                System.out.println(i + "puta mierda");
             }
 
         } catch (SQLException ex) {
