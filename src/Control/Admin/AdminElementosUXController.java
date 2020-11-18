@@ -50,6 +50,8 @@ public class AdminElementosUXController implements Initializable {
     
     private ObservableList<Elemento> oblist = FXCollections.observableArrayList();
     
+
+    
     //col_ID.setCellValueFactory(
       //          new TreeItemPropertyValueFactory<>("ID")
        // );
@@ -160,8 +162,8 @@ public class AdminElementosUXController implements Initializable {
 
     @FXML
     void eliminarElemento(ActionEvent event) {
-       Elemento el= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
-        if (el==null){
+      selectedElement= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
+        if (selectedElement==null){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
         alert.setTitle("error");
@@ -170,7 +172,7 @@ public class AdminElementosUXController implements Initializable {
         
         }else{
         
-        dao.delete(el);
+        dao.delete(selectedElement);
           }
         
         
@@ -182,8 +184,8 @@ getElementos();
 
     @FXML
     void modificarElemento(ActionEvent event) {
-        Elemento el= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
-        if (el==null){
+        selectedElement= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
+        if (selectedElement==null){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
         alert.setTitle("error");
@@ -243,13 +245,13 @@ getElementos();
         @FXML
     void seleccionar(MouseEvent event) {
         
-        Elemento el= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
-        if (el!=null){
+        selectedElement= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
+        if (selectedElement!=null){
             
-            this.txtid.setText(el.getID()+"");
-            this.txtdesc.setText(el.getDescripción());
-            this.txtestado.setText(el.getEstado()+"");
-            this.txtnombre.setText(el.getNombre());      
+            this.txtid.setText(selectedElement.getID()+"");
+            this.txtdesc.setText(selectedElement.getDescripción());
+            this.txtestado.setText(selectedElement.getEstado()+"");
+            this.txtnombre.setText(selectedElement.getNombre());      
         
         }
         
