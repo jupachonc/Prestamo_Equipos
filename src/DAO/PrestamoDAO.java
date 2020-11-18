@@ -75,13 +75,13 @@ public class PrestamoDAO {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "SELECT * FROM estudiante, prestamo "
-                       + "WHERE IDEstudiante = Documento and EstadoPrestamo = 0 AND Documento = " + est.getDocumento() + " AND DATE(TiempoDeInicio) = curdate();";
+            String sql = "SELECT * FROM prestamo "
+                       + "WHERE EstadoPrestamo = 0 AND IDEstudiante = " + est.getDocumento() + " AND DATE(TiempoDeInicio) = curdate();";
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
             
             while (resultSet.next()) {
-                reservas.add( new Reserva(resultSet.getInt("ID"), resultSet.getInt("EstadoReserva"), resultSet.getTimestamp("TiempoDeReserva")) );
+                reservas.add( new Reserva(resultSet.getInt("ID"), resultSet.getInt("EstadoPrestamo"), resultSet.getTimestamp("TiempoDeInicio")) );
             }
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);

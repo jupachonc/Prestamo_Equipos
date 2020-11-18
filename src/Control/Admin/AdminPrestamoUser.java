@@ -97,7 +97,7 @@ public class AdminPrestamoUser implements Initializable {
     }
 
     private void getReservas() {
-        reservas = FXCollections.observableList( new ReservasDAO().getReservasUser(estudiante) );
+        reservas = FXCollections.observableList( new PrestamoDAO().getPrestamos(estudiante) );
 
             JFXTreeTableColumn<Reserva, String> settingsColumn = new JFXTreeTableColumn<>("Seleccionar");
             settingsColumn.setPrefWidth(95);
