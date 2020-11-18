@@ -11,6 +11,7 @@ import Entidad.Categoria;
 import Entidad.Elemento;
 import Entidad.MacroCategoria;
 import Entidad.Usuario;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -22,12 +23,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -80,6 +85,9 @@ public class AdminElementosUXController implements Initializable {
     @FXML
     private JFXTextField txtestado;
     
+     @FXML
+    private JFXButton volver;
+    
     
     //this.col_id.setCellValueFactory(new TreeItemPropertyValueFactory<>("ID");
     
@@ -128,6 +136,7 @@ public class AdminElementosUXController implements Initializable {
         this.txtestado.setText(null);
         this.txtid.setText(null);
         this.txtnombre.setText(null);
+        getElementos();
         
     }
     public void getElementos (){
@@ -167,7 +176,7 @@ public class AdminElementosUXController implements Initializable {
         
         
         
-
+getElementos();
     }
 
     @FXML
@@ -227,7 +236,7 @@ public class AdminElementosUXController implements Initializable {
         
         
         }
-
+        getElementos();
     }
     
         @FXML
@@ -244,6 +253,32 @@ public class AdminElementosUXController implements Initializable {
         }
         
 
+    }
+    
+    @FXML
+    void backbtn(ActionEvent event) {
+          
+        ToPath("/Frontera/Admin/AdminCategoriasUX.fxml");
+        
+    }
+    
+    private void ToPath(String path) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+            Parent root1 = (Parent) fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            stage.show();
+            Stage stage1 = (Stage) volver.getScene().getWindow();
+            stage1.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     
