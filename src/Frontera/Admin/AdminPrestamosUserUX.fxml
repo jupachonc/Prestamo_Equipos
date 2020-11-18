@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
@@ -11,9 +13,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.AdminReservasUser">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.AdminPrestamoUser">
    <children>
-      <JFXTreeTableView fx:id="reservaTable" layoutX="278.0" layoutY="74.0" prefHeight="139.0" prefWidth="298.0">
+      <JFXTreeTableView fx:id="reservaTable" layoutX="278.0" layoutY="74.0" prefHeight="154.0" prefWidth="298.0">
          <columns>
             <TreeTableColumn fx:id="idreserva" prefWidth="75.0" text="ID" />
             <TreeTableColumn fx:id="timereserva" prefWidth="145.0" text="Tiempo Reserva" />
@@ -49,6 +51,16 @@
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="BACKWARD" size="16pt" translateX="-10.0" />
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXComboBox fx:id="optionBox" layoutX="278.0" layoutY="238.0" prefHeight="25.0" prefWidth="210.0" />
+      <JFXTextArea fx:id="observText" layoutX="278.0" layoutY="273.0" prefHeight="50.0" prefWidth="286.0" promptText="Observaciones" />
+      <JFXButton layoutX="325.0" layoutY="337.0" onAction="#makeDevolution" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Devolver Préstamo" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

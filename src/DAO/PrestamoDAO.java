@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import Entidad.Categoria;
 import Entidad.Elemento;
+import Entidad.Reserva;
 import Entidad.Usuario;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,10 +12,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author sebas
- */
 public class PrestamoDAO {
 
     Connection connection;
@@ -35,13 +27,13 @@ public class PrestamoDAO {
             if (reserve == 0) {
                 sql = "INSERT INTO prestamo (IDEstudiante, EstadoPrestamo, Comentarios, TiempoDeInicio, TiempoDeEntrega, ReservasID, AdministradorDocumento) "
                         + "VALUES (" + usr.getDocumento() + ", 0, "
-                        + "\"Obsernaciones Préstamo:\n\"" + obs + ",\"" + new Timestamp(new Date().getTime()) + "\", null, null"
+                        + "\"Obsernaciones Préstamo:\n" + obs + "\",\"" + new Timestamp(new Date().getTime()) + "\", null, null"
                         + "," + admin.getDocumento() + ");";
 
             } else {
                 sql = "INSERT INTO prestamo (IDEstudiante, EstadoPrestamo, Comentarios, TiempoDeInicio, TiempoDeEntrega, ReservasID, AdministradorDocumento) "
                         + "VALUES (" + usr.getDocumento() + ", 0, "
-                        + "\"Obsernaciones Préstamo:\n\"" + obs + ",\"" + new Timestamp(new Date().getTime()) + "\", null,"
+                        + "\"Obsernaciones Préstamo:\n" + obs + "\",\"" + new Timestamp(new Date().getTime()) + "\", null,"
                         + reserve + "," + admin.getDocumento() + ");";
             }
             statement.executeUpdate(sql);
@@ -75,5 +67,67 @@ public class PrestamoDAO {
         }
         return id;
 
+    }
+    
+    public ArrayList<Reserva> getPrestamos(Usuario est) {
+        ArrayList<Reserva> reservas = new ArrayList<>();
+        ResultSet resultSet = null;
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM prestamo "
+                       + "WHERE EstadoPrestamo = 0 AND IDEstudiante = " + est.getDocumento() + " AND DATE(TiempoDeInicio) = curdate();";
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            
+            while (resultSet.next()) {
+                reservas.add( new Reserva(resultSet.getInt("ID"), resultSet.getInt("EstadoPrestamo"), resultSet.getTimestamp("TiempoDeInicio")) );
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return reservas;
+
+    }
+    
+    public boolean makeDevolution(int ID, int state, String comms){
+        ResultSet resultSet = null;
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            
+            resultSet = statement.executeQuery("SELECT Comentarios FROM prestamo WHERE ID = " + ID + ";");
+            resultSet.next();
+            String coment = resultSet.getString("Comentarios");
+            coment = coment + " " + comms;
+            
+            
+            String sql = "UPDATE prestamo SET EstadoPrestamo = " + state + ", Comentarios = \"" + coment  + "\", TiempoDeEntrega = \"" + new Timestamp(new Date().getTime())
+                       + "\" WHERE ID =" + ID + ";";
+            statement.executeUpdate(sql);
+            
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return false;
     }
 }

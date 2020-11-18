@@ -369,6 +369,6 @@ public class AdminPrestamo implements Initializable {
 
     @FXML
     private void goToDevolucion(ActionEvent event) {
+        ToPath("/Frontera/Admin/AdminPrestamosUserUX.fxml");
     }
-
 }

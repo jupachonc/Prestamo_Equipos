@@ -3,6 +3,7 @@ package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
     public class Categoria extends RecursiveTreeObject<Categoria>{
         private int ID;
@@ -12,6 +13,23 @@ import java.util.ArrayList;
         private String descripción;
         private int MacroCategoriaID;
         public ArrayList<Entidad.Elemento> eleList = new ArrayList<>();
+        
+        public String validar(){
+        
+            if(nombre==null || !Pattern.compile("^.{3,255}$", Pattern.CASE_INSENSITIVE)
+                .matcher(nombre).find()){
+                return("Nombre inválido.");
+            }
+            if(descripción!=null && !descripción.equals("") && !Pattern.compile("^.{3,255}$", Pattern.CASE_INSENSITIVE)
+                .matcher(descripción).find()){
+                return("Descripción inválida.");
+            }
+            if(!Pattern.compile("^[0-9]{1,6}$", Pattern.CASE_INSENSITIVE)
+                .matcher(Integer.toString(CantidadMax)).find()){
+                return("Cantidad de elementos inválida.");
+            }
+            return("OK");
+        }
 
         public int getCantidadLibre() {
             return CantidadLibre;
