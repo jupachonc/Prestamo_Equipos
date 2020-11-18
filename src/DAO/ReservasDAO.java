@@ -62,7 +62,7 @@ public class ReservasDAO {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "SELECT * FROM reservas, estudiante WHERE EstudianteDocumento=Documento and EstadoReserva = 0 AND Documento =" + user.getDocumento() + ";";
+            String sql = "SELECT * FROM reservas, estudiante WHERE EstudianteDocumento=Documento and EstadoReserva = 0 AND Documento =" + user.getDocumento() + " AND DATE(TiempoDeReserva) = curdate();";
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
             

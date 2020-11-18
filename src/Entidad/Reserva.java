@@ -8,7 +8,6 @@ public class Reserva extends RecursiveTreeObject<Reserva>{
     private int ID;
     private int EstadoReserva;
     private Timestamp tiempoReserva;
-    public HashMap<Categoria, Integer> listaPrestamo = new HashMap<>();
 
     public Reserva(int ID, int EstadoReserva, Timestamp tiempoReserva) {
         this.ID = ID;
@@ -26,9 +25,5 @@ public class Reserva extends RecursiveTreeObject<Reserva>{
 
     public Timestamp getTiempoReserva() {
         return tiempoReserva;
-    }
-
-    public HashMap<Categoria, Integer> getListaPrestamo() {
-        return listaPrestamo;
     }
 }
