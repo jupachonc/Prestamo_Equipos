@@ -143,6 +143,12 @@ public class AdminElementosUXController implements Initializable {
     
     this.oblist=FXCollections.observableList(new ElementoDAO().getElements(cat.getID()));
     
+    this.colId.setCellValueFactory( new TreeItemPropertyValueFactory<>("ID") );
+        this.col_Nombre.setCellValueFactory( new TreeItemPropertyValueFactory<>("nombre") );
+        this.col_Descrip.setCellValueFactory( new TreeItemPropertyValueFactory<>("descripción") );
+        this.col_Estado.setCellValueFactory( new TreeItemPropertyValueFactory<>("Estado") );
+    
+    
     TreeItem<Elemento> root = new RecursiveTreeItem<>(oblist, RecursiveTreeObject::getChildren);
     
     elementsTable.setRoot(root);
@@ -165,12 +171,7 @@ public class AdminElementosUXController implements Initializable {
         }else{
         
         dao.delete(el);
-        
-        
-        
-        
-        
-        }
+          }
         
         
         
@@ -288,10 +289,14 @@ getElementos();
         // TODO
         getElementos();
         
-        this.colId.setCellValueFactory( new TreeItemPropertyValueFactory<>("ID") );
-        this.col_Nombre.setCellValueFactory( new TreeItemPropertyValueFactory<>("nombre") );
-        this.col_Descrip.setCellValueFactory( new TreeItemPropertyValueFactory<>("descripción") );
-        this.col_Estado.setCellValueFactory( new TreeItemPropertyValueFactory<>("Estado") );
+        
     }    
+    
+    public void setCategoria(Categoria cat) {
+            this.cat = cat;
+            getElementos();
+    }
+    
+    
     
 }
