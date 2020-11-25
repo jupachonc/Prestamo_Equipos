@@ -74,7 +74,7 @@ public class LaboratorioDAO {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "SELECT * FROM laboratorio Where Estado = 1;";
+            String sql = "SELECT * FROM active_labs;";
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
 
@@ -322,7 +322,7 @@ public class LaboratorioDAO {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "SELECT * FROM laboratorio, laboratorio_administrador "
+            String sql = "SELECT * FROM active_labs, laboratorio_administrador "
                     + "Where ID = LaboratorioID AND AdministradorDocumento =" + usr.getDocumento() + ";";
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();

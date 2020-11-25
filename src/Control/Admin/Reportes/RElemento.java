@@ -5,6 +5,7 @@
  */
 package Control.Admin.Reportes;
 
+import Entidad.Elemento;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,8 +25,10 @@ public class RElemento {
 
     private static final Logger LOGGER = Logger.getLogger("Control.Admin.Reportes.Elemento");
 
-    public static File getReportPrestamo() {
+    public static File getReportPrestamo(Elemento elemento) {
+        
         File file = new File("Reporte.xlsx");
+        Workbook workbook = new XSSFWorkbook();
 
         return file;
     }
