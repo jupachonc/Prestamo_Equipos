@@ -11,24 +11,24 @@
 
 <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="975.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.AdminMenuController">
    <children>
-      <Circle fill="#a9cd43" layoutX="326.0" layoutY="-375.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
-      <Label alignment="CENTER" layoutX="196.0" layoutY="29.0" style="-fx-font-family: &quot;PT Sans&quot;;" text="Menú Principal" textFill="WHITE">
+      <Circle fill="#a9cd43" layoutX="473.0" layoutY="-375.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="358.0" layoutY="29.0" style="-fx-font-family: &quot;PT Sans&quot;;" text="Menú Principal" textFill="WHITE">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="196.0" layoutY="116.0" style="-fx-font-family: Roboto;" text="¡Bienvenido Administrador! Desea acceder a...">
+      <Label layoutX="294.0" layoutY="130.0" style="-fx-font-family: &quot;PT Sans&quot;; -fx-font-size: 23pt; -fx-font-weight: Bold;" text="¡Bienvenido Administrador!">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="labelname" layoutX="323.0" layoutY="155.0" style="-fx-font-family: Roboto;" text="Está registrado como User" textAlignment="CENTER">
+      <Label fx:id="labelname" alignment="CENTER" contentDisplay="CENTER" layoutX="297.0" layoutY="169.0" style="-fx-font-family: Roboto;" text="Está registrado como User" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" layoutX="562.0" layoutY="505.0" size="18.0" />
-      <JFXButton buttonType="RAISED" layoutX="34.0" layoutY="291.0" onAction="#goToPrestamos" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Préstamos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton buttonType="RAISED" layoutX="34.0" layoutY="306.0" onAction="#goToPrestamos" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Préstamos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="ARROW_CIRCLE_LEFT" size="50" wrappingWidth="51.571428298950195" />
          </graphic>
@@ -36,15 +36,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="270.0" layoutY="291.0" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reporte Entrega" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <graphic>
-            <FontAwesomeIcon fill="WHITE" glyphName="ARROW_CIRCLE_RIGHT" size="50" wrappingWidth="51.571428298950195" />
-         </graphic>
-         <font>
-            <Font name="System Bold" size="23.0" />
-         </font>
-      </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="507.0" layoutY="291.0" onAction="#gotoInventary" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Inventario" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton buttonType="RAISED" layoutX="507.0" layoutY="306.0" onAction="#gotoInventary" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Inventario" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="CUBE" size="50" wrappingWidth="51.571428298950195" />
          </graphic>
@@ -52,7 +44,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="744.0" layoutY="291.0" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reportes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton buttonType="RAISED" layoutX="744.0" layoutY="306.0" onAction="#goToReports" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reportes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="LIST" size="50" wrappingWidth="51.571428298950195" />
          </graphic>
@@ -77,9 +69,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXComboBox fx:id="labList" layoutX="46.0" layoutY="219.0" onAction="#onSelectItem" prefHeight="27.0" prefWidth="180.0" promptText="Laboratorio" style="-jfx-label-float: true;" stylesheets="@../User/users.css" />
-      <Label layoutX="46.0" layoutY="176.0" prefHeight="41.0" prefWidth="209.0" style="-fx-font-family: &quot;PT Sans&quot;; -fx-font-size: 18 pt;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Seleccione el laboratorio" />
-      <JFXButton buttonType="RAISED" layoutX="403.0" layoutY="428.0" onAction="#goToGestor" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Gestor clase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXComboBox fx:id="labList" layoutX="46.0" layoutY="236.0" onAction="#onSelectItem" prefHeight="27.0" prefWidth="180.0" promptText="Laboratorio" style="-jfx-label-float: true;" stylesheets="@../User/users.css" />
+      <Label layoutX="46.0" layoutY="193.0" prefHeight="41.0" prefWidth="209.0" style="-fx-font-family: &quot;PT Sans&quot;; -fx-font-size: 18 pt;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Seleccione el laboratorio" />
+      <JFXButton buttonType="RAISED" layoutX="270.0" layoutY="306.0" onAction="#goToGestor" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Gestor clase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="ARROW_CIRCLE_RIGHT" size="50" wrappingWidth="51.571428298950195" />
          </graphic>

@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="Libraries">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi-bin-4.1.2-20200217.zip!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi-ooxml-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/jfoenix-8.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/commons-codec-1.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/fontawesomefx-8.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/xmlbeans-3.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/commons-collections4-4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi-ooxml-schemas-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/mysql-connector-java-8.0.15.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

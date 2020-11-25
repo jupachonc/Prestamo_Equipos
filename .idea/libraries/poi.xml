@@ -1,0 +1,27 @@
+<component name="libraryTable">
+  <library name="poi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/poi-excelant-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/activation-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/commons-collections4-4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/jaxb-api-2.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/SparseBitSet-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/commons-compress-1.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/jaxb-core-2.3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/poi-ooxml-schemas-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/poi-examples-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/poi-scratchpad-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/commons-math3-3.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/junit-4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/commons-codec-1.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/xmlbeans-3.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/poi-ooxml-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/poi-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/jaxb-impl-2.3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Resources/Libraries/poi/commons-logging-1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

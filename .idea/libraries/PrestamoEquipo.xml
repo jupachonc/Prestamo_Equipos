@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="PrestamoEquipo">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/PrestamoEquipo.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

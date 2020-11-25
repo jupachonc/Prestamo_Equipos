@@ -20,9 +20,21 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class Elemento {
+public class RElemento {
 
     private static final Logger LOGGER = Logger.getLogger("Control.Admin.Reportes.Elemento");
+
+    public static File getReportPrestamo() {
+        File file = new File("Reporte.xlsx");
+
+        return file;
+    }
+
+    public static File getReportPrestamoDate() {
+        File file = new File("Reporte.xlsx");
+
+        return file;
+    }
 
     public static void main(String[] args) {
         // Creamos el archivo donde almacenaremos la hoja

@@ -45,11 +45,11 @@ public class AdminMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         updateUser();
         getLabs();
-        
-        if(currentLab != null){
+
+        if (currentLab != null) {
             labList.setValue(currentLab);
         }
-        
+
     }
 
     public void updateUser() {
@@ -113,10 +113,10 @@ public class AdminMenuController implements Initializable {
     private void gotoInventary(ActionEvent event) {
         SafeRoute("/Frontera/Admin/AdminInventarioUX.fxml");
     }
-    
+
     @FXML
     void goToGestor(ActionEvent event) {
-            SafeRoute("/Frontera/Admin/AdminGestorClase.fxml");
+        SafeRoute("/Frontera/Admin/AdminGestorClase.fxml");
     }
 
     @FXML
@@ -154,6 +154,12 @@ public class AdminMenuController implements Initializable {
     private void goToPrestamos(ActionEvent event) {
         AdminPrestamo.flag = true;
         SafeRoute("/Frontera/Admin/AdminPrestamoUX.fxml");
+    }
+
+    @FXML
+    private void goToReports(ActionEvent event) {
+        SafeRoute("/Frontera/Admin/AdminReportesUX.fxml");
+
     }
 
 }
