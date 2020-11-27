@@ -6,6 +6,10 @@
 package Control.Admin;
 
 import com.jfoenix.controls.JFXButton;
+import java.util.logging.Logger;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +22,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javax.swing.JFileChooser;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * FXML Controller class
@@ -31,6 +39,7 @@ public class AdminReportes implements Initializable {
     private JFXButton volver;
     @FXML
     private AnchorPane mainPane;
+    private static final Logger LOGGER = Logger.getLogger("Control.Admin.Reportes.Elemento");
 
     /**
      * Initializes the controller class.
@@ -78,6 +87,41 @@ public class AdminReportes implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(AdminReportes.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static void save(Workbook workbook, String filename) {
+
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar Reporte");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Libro de Excel", "*.xlsx"));
+        fileChooser.setInitialFileName(filename);
+        File file = fileChooser.showSaveDialog(stage);
+
+        try {
+            // Creamos el flujo de salida de datos,
+            // apuntando al archivo donde queremos 
+            // almacenar el libro de Excel
+            FileOutputStream salida = new FileOutputStream(file);
+
+            // Almacenamos el libro de 
+            // Excel via ese 
+            // flujo de datos
+            workbook.write(salida);
+
+            // Cerramos el libro para concluir operaciones
+            workbook.close();
+
+            LOGGER.log(Level.INFO, "Archivo creado existosamente en {0}", file.getAbsolutePath());
+
+        } catch (FileNotFoundException ex) {
+            LOGGER.log(Level.SEVERE, "Archivo no localizable en sistema de archivos");
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE, "Error de entrada/salida");
+        }
+
+        System.out.println(file.getAbsolutePath());
+
     }
 
 }

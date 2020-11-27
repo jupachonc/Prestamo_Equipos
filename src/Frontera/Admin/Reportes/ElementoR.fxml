@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: White;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Control.Admin.Reportes.ElementoR">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.Reportes.ElementoR">
    <children>
       <JFXTreeTableView layoutX="14.0" layoutY="76.0" prefHeight="312.0" prefWidth="367.0" />
-      <JFXDatePicker layoutX="403.0" layoutY="107.0" />
-      <JFXDatePicker layoutX="402.0" layoutY="188.0" />
+      <JFXDatePicker fx:id="fInicio" layoutX="403.0" layoutY="107.0" />
+      <JFXDatePicker fx:id="fFin" layoutX="402.0" layoutY="178.0" />
       <JFXButton buttonType="RAISED" layoutX="397.0" layoutY="246.0" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reporte Préstamos Entre Fechas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="399.0" layoutY="321.0" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reporte Préstamos Histórico" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton fx:id="btnRH" buttonType="RAISED" layoutX="399.0" layoutY="321.0" onAction="#onSaveHistory" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reporte Préstamos Histórico" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
+      <JFXComboBox layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="160.0" promptText="Macrocategoría" style="-jfx-label-float: true;" stylesheets="@../../User/users.css" />
+      <JFXComboBox layoutX="220.0" layoutY="14.0" prefHeight="27.0" prefWidth="160.0" promptText="Categoría" style="-jfx-label-float: true;" stylesheets="@../../User/users.css" />
+      <Label layoutX="403.0" layoutY="87.0" text="Fecha Inicio">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="403.0" layoutY="158.0" text="Fecha Fin">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
