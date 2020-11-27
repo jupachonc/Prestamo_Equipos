@@ -13,7 +13,7 @@ public class ReportesDAO {
     static Connection connection;
     static PreparedStatement statement;
 
-    public static float useHours(Elemento elm) {
+    public static float useHoursE(Elemento elm) {
         float hours = -1;
         try {
             connection = DBConnection.getConnection();
@@ -43,7 +43,7 @@ public class ReportesDAO {
         return hours;
     }
 
-    public static float useHours(Elemento elm, LocalDateTime init, LocalDateTime fin) {
+    public static float useHoursE(Elemento elm, LocalDateTime init, LocalDateTime fin) {
         float hours = -1;
         PreparedStatement pstatement = null;
         try {
@@ -76,7 +76,7 @@ public class ReportesDAO {
         return hours;
     }
 
-    public static ResultSet getPrestamos(Elemento elm) {
+    public static ResultSet getPrestamosE(Elemento elm) {
         ResultSet resultset = null;
         try {
             connection = DBConnection.getConnection();
@@ -108,7 +108,7 @@ public class ReportesDAO {
         return resultset;
     }
 
-    public static ResultSet getPrestamos(Elemento elm, LocalDateTime init, LocalDateTime fin) {
+    public static ResultSet getPrestamosE(Elemento elm, LocalDateTime init, LocalDateTime fin) {
         ResultSet resultset = null;
         PreparedStatement pstatement = null;
         try {
