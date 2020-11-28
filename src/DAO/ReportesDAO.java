@@ -108,6 +108,98 @@ public class ReportesDAO {
         return count;
     }
 
+    public static float useHoursC(Categoria cat) {
+        float hours = -1;
+        try {
+            connection = DBConnection.getConnection();
+            String sql = "SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE , TiempoDeInicio, TiempoDeEntrega))/60, 1 ) Horas FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
+                    + "inner join elemento e on pe.IDElemento = e.ID inner join categoria c on e.CategoriaID = c.ID\n"
+                    + "WHERE CategoriaID = ?;";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, cat.getID());
+            ResultSet resultset = statement.executeQuery();
+            resultset.beforeFirst();
+            resultset.next();
+            hours = resultset.getFloat("Horas");
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            close();
+        }
+        return hours;
+    }
+
+    public static float useHoursC(Categoria cat, LocalDateTime init, LocalDateTime fin) {
+        float hours = -1;
+        try {
+            connection = DBConnection.getConnection();
+            String sql = "SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE , TiempoDeInicio, TiempoDeEntrega))/60, 1 ) Horas FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
+                    + "inner join elemento e on pe.IDElemento = e.ID inner join categoria c on e.CategoriaID = c.ID\n"
+                    + "WHERE CategoriaID = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, cat.getID());
+            statement.setTimestamp(2, Timestamp.valueOf(init));
+            statement.setTimestamp(3, Timestamp.valueOf(fin));
+            ResultSet resultset = statement.executeQuery();
+            resultset.beforeFirst();
+            resultset.next();
+            hours = resultset.getFloat("Horas");
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            close();
+        }
+        return hours;
+    }
+
+    public static int useTimesC(Categoria cat) {
+        int count = -1;
+        try {
+            connection = DBConnection.getConnection();
+            String sql = "SELECT COUNT(DISTINCT IDPrestamo) COUNT FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
+                    + "inner join elemento e on pe.IDElemento = e.ID inner join categoria c on e.CategoriaID = c.ID\n"
+                    + "WHERE CategoriaID = ?;";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, cat.getID());
+            ResultSet resultset = statement.executeQuery();
+            resultset.beforeFirst();
+            resultset.next();
+            count = resultset.getInt("COUNT");
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            close();
+        }
+        return count;
+    }
+
+    public static int useTimesC(Categoria cat, LocalDateTime init, LocalDateTime fin) {
+        int count = -1;
+        try {
+            connection = DBConnection.getConnection();
+            String sql = "SELECT COUNT(DISTINCT IDPrestamo) COUNT FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
+                    + "inner join elemento e on pe.IDElemento = e.ID inner join categoria c on e.CategoriaID = c.ID\n"
+                    + "WHERE CategoriaID = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, cat.getID());
+            statement.setTimestamp(2, Timestamp.valueOf(init));
+            statement.setTimestamp(3, Timestamp.valueOf(fin));
+            ResultSet resultset = statement.executeQuery();
+            resultset.beforeFirst();
+            resultset.next();
+            count = resultset.getInt("COUNT");
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            close();
+        }
+        return count;
+    }
+
     public static ResultSet getPrestamosE(Elemento elm) {
         ResultSet resultset = null;
         try {
@@ -196,7 +288,7 @@ public class ReportesDAO {
                     + "inner join elemento e on pe.IDElemento = e.ID inner join categoria c on e.CategoriaID = c.ID\n"
                     + "inner join estudiante e2 on prestamo.IDEstudiante = e2.Documento\n"
                     + "inner join administrador a on prestamo.AdministradorDocumento = a.Documento"
-                    + "    where e.ID = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
+                    + "    where CategoriaID = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
             pstatement = connection.prepareStatement(sql);
             pstatement.setInt(1, cat.getID());
             pstatement.setTimestamp(2, Timestamp.valueOf(init));

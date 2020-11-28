@@ -6,7 +6,6 @@
 package Control.Admin;
 
 import com.jfoenix.controls.JFXButton;
-import java.util.logging.Logger;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,9 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import javax.swing.JFileChooser;
 import org.apache.poi.ss.usermodel.Workbook;
 
 /**
@@ -68,20 +65,22 @@ public class AdminReportes implements Initializable {
 
     @FXML
     private void elementoReport(ActionEvent event) {
-        try {
-            AnchorPane newpane = FXMLLoader.load(getClass().getResource("/Frontera/Admin/Reportes/ElementoR.fxml"));
-            mainPane.getChildren().clear();
-            mainPane.getChildren().add(newpane);
-        } catch (IOException ex) {
-            Logger.getLogger(AdminReportes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        setPane("/Frontera/Admin/Reportes/ElementoR.fxml");
     }
 
     @FXML
     private void catReport(ActionEvent event) {
+        setPane("/Frontera/Admin/Reportes/CategoriaR.fxml");
+    }
+
+    @FXML
+    private void labReport(ActionEvent event) {
+        setPane("/Frontera/Admin/Reportes/LabR.fxml");
+    }
+
+    private void setPane(String path) {
         try {
-            AnchorPane newpane = FXMLLoader.load(getClass().getResource("/Frontera/Admin/Reportes/LabR.fxml"));
+            AnchorPane newpane = FXMLLoader.load(getClass().getResource(path));
             mainPane.getChildren().clear();
             mainPane.getChildren().add(newpane);
         } catch (IOException ex) {

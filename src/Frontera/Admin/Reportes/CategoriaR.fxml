@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: White;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Control.Admin.Reportes.CategoriaR">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.Reportes.CategoriaR">
    <children>
       <JFXDatePicker fx:id="fInicio" layoutX="410.0" layoutY="103.0" />
       <JFXDatePicker fx:id="fFin" layoutX="409.0" layoutY="174.0" />
@@ -24,7 +23,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXComboBox fx:id="macroLista" layoutX="24.0" layoutY="24.0" onAction="#onMacro" prefHeight="33.0" prefWidth="160.0" promptText="Macrocategoría" style="-jfx-label-float: true;" stylesheets="@../../User/users.css" />
+      <JFXComboBox fx:id="macroLista" layoutX="14.0" layoutY="14.0" onAction="#onMacro" prefHeight="33.0" prefWidth="160.0" promptText="Macrocategoría" style="-jfx-label-float: true;" stylesheets="@../../User/users.css" />
       <Label layoutX="410.0" layoutY="83.0" text="Fecha Inicio">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -35,7 +34,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <JFXTreeTableView fx:id="eTable" layoutX="14.0" layoutY="69.0" prefHeight="312.0" prefWidth="367.0">
+      <JFXTreeTableView fx:id="cTable" layoutX="14.0" layoutY="69.0" prefHeight="312.0" prefWidth="367.0">
          <columns>
             <TreeTableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
             <TreeTableColumn fx:id="nombreColumn" prefWidth="285.0" text="Nombre" />
