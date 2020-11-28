@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: White;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Control.Admin.Reportes.CategoriaR">
+   <children>
+      <JFXDatePicker fx:id="fInicio" layoutX="410.0" layoutY="103.0" />
+      <JFXDatePicker fx:id="fFin" layoutX="409.0" layoutY="174.0" />
+      <JFXButton buttonType="RAISED" layoutX="404.0" layoutY="242.0" onAction="#onSaveDates" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reporte Préstamos Entre Fechas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnRH" buttonType="RAISED" layoutX="406.0" layoutY="317.0" onAction="#onSaveHistory" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reporte Préstamos Histórico" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox fx:id="macroLista" layoutX="24.0" layoutY="24.0" onAction="#onMacro" prefHeight="33.0" prefWidth="160.0" promptText="Macrocategoría" style="-jfx-label-float: true;" stylesheets="@../../User/users.css" />
+      <Label layoutX="410.0" layoutY="83.0" text="Fecha Inicio">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="410.0" layoutY="154.0" text="Fecha Fin">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTreeTableView fx:id="eTable" layoutX="14.0" layoutY="69.0" prefHeight="312.0" prefWidth="367.0">
+         <columns>
+            <TreeTableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+            <TreeTableColumn fx:id="nombreColumn" prefWidth="285.0" text="Nombre" />
+         </columns>
+      </JFXTreeTableView>
+   </children>
+</AnchorPane>
