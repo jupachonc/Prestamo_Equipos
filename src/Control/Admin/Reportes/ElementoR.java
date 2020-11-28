@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control.Admin.Reportes;
 
 import Control.Admin.AdminMenuController;
@@ -84,6 +79,129 @@ public class ElementoR implements Initializable {
         getMacro();
     }
 
+    private boolean doReport(Elemento elm, LocalDateTime in, LocalDateTime fi) throws SQLException {
+        try {
+            int filaidx = 0;
+
+            //Creación Libro y hoja
+            Workbook workbook = new XSSFWorkbook();
+            Sheet pagina = workbook.createSheet("Reporte");
+
+            //Titulo
+            pagina.addMergedRegion(new CellRangeAddress(filaidx, filaidx, 0, 7));
+            Row titleF = pagina.createRow(filaidx);
+            CellStyle titleStyle = workbook.createCellStyle();
+            Font titleFont = workbook.createFont();
+            titleFont.setBold(true);
+            titleFont.setFontHeightInPoints((short) 20);
+            titleStyle.setAlignment(HorizontalAlignment.CENTER);
+            titleStyle.setFont(titleFont);
+            Cell title = titleF.createCell(0);
+            title.setCellStyle(titleStyle);
+            title.setCellValue("Préstamos Elemento " + elm.getID() + "-" + elm.getNombre());
+            filaidx++;
+
+            //Subtitulo
+            pagina.addMergedRegion(new CellRangeAddress(filaidx, filaidx, 0, 7));
+            Row fila = pagina.createRow(filaidx);
+            CellStyle subtitleStyle = workbook.createCellStyle();
+            Font subtitleFont = workbook.createFont();
+            subtitleFont.setFontHeightInPoints((short) 14);
+            subtitleStyle.setAlignment(HorizontalAlignment.CENTER);
+            subtitleStyle.setFont(subtitleFont);
+            Cell subtitle = fila.createCell(0);
+            subtitle.setCellStyle(subtitleStyle);
+            if (in == null && fi == null) {
+                subtitle.setCellValue(ReportesDAO.useHoursE(elm) + " horas de uso total");
+            } else {
+                subtitle.setCellValue(ReportesDAO.useHoursE(elm, in, fi) + " horas de uso desde "
+                        + in.toLocalDate() + " hasta " + fi.toLocalDate());
+            }
+            filaidx++;
+
+            //Encabezados
+            String[] titulos = {"ID", "IDEstudiante", "Nombre Estudiante", "E-Mail",
+                "Administrador", "Tiempo Inicio", "Tiempo Entrega", "Tiempo Uso (Min)"};
+
+            Font newFont = workbook.createFont();
+            newFont.setColor(IndexedColors.WHITE.getIndex());
+
+            CellStyle style = workbook.createCellStyle();
+            style.setFillForegroundColor(IndexedColors.AQUA.getIndex());
+            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            style.setFont(newFont);
+
+            fila = pagina.createRow(filaidx);
+
+            for (int i = 0; i < titulos.length; i++) {
+                // Creamos una celda en esa fila, en la posicion 
+                // indicada por el contador del ciclo
+                Cell celda = fila.createCell(i);
+
+                // Indicamos el estilo que deseamos 
+                // usar en la celda, en este caso el unico 
+                // que hemos creado
+                celda.setCellStyle(style);
+                celda.setCellValue(titulos[i]);
+            }
+
+            //Data
+            ResultSet rs;
+            if (in == null && fi == null) {
+                rs = ReportesDAO.getPrestamosE(elm);
+            } else {
+                rs = ReportesDAO.getPrestamosE(elm, in, fi);
+            }
+
+            while (rs.next()) {
+
+                filaidx++;
+                fila = pagina.createRow(filaidx);
+                Cell celda;
+                int ci = 0;
+                celda = fila.createCell(ci);
+                celda.setCellValue(rs.getInt("ID"));
+                ci++;
+                celda = fila.createCell(ci);
+                celda.setCellValue(rs.getInt("IDEstudiante"));
+                ci++;
+                celda = fila.createCell(ci);
+                celda.setCellValue(rs.getString("NombreEstudiante"));
+                ci++;
+                celda = fila.createCell(ci);
+                celda.setCellValue(rs.getString("Email"));
+                ci++;
+                celda = fila.createCell(ci);
+                celda.setCellValue(rs.getString("Administrador"));
+                ci++;
+                celda = fila.createCell(ci);
+                celda.setCellValue(rs.getString("TiempoDeInicio"));
+                ci++;
+                celda = fila.createCell(ci);
+                celda.setCellValue(rs.getString("TiempoDeEntrega"));
+                ci++;
+                celda = fila.createCell(ci);
+                celda.setCellValue(rs.getInt("TiempoUso"));
+
+            }
+
+            ReportesDAO.close();
+
+            //Autosize Columns
+            for (int i = 0; i < titulos.length; i++) {
+                pagina.autoSizeColumn(i);
+            }
+
+            //Save file
+            AdminReportes.save(workbook, "Reporte_" + elm.getID() + "_" + LocalDate.now());
+            return true;
+
+        } catch (Exception ex) {
+            return false;
+        }
+
+    }
+
     @FXML
     private void onSaveHistory(ActionEvent event) throws SQLException {
         if (eTable.getSelectionModel().getSelectedItem() == null) {
@@ -97,109 +215,7 @@ public class ElementoR implements Initializable {
 
         //Elemento a Buscar
         Elemento elm = eTable.getSelectionModel().getSelectedItem().getValue();
-
-        //Creación Libro y hoja
-        Workbook workbook = new XSSFWorkbook();
-        Sheet pagina = workbook.createSheet("Reporte");
-
-        int filaidx = 0;
-
-        //Titulo
-        pagina.addMergedRegion(new CellRangeAddress(filaidx, filaidx, 0, 7));
-        Row titleF = pagina.createRow(filaidx);
-        CellStyle titleStyle = workbook.createCellStyle();
-        Font titleFont = workbook.createFont();
-        titleFont.setBold(true);
-        titleFont.setFontHeightInPoints((short) 20);
-        titleStyle.setAlignment(HorizontalAlignment.CENTER);
-        titleStyle.setFont(titleFont);
-        Cell title = titleF.createCell(0);
-        title.setCellStyle(titleStyle);
-        title.setCellValue("Préstamos Elemento " + elm.getID() + "-" + elm.getNombre());
-        filaidx++;
-
-        //Subtitulo
-        pagina.addMergedRegion(new CellRangeAddress(filaidx, filaidx, 0, 7));
-        Row fila = pagina.createRow(filaidx);
-        CellStyle subtitleStyle = workbook.createCellStyle();
-        Font subtitleFont = workbook.createFont();
-        subtitleFont.setFontHeightInPoints((short) 14);
-        subtitleStyle.setAlignment(HorizontalAlignment.CENTER);
-        subtitleStyle.setFont(subtitleFont);
-        Cell subtitle = fila.createCell(0);
-        subtitle.setCellStyle(subtitleStyle);
-        subtitle.setCellValue(ReportesDAO.useHoursE(elm) + " horas de uso total");
-        filaidx++;
-
-        //Encabezados
-        String[] titulos = {"ID", "IDEstudiante", "Nombre Estudiante", "E-Mail",
-            "Administrador", "Tiempo Inicio", "Tiempo Entrega", "Tiempo Uso (Min)"};
-
-        Font newFont = workbook.createFont();
-        newFont.setColor(IndexedColors.WHITE.getIndex());
-
-        CellStyle style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.AQUA.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        style.setFont(newFont);
-
-        fila = pagina.createRow(filaidx);
-
-        for (int i = 0; i < titulos.length; i++) {
-            // Creamos una celda en esa fila, en la posicion 
-            // indicada por el contador del ciclo
-            Cell celda = fila.createCell(i);
-
-            // Indicamos el estilo que deseamos 
-            // usar en la celda, en este caso el unico 
-            // que hemos creado
-            celda.setCellStyle(style);
-            celda.setCellValue(titulos[i]);
-        }
-
-        //Data
-        ResultSet rs = ReportesDAO.getPrestamosE(elm);
-        while (rs.next()) {
-
-            filaidx++;
-            fila = pagina.createRow(filaidx);
-            Cell celda;
-            int ci = 0;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getInt("ID"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getInt("IDEstudiante"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("NombreEstudiante"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("Email"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("Administrador"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("TiempoDeInicio"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("TiempoDeEntrega"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getInt("TiempoUso"));
-
-        }
-
-        ReportesDAO.close();
-
-        //Autosize Columns
-        for (int i = 0; i < titulos.length; i++) {
-            pagina.autoSizeColumn(i);
-        }
-
-        //Save file
-        AdminReportes.save(workbook, "Reporte_" + elm.getID() + "_" + LocalDate.now());
+        doReport(elm, null, null);
 
     }
 
@@ -212,7 +228,7 @@ public class ElementoR implements Initializable {
             alert.setContentText("Para generar un reporte primero seleccione un elemento");
             alert.showAndWait();
             return;
-        }else if (fInicio.getValue() == null || fFin.getValue() == null) {
+        } else if (fInicio.getValue() == null || fFin.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
             alert.setHeaderText("No ha seleccionado un intervalo válido");
@@ -230,113 +246,12 @@ public class ElementoR implements Initializable {
             alert.showAndWait();
             return;
         }
-        
+
         //Elemento a Buscar
         Elemento elm = eTable.getSelectionModel().getSelectedItem().getValue();
 
-        //Creación Libro y hoja
-        Workbook workbook = new XSSFWorkbook();
-        Sheet pagina = workbook.createSheet("Reporte");
+        doReport(elm, initialDate, endDate);
 
-        int filaidx = 0;
-
-        //Titulo
-        pagina.addMergedRegion(new CellRangeAddress(filaidx, filaidx, 0, 7));
-        Row titleF = pagina.createRow(filaidx);
-        CellStyle titleStyle = workbook.createCellStyle();
-        Font titleFont = workbook.createFont();
-        titleFont.setBold(true);
-        titleFont.setFontHeightInPoints((short) 20);
-        titleStyle.setAlignment(HorizontalAlignment.CENTER);
-        titleStyle.setFont(titleFont);
-        Cell title = titleF.createCell(0);
-        title.setCellStyle(titleStyle);
-        title.setCellValue("Préstamos Elemento " + elm.getID() + "-" + elm.getNombre());
-        filaidx++;
-
-        //Subtitulo
-        pagina.addMergedRegion(new CellRangeAddress(filaidx, filaidx, 0, 7));
-        Row fila = pagina.createRow(filaidx);
-        CellStyle subtitleStyle = workbook.createCellStyle();
-        Font subtitleFont = workbook.createFont();
-        subtitleFont.setFontHeightInPoints((short) 14);
-        subtitleStyle.setAlignment(HorizontalAlignment.CENTER);
-        subtitleStyle.setFont(subtitleFont);
-        Cell subtitle = fila.createCell(0);
-        subtitle.setCellStyle(subtitleStyle);
-        subtitle.setCellValue(ReportesDAO.useHoursE(elm, initialDate, endDate) + " horas de uso en el intervalo");
-        filaidx++;
-
-        //Encabezados
-        String[] titulos = {"ID", "IDEstudiante", "Nombre Estudiante", "E-Mail",
-            "Administrador", "Tiempo Inicio", "Tiempo Entrega", "Tiempo Uso (Min)"};
-
-        Font newFont = workbook.createFont();
-        newFont.setColor(IndexedColors.WHITE.getIndex());
-
-        CellStyle style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.AQUA.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        style.setFont(newFont);
-
-        fila = pagina.createRow(filaidx);
-
-        for (int i = 0; i < titulos.length; i++) {
-            // Creamos una celda en esa fila, en la posicion 
-            // indicada por el contador del ciclo
-            Cell celda = fila.createCell(i);
-
-            // Indicamos el estilo que deseamos 
-            // usar en la celda, en este caso el unico 
-            // que hemos creado
-            celda.setCellStyle(style);
-            celda.setCellValue(titulos[i]);
-        }
-
-        //Data
-        ResultSet rs = ReportesDAO.getPrestamosE(elm, initialDate, endDate);
-        while (rs.next()) {
-
-            filaidx++;
-            fila = pagina.createRow(filaidx);
-            Cell celda;
-            int ci = 0;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getInt("ID"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getInt("IDEstudiante"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("NombreEstudiante"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("Email"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("Administrador"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("TiempoDeInicio"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getString("TiempoDeEntrega"));
-            ci++;
-            celda = fila.createCell(ci);
-            celda.setCellValue(rs.getInt("TiempoUso"));
-
-        }
-
-        ReportesDAO.close();
-
-        //Autosize Columns
-        for (int i = 0; i < titulos.length; i++) {
-            pagina.autoSizeColumn(i);
-        }
-
-        //Save file
-        AdminReportes.save(workbook, "Reporte_" + elm.getID() + "_" + LocalDate.now());
-        
     }
 
     private void getMacro() {
@@ -354,10 +269,6 @@ public class ElementoR implements Initializable {
                 return findID(Integer.parseInt(string.split("-")[0]));
             }
         });
-    }
-
-    private void getTable() {
-
     }
 
     private MacroCategoria findID(int id) {

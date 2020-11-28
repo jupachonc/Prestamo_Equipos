@@ -38,18 +38,17 @@ public class ReportesDAO {
 
     public static float useHoursE(Elemento elm, LocalDateTime init, LocalDateTime fin) {
         float hours = -1;
-        PreparedStatement pstatement = null;
         try {
             connection = DBConnection.getConnection();
             String sql = "SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE , TiempoDeInicio, TiempoDeEntrega))/60, 1 )Horas"
                     + " FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo"
                     + " inner join elemento e on pe.IDElemento = e.ID"
                     + " where e.ID = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
-            pstatement = connection.prepareStatement(sql);
-            pstatement.setInt(1, elm.getID());
-            pstatement.setTimestamp(2, Timestamp.valueOf(init));
-            pstatement.setTimestamp(3, Timestamp.valueOf(fin));
-            ResultSet resultset = pstatement.executeQuery();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, elm.getID());
+            statement.setTimestamp(2, Timestamp.valueOf(init));
+            statement.setTimestamp(3, Timestamp.valueOf(fin));
+            ResultSet resultset = statement.executeQuery();
             resultset.beforeFirst();
             resultset.next();
             hours = resultset.getFloat("Horas");
