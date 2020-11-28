@@ -5,15 +5,20 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.Reportes.ElementoR">
    <children>
-      <JFXTreeTableView layoutX="14.0" layoutY="76.0" prefHeight="312.0" prefWidth="367.0" />
+      <JFXTreeTableView fx:id="eTable" layoutX="14.0" layoutY="76.0" prefHeight="312.0" prefWidth="367.0">
+         <columns>
+            <TreeTableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+            <TreeTableColumn fx:id="nombreColumn" prefWidth="285.0" text="Nombre" />
+         </columns></JFXTreeTableView>
       <JFXDatePicker fx:id="fInicio" layoutX="403.0" layoutY="107.0" />
       <JFXDatePicker fx:id="fFin" layoutX="402.0" layoutY="178.0" />
-      <JFXButton buttonType="RAISED" layoutX="397.0" layoutY="246.0" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reporte Préstamos Entre Fechas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton buttonType="RAISED" layoutX="397.0" layoutY="246.0" onAction="#onSaveDates" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Reporte Préstamos Entre Fechas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -23,8 +28,8 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXComboBox layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="160.0" promptText="Macrocategoría" style="-jfx-label-float: true;" stylesheets="@../../User/users.css" />
-      <JFXComboBox layoutX="220.0" layoutY="14.0" prefHeight="27.0" prefWidth="160.0" promptText="Categoría" style="-jfx-label-float: true;" stylesheets="@../../User/users.css" />
+      <JFXComboBox fx:id="macroLista" layoutX="14.0" layoutY="14.0" onAction="#onMacro" prefHeight="33.0" prefWidth="160.0" promptText="Macrocategoría" style="-jfx-label-float: true;" stylesheets="@../../User/users.css" />
+      <JFXComboBox fx:id="catLista" layoutX="220.0" layoutY="14.0" onAction="#onCats" prefHeight="27.0" prefWidth="160.0" promptText="Categoría" style="-jfx-label-float: true;" stylesheets="@../../User/users.css" />
       <Label layoutX="403.0" layoutY="87.0" text="Fecha Inicio">
          <font>
             <Font name="System Bold" size="14.0" />

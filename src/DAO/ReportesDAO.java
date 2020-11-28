@@ -31,14 +31,7 @@ public class ReportesDAO {
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
         } finally {
-            try {
-                System.out.println("cerrando statement...");
-                statement.close();
-                System.out.println("cerrando conexión...");
-                connection.close();
-            } catch (SQLException ex) {
-                System.out.println("Error en SQL" + ex);
-            }
+            close();
         }
         return hours;
     }
@@ -64,14 +57,7 @@ public class ReportesDAO {
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
         } finally {
-            try {
-                System.out.println("cerrando statement...");
-                statement.close();
-                System.out.println("cerrando conexión...");
-                connection.close();
-            } catch (SQLException ex) {
-                System.out.println("Error en SQL" + ex);
-            }
+            close();
         }
         return hours;
     }
@@ -96,14 +82,7 @@ public class ReportesDAO {
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
         } finally {
-            try {
-                System.out.println("cerrando statement...");
-                statement.close();
-                System.out.println("cerrando conexión...");
-                connection.close();
-            } catch (SQLException ex) {
-                System.out.println("Error en SQL" + ex);
-            }
+
         }
         return resultset;
     }
@@ -131,16 +110,21 @@ public class ReportesDAO {
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
         } finally {
-            try {
-                System.out.println("cerrando statement...");
-                statement.close();
-                System.out.println("cerrando conexión...");
-                connection.close();
-            } catch (SQLException ex) {
-                System.out.println("Error en SQL" + ex);
-            }
+
         }
         return resultset;
+    }
+
+    public static void close() {
+        try {
+            System.out.println("cerrando statement...");
+            statement.close();
+            System.out.println("cerrando conexión...");
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        }
+
     }
 
 }

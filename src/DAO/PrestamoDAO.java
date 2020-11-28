@@ -27,13 +27,13 @@ public class PrestamoDAO {
             if (reserve == 0) {
                 sql = "INSERT INTO prestamo (IDEstudiante, EstadoPrestamo, Comentarios, TiempoDeInicio, TiempoDeEntrega, ReservasID, AdministradorDocumento) "
                         + "VALUES (" + usr.getDocumento() + ", 0, "
-                        + "\"Obsernaciones Préstamo:\n" + obs + "\",\"" + new Timestamp(new Date().getTime()) + "\", null, null"
+                        + "\"Observaciones Préstamo:\n" + obs + "\",\"" + new Timestamp(new Date().getTime()) + "\", null, null"
                         + "," + admin.getDocumento() + ");";
 
             } else {
                 sql = "INSERT INTO prestamo (IDEstudiante, EstadoPrestamo, Comentarios, TiempoDeInicio, TiempoDeEntrega, ReservasID, AdministradorDocumento) "
                         + "VALUES (" + usr.getDocumento() + ", 0, "
-                        + "\"Obsernaciones Préstamo:\n" + obs + "\",\"" + new Timestamp(new Date().getTime()) + "\", null,"
+                        + "\"Observaciones Préstamo:\n" + obs + "\",\"" + new Timestamp(new Date().getTime()) + "\", null,"
                         + reserve + "," + admin.getDocumento() + ");";
             }
             statement.executeUpdate(sql);
