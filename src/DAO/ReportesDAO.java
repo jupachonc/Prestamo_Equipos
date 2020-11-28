@@ -61,6 +61,52 @@ public class ReportesDAO {
         return hours;
     }
 
+    public static int useTimesE(Elemento elm) {
+        int count = -1;
+        try {
+            connection = DBConnection.getConnection();
+            String sql = "SELECT COUNT(IDPrestamo) COUNT FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
+                    + " inner join elemento e on pe.IDElemento = e.ID"
+                    + " where e.ID = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, elm.getID());
+            ResultSet resultset = statement.executeQuery();
+            resultset.beforeFirst();
+            resultset.next();
+            count = resultset.getInt("COUNT");
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            close();
+        }
+        return count;
+    }
+
+    public static int useTimesE(Elemento elm, LocalDateTime init, LocalDateTime fin) {
+        int count = -1;
+        try {
+            connection = DBConnection.getConnection();
+            String sql = "SELECT COUNT(IDPrestamo) COUNT FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
+                    + " inner join elemento e on pe.IDElemento = e.ID"
+                    + " where e.ID = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, elm.getID());
+            statement.setTimestamp(2, Timestamp.valueOf(init));
+            statement.setTimestamp(3, Timestamp.valueOf(fin));
+            ResultSet resultset = statement.executeQuery();
+            resultset.beforeFirst();
+            resultset.next();
+            count = resultset.getInt("COUNT");
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            close();
+        }
+        return count;
+    }
+
     public static ResultSet getPrestamosE(Elemento elm) {
         ResultSet resultset = null;
         try {

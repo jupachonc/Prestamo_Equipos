@@ -8,7 +8,6 @@ import Entidad.Categoria;
 import Entidad.Elemento;
 import Entidad.Laboratorio;
 import Entidad.MacroCategoria;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -42,11 +41,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- * FXML Controller class
- *
- * @author sebas
- */
+
 public class ElementoR implements Initializable {
 
     private Laboratorio lab = AdminMenuController.currentLab;
@@ -60,8 +55,6 @@ public class ElementoR implements Initializable {
     private TreeTableColumn<Elemento, Integer> idColumn;
     @FXML
     private TreeTableColumn<Elemento, String> nombreColumn;
-    @FXML
-    private JFXButton btnRH;
     @FXML
     private JFXDatePicker fInicio;
     @FXML
@@ -112,10 +105,12 @@ public class ElementoR implements Initializable {
             Cell subtitle = fila.createCell(0);
             subtitle.setCellStyle(subtitleStyle);
             if (in == null && fi == null) {
-                subtitle.setCellValue(ReportesDAO.useHoursE(elm) + " horas de uso total");
+                subtitle.setCellValue(ReportesDAO.useHoursE(elm) + " horas de uso total, con "
+                + ReportesDAO.useTimesE(elm) + " préstamos");
             } else {
                 subtitle.setCellValue(ReportesDAO.useHoursE(elm, in, fi) + " horas de uso desde "
-                        + in.toLocalDate() + " hasta " + fi.toLocalDate());
+                        + in.toLocalDate() + " hasta " + fi.toLocalDate() + " con " 
+                        + ReportesDAO.useTimesE(elm, in, fi) + " préstamos");
             }
             filaidx++;
 
