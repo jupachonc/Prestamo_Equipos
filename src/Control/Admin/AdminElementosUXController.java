@@ -334,16 +334,16 @@ getElementos();
     
         switch (a){
             case "Disponible":
-            b=0;
-            break;
-            case "Prestamo":
             b=1;
             break;
-            case "Mantenimiento":
+            case "Prestamo":
             b=2;
             break;
-            case "Inhabilitado":
+            case "Mantenimiento":
             b=3;
+            break;
+            case "Inhabilitado":
+            b=0;
             break;
         }
     
@@ -354,13 +354,13 @@ getElementos();
     String b="";
         switch (a){
             case 0:
-            b="Disponible";
+            b="Inhabilitado";
             break;
             case 1:
-            b="Prestamo";
+            b="Disponible";
             break;
             case 2:
-            b="Mantenimiento";
+            b="Prestamo";
             break;
             case 3:
             b="Mantenimiento";
