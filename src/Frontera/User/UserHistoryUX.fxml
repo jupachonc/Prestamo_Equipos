@@ -7,6 +7,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
@@ -30,10 +31,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTreeTableView fx:id="historialTable" layoutX="37.0" layoutY="128.0" prefHeight="385.0" prefWidth="630.0" />
-      <JFXDatePicker fx:id="datePicker" layoutX="731.0" layoutY="197.0" />
-      <JFXComboBox fx:id="labList" layoutX="725.0" layoutY="275.0" prefHeight="28.0" prefWidth="188.0" promptText="Laboratorio" style="-jfx-label-float: true;" styleClass="combo-box" stylesheets="@users.css" />
-      <JFXButton fx:id="searchButton" layoutX="719.0" layoutY="375.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Aplicar Filtros" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXTreeTableView fx:id="historialTable" layoutX="37.0" layoutY="128.0" prefHeight="385.0" prefWidth="597.0">
+         <columns>
+            <TreeTableColumn prefWidth="45.0" text="ID" />
+            <TreeTableColumn prefWidth="161.0" text="Laboratorio" />
+            <TreeTableColumn prefWidth="155.0" text="Estado del Préstamo" />
+            <TreeTableColumn prefWidth="120.0" text="Fecha" />
+            <TreeTableColumn prefWidth="115.0" text="Ver Préstamo" />
+         </columns></JFXTreeTableView>
+      <JFXDatePicker fx:id="datePicker" layoutX="704.0" layoutY="262.0" />
+      <JFXComboBox fx:id="labList" layoutX="692.0" layoutY="166.0" prefHeight="34.0" prefWidth="188.0" promptText="Laboratorio" style="-jfx-label-float: true;" styleClass="combo-box" stylesheets="@users.css" />
+      <JFXButton fx:id="searchButton" layoutX="704.0" layoutY="429.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #1a237e; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Aplicar Filtros" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -44,5 +52,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <JFXDatePicker fx:id="datePicker1" layoutX="704.0" layoutY="332.0" />
+      <Label layoutX="704.0" layoutY="230.0" style="-fx-font-weight: bold;" text="Fecha de Inicio" />
+      <Label layoutX="704.0" layoutY="312.0" style="-fx-font-weight: bold;" text="Fecha Final" />
    </children>
 </AnchorPane>
