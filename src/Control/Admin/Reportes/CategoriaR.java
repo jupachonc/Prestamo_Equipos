@@ -134,7 +134,7 @@ public class CategoriaR implements Initializable {
             titleStyle.setFont(titleFont);
             Cell title = titleF.createCell(0);
             title.setCellStyle(titleStyle);
-            title.setCellValue("Préstamos Categoria " + cat.getID() + "-" + cat.getNombre());
+            title.setCellValue("Préstamos Categoría " + cat.getID() + "-" + cat.getNombre());
             filaidx++;
 
             //Subtitulo
@@ -149,11 +149,11 @@ public class CategoriaR implements Initializable {
             subtitle.setCellStyle(subtitleStyle);
             if (in == null && fi == null) {
                 subtitle.setCellValue(ReportesDAO.useHoursC(cat) + " horas de uso total - "
-                        + ReportesDAO.useTimesC(cat) + " préstamos");
+                        + ReportesDAO.useTimesC(cat) + " Préstamos");
             } else {
                 subtitle.setCellValue(ReportesDAO.useHoursC(cat, in, fi) + " horas de uso desde "
                         + in.toLocalDate() + " hasta " + fi.toLocalDate() + " - "
-                        + ReportesDAO.useTimesC(cat, in, fi) + " préstamos");
+                        + ReportesDAO.useTimesC(cat, in, fi) + " Préstamos");
             }
             filaidx++;
             

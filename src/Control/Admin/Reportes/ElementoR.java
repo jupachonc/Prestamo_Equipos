@@ -105,12 +105,12 @@ public class ElementoR implements Initializable {
             Cell subtitle = fila.createCell(0);
             subtitle.setCellStyle(subtitleStyle);
             if (in == null && fi == null) {
-                subtitle.setCellValue(ReportesDAO.useHoursE(elm) + " horas de uso total, con "
-                + ReportesDAO.useTimesE(elm) + " préstamos");
+                subtitle.setCellValue(ReportesDAO.useHoursE(elm) + " horas de uso total - "
+                + ReportesDAO.useTimesE(elm) + " Préstamos");
             } else {
                 subtitle.setCellValue(ReportesDAO.useHoursE(elm, in, fi) + " horas de uso desde "
-                        + in.toLocalDate() + " hasta " + fi.toLocalDate() + " con " 
-                        + ReportesDAO.useTimesE(elm, in, fi) + " préstamos");
+                        + in.toLocalDate() + " hasta " + fi.toLocalDate() + " - " 
+                        + ReportesDAO.useTimesE(elm, in, fi) + " Préstamos");
             }
             filaidx++;
 
