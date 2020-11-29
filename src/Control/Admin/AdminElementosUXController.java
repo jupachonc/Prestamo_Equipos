@@ -12,11 +12,13 @@ import Entidad.Elemento;
 import Entidad.MacroCategoria;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.collections.FXCollections;
@@ -61,7 +63,7 @@ public class AdminElementosUXController implements Initializable {
    private ElementoDAO dao = new ElementoDAO();
     
     @FXML
-    private TreeTableView<Elemento> elementsTable;
+    private JFXTreeTableView<Elemento> elementsTable;
 
     @FXML
     private TreeTableColumn<Elemento, Integer> colId;
@@ -89,6 +91,12 @@ public class AdminElementosUXController implements Initializable {
     
      @FXML
     private JFXButton volver;
+     
+    @FXML
+    private JFXComboBox<String> comboEstados;
+    
+    private ObservableList<String> estados = FXCollections.observableArrayList();
+    
     
     
     //this.col_id.setCellValueFactory(new TreeItemPropertyValueFactory<>("ID");
@@ -138,6 +146,7 @@ public class AdminElementosUXController implements Initializable {
         this.txtestado.setText(null);
         this.txtid.setText(null);
         this.txtnombre.setText(null);
+        this.comboEstados.setValue(null);
         getElementos();
         
     }
@@ -162,7 +171,7 @@ public class AdminElementosUXController implements Initializable {
 
     @FXML
     void eliminarElemento(ActionEvent event) {
-      selectedElement= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
+      
         if (selectedElement==null){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
@@ -171,9 +180,15 @@ public class AdminElementosUXController implements Initializable {
         alert.showAndWait();
         
         }else{
-        
+        selectedElement= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
         dao.delete(selectedElement);
           }
+        
+        this.txtdesc.setText(null);
+        this.txtestado.setText(null);
+        this.txtid.setText(null);
+        this.txtnombre.setText(null);
+        this.comboEstados.setValue(null);
         
         
         
@@ -184,62 +199,62 @@ getElementos();
 
     @FXML
     void modificarElemento(ActionEvent event) {
-        selectedElement= this.elementsTable.getSelectionModel().getSelectedItem().getValue();
+        
+        
         if (selectedElement==null){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
         alert.setTitle("error");
-        alert.setContentText("Debe seleccionar un elemento");
+        alert.setContentText("Debe seleccionar un elemento para modificar");
         alert.showAndWait();
         
-        }else{
+            }else if(this.txtid.getText().length()==0||  this.txtestado.getText().length()==0 || this.txtnombre.getText().length()==0 || this.txtnombre.getText()==" "){
             
-        if(this.txtid.getText()== null || this.txtestado.getText()==null || this.txtnombre.getText()==null){
-        
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("error");
-        alert.setContentText("Debe llenar los espacios obligatorios");
-        alert.showAndWait();
-        
-        
-        
-        }else{
-        
+            //selectedElement= this.elementsTable.getSelectionModel().getSelectedItem().getValue(); 
+            //if(this.txtid.getText()== null|| this.txtid.getText()== "" || this.txtestado.getText()==null || this.txtestado.getText()=="" || this.txtnombre.getText()==null || this.txtnombre.getText()==""){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("error");
+            alert.setContentText("Debe llenar los espacios obligatorios para modificar");
+            alert.showAndWait();
+            
+      
+            }else{
+            
+           
+                
         try{
         
-        int id = Integer.parseInt( this.txtid.getText());
-        String nombre = this.txtnombre.getText();
-        String desc = this.txtdesc.getText();
-        int estado = Integer.parseInt( this.txtestado.getText());
-        
-        Elemento el2 = new Elemento(id, nombre, desc, estado);
-        
-        dao.update(el2);
-        
-        }catch(NumberFormatException e){
-        
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("error");
-        alert.setContentText("formato incorrecto");
-        alert.showAndWait();
-        
-        
-        
-        
-        }
+                int id = Integer.parseInt( this.txtid.getText());
+                String nombre = this.txtnombre.getText();
+                String desc = this.txtdesc.getText();
+                int estado = Integer.parseInt( this.txtestado.getText());
+
+                Elemento el2 = new Elemento(id, nombre, desc, estado);
+
+                dao.update(el2);
+
+                }catch(Exception e){
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("error");
+                alert.setContentText("formato incorrecto al modificar ");
+                alert.showAndWait();
+
+                }
         }    
-            
-            
-            
+         
+        this.txtdesc.setText(null);
+        this.txtestado.setText(null);
+        this.txtid.setText(null);
+        this.txtnombre.setText(null);
+        this.comboEstados.setValue(null);
         
         
         
-        
-        
-        }
         getElementos();
+        selectedElement = null;
     }
     
         @FXML
@@ -251,10 +266,20 @@ getElementos();
             this.txtid.setText(selectedElement.getID()+"");
             this.txtdesc.setText(selectedElement.getDescripción());
             this.txtestado.setText(selectedElement.getEstado()+"");
-            this.txtnombre.setText(selectedElement.getNombre());      
+            this.txtnombre.setText(selectedElement.getNombre()); 
+           this.comboEstados.setValue(resolucion(selectedElement.getEstado()));
         
         }
         
+
+    }
+    
+    
+    @FXML
+    void onSelectItem(ActionEvent event) {
+        
+        
+        this.txtestado.setText(resolucion(this.comboEstados.getSelectionModel().getSelectedItem())+"");
 
     }
     
@@ -288,14 +313,60 @@ getElementos();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    
+      estados.add("Disponible");
+      estados.add("Prestamo");
+      estados.add("Mantenimiento");
+      estados.add("Inhabilitado");
+      comboEstados.setItems(estados);
+      
+      this.txtestado.setVisible(false);
         
     }    
     
     public void setCategoria(Categoria cat) {
             this.cat = cat;
             getElementos();
+    }
+    
+    public int resolucion(String a){
+    
+    int b =0;
+    
+        switch (a){
+            case "Disponible":
+            b=0;
+            break;
+            case "Prestamo":
+            b=1;
+            break;
+            case "Mantenimiento":
+            b=2;
+            break;
+            case "Inhabilitado":
+            b=3;
+            break;
+        }
+    
+    return b;
+    }
+    
+    public String resolucion(int a){
+    String b="";
+        switch (a){
+            case 0:
+            b="Disponible";
+            break;
+            case 1:
+            b="Prestamo";
+            break;
+            case 2:
+            b="Mantenimiento";
+            break;
+            case 3:
+            b="Mantenimiento";
+            break;
+        }
+    return b;
     }
     
     
