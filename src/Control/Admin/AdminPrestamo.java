@@ -137,7 +137,7 @@ public class AdminPrestamo implements Initializable {
     void Prestamo(ActionEvent event) {
         if (!dataPrestamo.isEmpty() && estudiante != null) {
             int rs = new PrestamoDAO().doPrestamo(new ArrayList<Elemento>(dataPrestamo),
-                    estudiante, admin, Observaciones.getText(), reserve);
+                    estudiante, admin, Observaciones.getText(), reserve, lab.getID());
             if (rs != 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Información");

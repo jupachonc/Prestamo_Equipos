@@ -2,6 +2,8 @@ package DAO;
 
 import Entidad.Categoria;
 import Entidad.Elemento;
+import Entidad.Laboratorio;
+import Entidad.Prestamo;
 import Entidad.Reserva;
 import Entidad.Usuario;
 import java.sql.Connection;
@@ -11,13 +13,14 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 
 public class PrestamoDAO {
-
+    
     Connection connection;
     Statement statement;
 
-    public int doPrestamo(ArrayList<Elemento> elements, Usuario usr, Usuario admin, String obs, int reserve) {
+    public int doPrestamo(ArrayList<Elemento> elements, Usuario usr, Usuario admin, String obs, int reserve, int labID) {
         ResultSet resultSet = null;
         int id = 0;
         try {
@@ -25,16 +28,16 @@ public class PrestamoDAO {
             statement = connection.createStatement();
             String sql;
             if (reserve == 0) {
-                sql = "INSERT INTO prestamo (IDEstudiante, EstadoPrestamo, Comentarios, TiempoDeInicio, TiempoDeEntrega, ReservasID, AdministradorDocumento) "
+                sql = "INSERT INTO prestamo (IDEstudiante, EstadoPrestamo, Comentarios, TiempoDeInicio, TiempoDeEntrega, ReservasID, AdministradorDocumento, LaboratorioID) "
                         + "VALUES (" + usr.getDocumento() + ", 0, "
                         + "\"Observaciones Préstamo:\n" + obs + "\",\"" + new Timestamp(new Date().getTime()) + "\", null, null"
-                        + "," + admin.getDocumento() + ");";
+                        + "," + admin.getDocumento() + ", " + labID + ");";
 
             } else {
-                sql = "INSERT INTO prestamo (IDEstudiante, EstadoPrestamo, Comentarios, TiempoDeInicio, TiempoDeEntrega, ReservasID, AdministradorDocumento) "
+                sql = "INSERT INTO prestamo (IDEstudiante, EstadoPrestamo, Comentarios, TiempoDeInicio, TiempoDeEntrega, ReservasID, AdministradorDocumento, LaboratorioID) "
                         + "VALUES (" + usr.getDocumento() + ", 0, "
                         + "\"Observaciones Préstamo:\n" + obs + "\",\"" + new Timestamp(new Date().getTime()) + "\", null,"
-                        + reserve + "," + admin.getDocumento() + ");";
+                        + reserve + "," + admin.getDocumento() + ", " + labID + ");";
             }
             statement.executeUpdate(sql);
             resultSet = statement.executeQuery("SELECT LAST_INSERT_ID() as ID");
@@ -96,6 +99,51 @@ public class PrestamoDAO {
             }
         }
         return reservas;
+
+    }
+    
+     public ArrayList<Prestamo> getHistory(Usuario est, Laboratorio lab, String fechaInicio, String fechaFinal) {
+         
+        ArrayList<Prestamo> prestamos = new ArrayList<>();
+        ResultSet resultSet = null;
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            
+            String sql;
+            
+            if(lab == null){
+                sql = "SELECT * FROM prestamo, laboratorio WHERE IDEstudiante = " + est.getDocumento()
+                       + " AND TiempoDeInicio >= \"" + fechaInicio + "\" AND TiempoDeInicio <= \"" + fechaFinal
+                       + "\" AND LaboratorioID = laboratorio.ID;";
+            }
+            else{
+                sql = "SELECT * FROM prestamo, laboratorio WHERE IDEstudiante = " + est.getDocumento()
+                       + " AND TiempoDeInicio >= \"" + fechaInicio + "\" AND TiempoDeInicio <= \"" + fechaFinal
+                       + "\" AND LaboratorioID = " + lab.getID() + " AND LaboratorioID = laboratorio.ID;";
+            }
+            
+            
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            
+            while (resultSet.next()) {
+                prestamos.add(new Prestamo(resultSet.getInt("ID"), resultSet.getInt("EstadoPrestamo"), resultSet.getString("TiempodeInicio"), resultSet.getString("Comentarios"), resultSet.getString("Nombre")));
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return prestamos;
 
     }
     

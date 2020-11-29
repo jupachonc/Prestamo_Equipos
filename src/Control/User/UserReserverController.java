@@ -6,25 +6,19 @@ import DAO.ReservasDAO;
 import Entidad.Categoria;
 import Entidad.Laboratorio;
 import Entidad.MacroCategoria;
-import Entidad.Reserva;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,14 +29,11 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 public class UserReserverController implements Initializable {
-    
-    
 
     private Usuario user = LoginController.getUsuario();
     private ObservableList<Laboratorio> dataLabs;
@@ -70,10 +61,6 @@ public class UserReserverController implements Initializable {
     private TreeTableColumn<Categoria, Integer> TMaxL;
     @FXML
     private JFXButton backToMenu1;
-    @FXML
-    private JFXButton reserveButton;
-    @FXML
-    private JFXButton reserveButton1;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -224,7 +211,7 @@ public class UserReserverController implements Initializable {
                         setText(null);
                     } else {
                         btn.setButtonType(JFXButton.ButtonType.FLAT);
-                        btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
+                        btn.setStyle("-fx-background-color:  #1a237e; -fx-text-fill: #ffffff;");
                         btn.setOnAction(event -> {
                             
                             this.getTreeTableRow().getItem().setCantidadMax(this.getTreeTableRow().getItem().getCantidadMax() - 1);
@@ -240,8 +227,8 @@ public class UserReserverController implements Initializable {
                     }
                 }
             };
-                    return cell;
-                };
+            return cell;
+        };
 
         TQuitarp.setCellFactory(cellFactory);
 
