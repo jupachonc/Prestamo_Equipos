@@ -13,6 +13,7 @@ public class Prestamo extends RecursiveTreeObject<Prestamo> {
     public ArrayList<Categoria> catList;
     
     enum EstadoPrestamo{
+        RESERVA(-1, "Reservado"),
         PRESTADO(0, "Prestado"),
         DEV_COMPLETO(1, "Devolución Completa"),
         DEV_INCOMPLETO(2, "Devolución Incompleta"),

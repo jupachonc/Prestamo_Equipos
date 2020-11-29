@@ -1,6 +1,5 @@
 package DAO;
 
-import Entidad.Categoria;
 import Entidad.Elemento;
 import Entidad.Laboratorio;
 import Entidad.Prestamo;
@@ -13,7 +12,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import jdk.nashorn.internal.codegen.CompilerConstants;
 
 public class PrestamoDAO {
     
@@ -111,6 +109,14 @@ public class PrestamoDAO {
             statement = connection.createStatement();
             
             String sql;
+            sql = "SELECT * FROM reservas WHERE DATE(TiempoDeReserva) = curdate() AND EstudianteDocumento = " + est.getDocumento() + " AND EstadoReserva = 0;";
+            
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            
+            while (resultSet.next()) {
+                prestamos.add(new Prestamo(resultSet.getInt("ID"), -1, resultSet.getString("TiempodeReserva"), "", "Reserva"));
+            }
             
             if(lab == null){
                 sql = "SELECT * FROM prestamo, laboratorio WHERE IDEstudiante = " + est.getDocumento()
