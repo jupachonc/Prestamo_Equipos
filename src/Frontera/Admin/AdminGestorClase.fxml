@@ -8,8 +8,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Control.Admin.AdminGestorClaseController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.AdminGestorClaseController">
    <children>
       <Circle fill="#a9cd43" layoutX="381.0" layoutY="-347.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
       <Label alignment="CENTER" layoutX="191.0" layoutY="40.0" prefHeight="40.0" prefWidth="381.0" style="-fx-font-size: 26pt; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Gestión de clases " textFill="WHITE">
@@ -27,7 +26,7 @@
             <Font size="18.0" />
          </font>
       </RadioButton>
-      <JFXButton fx:id="gestionbtn" buttonType="RAISED" layoutX="602.0" layoutY="199.0" onAction="#Gestion" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #ff5252; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Aplicar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton fx:id="gestionbtn" buttonType="RAISED" layoutX="602.0" layoutY="199.0" onAction="#Gestion" prefHeight="115.0" prefWidth="203.0" style="-fx-background-color: #1a237e; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Aplicar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="LIST" size="50" wrappingWidth="51.571428298950195" />
          </graphic>

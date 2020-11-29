@@ -21,7 +21,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXButton layoutX="735.0" layoutY="49.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton layoutX="735.0" layoutY="49.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #1a237e; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -47,7 +47,7 @@
          </columns>
       </JFXTreeTableView>
       <JFXTextArea fx:id="Observaciones" layoutX="524.0" layoutY="431.0" prefHeight="80.0" prefWidth="250.0" promptText="Observaciones Préstamo" />
-      <JFXButton layoutX="803.0" layoutY="451.0" onAction="#Prestamo" prefHeight="41.0" prefWidth="132.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Prestar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton layoutX="803.0" layoutY="451.0" onAction="#Prestamo" prefHeight="41.0" prefWidth="132.0" ripplerFill="#e89a9a" style="-fx-background-color: #1a237e; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Prestar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -60,7 +60,7 @@
       </JFXButton>
       <Label layoutX="524.0" layoutY="190.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Préstamo" underline="true" />
       <JFXComboBox fx:id="macroLista" layoutX="47.0" layoutY="142.0" onAction="#onSelectedMC" prefHeight="27.0" prefWidth="180.0" promptText="Macrocategoria" style="-jfx-label-float: true;" stylesheets="@../User/users.css" />
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="822.0" layoutY="189.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToReservas" prefHeight="27.0" prefWidth="117.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 10pt;" text="Reservas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="822.0" layoutY="189.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToReservas" prefHeight="27.0" prefWidth="117.0" ripplerFill="#e89a9a" style="-fx-background-color: #1a237e; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 10pt;" text="Reservas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -72,7 +72,7 @@
       <Label fx:id="LastName" layoutX="524.0" layoutY="135.0" style="-fx-font-family: Roboto; -fx-font-size: 14pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Un Usuario" />
       <Label fx:id="Document" layoutX="524.0" layoutY="159.0" style="-fx-font-family: Roboto; -fx-font-size: 12pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="*" />
       <JFXTextField fx:id="DocumentN" focusColor="#7f9a33" layoutX="699.0" layoutY="115.0" prefHeight="38.0" prefWidth="171.0" promptText="Documento" style="-fx-font-family: &quot;Roboto&quot;; -fx-font-size: 14pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
-      <JFXButton contentDisplay="CENTER" layoutX="888.0" layoutY="115.0" onAction="#searchDocument" prefHeight="40.0" prefWidth="60.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton contentDisplay="CENTER" layoutX="888.0" layoutY="115.0" onAction="#searchDocument" prefHeight="40.0" prefWidth="60.0" ripplerFill="#e89a9a" style="-fx-background-color: #1a237e; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -83,7 +83,7 @@
             <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" size="16pt" />
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="Devolucionbtn" alignment="CENTER" contentDisplay="CENTER" layoutX="686.0" layoutY="189.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToDevolucion" prefHeight="27.0" prefWidth="117.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 10pt;" text="Devoluciones" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton fx:id="Devolucionbtn" alignment="CENTER" contentDisplay="CENTER" layoutX="686.0" layoutY="189.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToDevolucion" prefHeight="27.0" prefWidth="117.0" ripplerFill="#e89a9a" style="-fx-background-color: #1a237e; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 10pt;" text="Devoluciones" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>

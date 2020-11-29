@@ -20,7 +20,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXButton fx:id="backToMenu1" layoutX="725.0" layoutY="39.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #f44336; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton fx:id="backToMenu1" layoutX="725.0" layoutY="39.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #1a237e; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>

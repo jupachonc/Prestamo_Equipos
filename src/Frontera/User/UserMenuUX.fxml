@@ -37,7 +37,7 @@
             <Font name="MS Outlook" size="18.0" />
          </font>
       </Label>
-      <JFXButton fx:id="reserveUserButton" layoutX="132.0" layoutY="259.0" onAction="#ToReserve" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #ff5252; -fx-border-radius: 20pt; -jfx-button-type: RAISED; -fx-background-radius: 20pt;" text="Reservar un Elemento" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton fx:id="reserveUserButton" layoutX="132.0" layoutY="259.0" onAction="#ToReserve" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #1a237e; -fx-border-radius: 20pt; -jfx-button-type: RAISED; -fx-background-radius: 20pt;" text="Reservar un Elemento" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -49,7 +49,7 @@
          </cursor>
          
       </JFXButton>
-      <JFXButton fx:id="historyUserButton" layoutX="525.0" layoutY="259.0" onAction="#ToHistory" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #ff5252; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Historial de Reservas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXButton fx:id="historyUserButton" layoutX="525.0" layoutY="259.0" onAction="#ToHistory" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #1a237e; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt;" text="Historial de Reservas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <graphic>
             <FontAwesomeIcon blendMode="ADD" fill="WHITE" glyphName="HISTORY" size="48" translateX="20.0" wrappingWidth="48.0" />
          </graphic>
