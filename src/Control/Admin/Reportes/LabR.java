@@ -154,8 +154,9 @@ public class LabR implements Initializable {
                             celda.setCellStyle(style);
                             celda.setCellValue(titulos[i]);
                         }
+                        filaidx++;
                     }
-                    for (Elemento elm : labDAO.getElements(cat)) {
+                    for (Elemento elm : labDAO.getElementsA(cat)) {
                         int ci = 0;
                         fila = pagina.createRow(filaidx);
                         Cell cell = fila.createCell(ci);
@@ -179,6 +180,10 @@ public class LabR implements Initializable {
             for (int i = 0; i < titulos.length; i++) {
                 pagina.autoSizeColumn(i);
             }
+            pagina.setColumnWidth(0, 2600);
+            pagina.setColumnWidth(1, 10400);
+            pagina.setColumnWidth(2, 13000);
+            pagina.setColumnWidth(3, 6500);
 
             //Save file
             AdminReportes.save(workbook, "Inventario_Lab_" + lab.getID() + "_" + LocalDate.now());
@@ -360,13 +365,13 @@ public class LabR implements Initializable {
     private String getState(int idx) {
         switch (idx) {
             case 0:
-                return "Disponible";
-            case 1:
-                return "En Préstamo";
-            case 2:
-                return "En Mantenimiento";
-            case 3:
                 return "Inhabilitado";
+            case 1:
+                return "Disponible";
+            case 2:
+                return "En Préstamo";
+            case 3:
+                return "En Mantenimiento";
 
         }
         return "";

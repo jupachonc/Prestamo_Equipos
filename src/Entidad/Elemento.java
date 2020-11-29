@@ -3,6 +3,14 @@ package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+/*
+Estados
+0 - Inhabilitado
+1 - Disponible
+2 - En Préstamo
+3 - En Mantenimiento
+*/
+
 public class Elemento extends RecursiveTreeObject<Elemento> { 
     private int ID;
     private String nombre;

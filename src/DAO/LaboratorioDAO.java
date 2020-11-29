@@ -63,7 +63,7 @@ public class LaboratorioDAO {
                 System.out.println("Error en SQL" + ex);
             }
         }
-        
+
         return resultSet > 0;
     }
 
@@ -290,7 +290,7 @@ public class LaboratorioDAO {
 
     public boolean enableLab(Laboratorio lab) {
         int resultSet;
-        
+
         try {
             resultSet = -1;
             connection = DBConnection.getConnection();
@@ -360,14 +360,14 @@ public class LaboratorioDAO {
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
             while (resultSet.next()) {
-                
+
                 int catID = resultSet.getInt("ID");
                 int catMax = resultSet.getInt("CantidadMax");
                 String nombre = resultSet.getString("Nombre");
                 String desc = resultSet.getString("Descripción");
-                
+
                 int amount = maxCatAmount(catID);
-                
+
                 cats.add(new Categoria(catID, catMax, amount, nombre, desc));
             }
         } catch (SQLException ex) {
@@ -386,7 +386,7 @@ public class LaboratorioDAO {
 
     }
 
-    public int maxCatAmount(int catID){
+    public int maxCatAmount(int catID) {
         int amount = 0;
         ResultSet resultSet = null;
 
@@ -401,17 +401,16 @@ public class LaboratorioDAO {
             while (resultSet.next()) {
                 amount = resultSet.getInt("amount");
             }
-            
+
             sql = "SELECT Cantidad FROM reservas,categoria_reservas "
-                + "WHERE ID = ReservasID AND CategoriaID = " + catID + " AND EstadoReserva = 0 AND DATE(TiempoDeReserva) = DATE(NOW());";
+                    + "WHERE ID = ReservasID AND CategoriaID = " + catID + " AND EstadoReserva = 0 AND DATE(TiempoDeReserva) = DATE(NOW());";
 
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
             while (resultSet.next()) {
                 amount -= resultSet.getInt("Cantidad");
             }
-            
-            
+
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
         } finally {
@@ -426,8 +425,42 @@ public class LaboratorioDAO {
         }
         return amount;
     }
-    
-    public ArrayList<Elemento> getElements(Categoria cat){
+
+    public ArrayList<Elemento> getElements(Categoria cat) {
+        ArrayList<Elemento> elmts = new ArrayList<>();
+
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM active_elements, categoria "
+                    + "WHERE CategoriaID = categoria.ID AND CategoriaID =" + cat.getID();
+
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            while (resultSet.next()) {
+
+                elmts.add(new Elemento(resultSet.getInt("elemento.ID"), resultSet.getString("elemento.Nombre"),
+                        resultSet.getString("elemento.Descripción"), resultSet.getInt("EstadoElemento")));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return elmts;
+
+    }
+
+    public ArrayList<Elemento> getElementsA(Categoria cat) {
         ArrayList<Elemento> elmts = new ArrayList<>();
 
         ResultSet resultSet = null;
