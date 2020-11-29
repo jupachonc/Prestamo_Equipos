@@ -33,8 +33,8 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="user" focusColor="#7f9a33" layoutX="50.0" layoutY="148.0" prefHeight="25.0" prefWidth="190.0" promptText="Usuario"  stylesheets="@../Resources/Fonts/Roboto/Roboto.css" />
-      <JFXPasswordField fx:id="password" focusColor="#7f9a33" layoutX="50.0" layoutY="200.0" prefHeight="25.0" prefWidth="190.0" promptText="Contraseña" stylesheets="@../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXTextField fx:id="user" focusColor="#7f9a33" layoutX="50.0" layoutY="148.0" prefHeight="25.0" prefWidth="190.0" promptText="Usuario" style="-fx-font-family: 'Segoe UI';" stylesheets="@../Resources/Fonts/Segoe_UI/SegoeUI.css" />
+      <JFXPasswordField fx:id="password" focusColor="#7f9a33" layoutX="50.0" layoutY="200.0" prefHeight="25.0" prefWidth="190.0" promptText="Contraseña" style="-fx-font-family: 'Segoe UI';" stylesheets="@../Resources/Fonts/Segoe_UI/SegoeUI.css" />
       <JFXButton fx:id="loginbtn" buttonType="RAISED" layoutX="50.0" layoutY="281.0" onAction="#Login" prefHeight="25.0" prefWidth="190.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;;" stylesheets="@../Resources/Fonts/PT_Sans/PTSansBold.css" text="Iniciar Sesión" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -45,7 +45,7 @@
             <Font size="11.0" />
          </font>
          <graphic>
-            <Label fx:id="registerlabel"  stylesheets="@../Resources/Fonts/PT_Sans/PTSansBold.css" text="¿Sin usuario?" />
+            <Label fx:id="registerlabel" style="-fx-font-family: 'Segoe UI';" stylesheets="@../Resources/Fonts/Segoe_UI/SegoeUI.css" text="¿Sin usuario?" />
          </graphic>
       </Hyperlink>
    </children>
