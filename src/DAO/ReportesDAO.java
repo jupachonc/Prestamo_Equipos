@@ -208,7 +208,7 @@ public class ReportesDAO {
             String sql = "SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE , TiempoDeInicio, TiempoDeEntrega))/60, 1 ) Horas FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
                     + "inner join elemento e on pe.IDElemento = e.ID inner join categoria c on e.CategoriaID = c.ID\n"
                     + "inner join macrocategoria m on c.MacroCategoriaID = m.ID\n"
-                    + "WHERE LaboratorioID = ?;";
+                    + "WHERE m.LaboratorioID  = ?;";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, lab.getID());
             ResultSet resultset = statement.executeQuery();
@@ -231,7 +231,7 @@ public class ReportesDAO {
             String sql = "SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE , TiempoDeInicio, TiempoDeEntrega))/60, 1 ) Horas FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
                     + "inner join elemento e on pe.IDElemento = e.ID inner join categoria c on e.CategoriaID = c.ID\n"
                     + "inner join macrocategoria m on c.MacroCategoriaID = m.ID\n"
-                    + "WHERE LaboratorioID = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
+                    + "WHERE  m.LaboratorioID  = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, lab.getID());
             statement.setTimestamp(2, Timestamp.valueOf(init));
@@ -256,7 +256,7 @@ public class ReportesDAO {
             String sql = "SELECT COUNT(DISTINCT IDPrestamo) COUNT FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
                     + "inner join elemento e on pe.IDElemento = e.ID inner join categoria c on e.CategoriaID = c.ID\n"
                     + "inner join macrocategoria m on c.MacroCategoriaID = m.ID\n"
-                    + "WHERE LaboratorioID = ?;";
+                    + "WHERE  m.LaboratorioID  = ?;";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, lab.getID());
             ResultSet resultset = statement.executeQuery();
@@ -279,7 +279,7 @@ public class ReportesDAO {
             String sql = "SELECT COUNT(DISTINCT IDPrestamo) COUNT FROM prestamo inner join prestamo_elemento pe on prestamo.ID = pe.IDPrestamo\n"
                     + "inner join elemento e on pe.IDElemento = e.ID inner join categoria c on e.CategoriaID = c.ID\n"
                     + "inner join macrocategoria m on c.MacroCategoriaID = m.ID\n"
-                    + "WHERE LaboratorioID = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
+                    + "WHERE  m.LaboratorioID  = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, lab.getID());
             statement.setTimestamp(2, Timestamp.valueOf(init));
@@ -413,7 +413,7 @@ public class ReportesDAO {
                     + "inner join macrocategoria m on c.MacroCategoriaID = m.ID\n"
                     + "inner join estudiante e2 on prestamo.IDEstudiante = e2.Documento\n"
                     + "inner join administrador a on prestamo.AdministradorDocumento = a.Documento\n"
-                    + "WHERE LaboratorioID = ?;";
+                    + "WHERE  m.LaboratorioID  = ?;";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, lab.getID());
             resultset = statement.executeQuery();
@@ -440,7 +440,7 @@ public class ReportesDAO {
                     + "inner join macrocategoria m on c.MacroCategoriaID = m.ID\n"
                     + "inner join estudiante e2 on prestamo.IDEstudiante = e2.Documento\n"
                     + "inner join administrador a on prestamo.AdministradorDocumento = a.Documento\n"
-                    + "WHERE LaboratorioID = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
+                    + "WHERE  m.LaboratorioID  = ? AND TiempoDeInicio > ? AND TiempoDeEntrega < ?;";
             pstatement = connection.prepareStatement(sql);
             pstatement.setInt(1, lab.getID());
             pstatement.setTimestamp(2, Timestamp.valueOf(init));
