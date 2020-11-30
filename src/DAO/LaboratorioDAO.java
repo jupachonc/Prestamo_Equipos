@@ -434,7 +434,7 @@ public class LaboratorioDAO {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "SELECT * FROM active_elements, categoria "
+            String sql = "SELECT * FROM active_elements elemento, categoria "
                     + "WHERE CategoriaID = categoria.ID AND CategoriaID =" + cat.getID();
 
             resultSet = statement.executeQuery(sql);
