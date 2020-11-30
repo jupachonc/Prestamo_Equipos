@@ -27,7 +27,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label layoutX="80.0" layoutY="132.0" style="-fx-font-family: Roboto;" text="¡Bienvenido!">
+      <Label layoutX="80.0" layoutY="132.0" style="-fx-font-family: 'Segoe UI';" text="¡Bienvenido!">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>

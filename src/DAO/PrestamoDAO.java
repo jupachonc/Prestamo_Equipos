@@ -100,7 +100,7 @@ public class PrestamoDAO {
 
     }
     
-     public ArrayList<Prestamo> getHistory(Usuario est, Laboratorio lab, String fechaInicio, String fechaFinal) {
+    public ArrayList<Prestamo> getHistory(Usuario est, Laboratorio lab, String fechaInicio, String fechaFinal) {
          
         ArrayList<Prestamo> prestamos = new ArrayList<>();
         ResultSet resultSet = null;
@@ -168,6 +168,8 @@ public class PrestamoDAO {
             String sql = "UPDATE prestamo SET EstadoPrestamo = " + state + ", Comentarios = \"" + coment  + "\", TiempoDeEntrega = \"" + new Timestamp(new Date().getTime())
                        + "\" WHERE ID =" + ID + ";";
             statement.executeUpdate(sql);
+            
+            
             
             return true;
         } catch (SQLException ex) {

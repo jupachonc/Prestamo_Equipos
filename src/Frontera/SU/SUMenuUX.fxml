@@ -16,12 +16,12 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="314.0" layoutY="152.0" style="-fx-font-family: Roboto;" text="¡Bienvenido! Desea acceder a...">
+      <Label layoutX="314.0" layoutY="152.0" style="-fx-font-family: 'Segoe UI';" text="¡Bienvenido! Desea acceder a...">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="labelname" layoutX="314.0" layoutY="185.0" style="-fx-font-family: Roboto;" text="Está registrado como User" textAlignment="CENTER">
+      <Label fx:id="labelname" layoutX="314.0" layoutY="185.0" style="-fx-font-family: 'Segoe UI';" text="Está registrado como User" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>

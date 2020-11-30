@@ -13,18 +13,18 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.RegisterController">
    <children>
-      <JFXTextField fx:id="nombres" focusColor="#7f9a33" layoutX="52.0" layoutY="71.0" prefHeight="25.0" prefWidth="190.0" promptText="Nombres" style="-fx-font-family: Roboto;" />
-      <JFXTextField fx:id="apellidos" focusColor="#7f9a33" layoutX="52.0" layoutY="107.0" prefHeight="25.0" prefWidth="190.0" promptText="Apellidos" style="-fx-font-family: Roboto;" />
-      <JFXTextField fx:id="documento" focusColor="#7f9a33" layoutX="52.0" layoutY="144.0" prefHeight="25.0" prefWidth="190.0" promptText="Documento" style="-fx-font-family: Roboto;" />
-      <JFXTextField fx:id="email" focusColor="#7f9a33" layoutX="52.0" layoutY="180.0" prefHeight="25.0" prefWidth="190.0" promptText="E-mail" style="-fx-font-family: Roboto;" />
-      <JFXPasswordField fx:id="password" focusColor="#7f9a33" layoutX="52.0" layoutY="216.0" prefHeight="25.0" prefWidth="190.0" promptText="Contraseña" style="-fx-font-family: Roboto;" />
-      <JFXPasswordField fx:id="confirm_password" focusColor="#7f9a33" layoutX="52.0" layoutY="252.0" prefHeight="25.0" prefWidth="190.0" promptText="Confirmar Contraseña" style="-fx-font-family: Roboto;" />
+      <JFXTextField fx:id="nombres" focusColor="#7f9a33" layoutX="52.0" layoutY="71.0" prefHeight="25.0" prefWidth="190.0" promptText="Nombres" style="-fx-font-family: 'Segoe UI';" />
+      <JFXTextField fx:id="apellidos" focusColor="#7f9a33" layoutX="52.0" layoutY="107.0" prefHeight="25.0" prefWidth="190.0" promptText="Apellidos" style="-fx-font-family: 'Segoe UI';" />
+      <JFXTextField fx:id="documento" focusColor="#7f9a33" layoutX="52.0" layoutY="144.0" prefHeight="25.0" prefWidth="190.0" promptText="Documento" style="-fx-font-family: 'Segoe UI';" />
+      <JFXTextField fx:id="email" focusColor="#7f9a33" layoutX="52.0" layoutY="180.0" prefHeight="25.0" prefWidth="190.0" promptText="E-mail" style="-fx-font-family: 'Segoe UI';" />
+      <JFXPasswordField fx:id="password" focusColor="#7f9a33" layoutX="52.0" layoutY="216.0" prefHeight="25.0" prefWidth="190.0" promptText="Contraseña" style="-fx-font-family: 'Segoe UI';" />
+      <JFXPasswordField fx:id="confirm_password" focusColor="#7f9a33" layoutX="52.0" layoutY="252.0" prefHeight="25.0" prefWidth="190.0" promptText="Confirmar Contraseña" style="-fx-font-family: 'Segoe UI';" />
       <JFXButton fx:id="registerbtn" buttonType="RAISED" layoutX="48.0" layoutY="305.0" onAction="#Register" prefHeight="25.0" prefWidth="190.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;;" text="Registrarse" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <Hyperlink fx:id="loginlink" layoutX="48.0" layoutY="340.0" onAction="#ToLogin" style="-fx-font-family: Roboto;" text="Ingrese aquí">
+      <Hyperlink fx:id="loginlink" layoutX="48.0" layoutY="340.0" onAction="#ToLogin" style="-fx-font-family: 'Segoe UI';" text="Ingrese aquí">
          <graphic>
             <Label text="¿Ya está registrado?">
                <font>

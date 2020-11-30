@@ -40,18 +40,18 @@
             <TreeTableColumn prefWidth="95.0" text="Deshabilitar" />
          </columns>
       </JFXTreeTableView>
-      <Label layoutX="678.0" layoutY="139.0" prefHeight="77.0" prefWidth="236.0" style="-fx-font-family: Roboto; -fx-font-size: 30;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Crear Administrador" wrapText="true" />
+      <Label layoutX="678.0" layoutY="139.0" prefHeight="77.0" prefWidth="236.0" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 30;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Crear Administrador" wrapText="true" />
       <JFXTextField fx:id="names" focusColor="#7f9a33" layoutX="678.0" layoutY="233.0" prefHeight="25.0" prefWidth="250.0" promptText="Nombres" style="-fx-font-family: &quot;Roboto&quot;; -fx-font-size: 10pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
       <JFXTextField fx:id="lastnames" focusColor="#7f9a33" layoutX="678.0" layoutY="271.0" prefHeight="25.0" prefWidth="250.0" promptText="Apellidos" style="-fx-font-family: &quot;Roboto&quot;; -fx-font-size: 10pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
       <JFXTextField fx:id="document" focusColor="#7f9a33" layoutX="678.0" layoutY="308.0" prefHeight="25.0" prefWidth="250.0" promptText="Documento" style="-fx-font-family: &quot;Roboto&quot;; -fx-font-size: 10pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
       <JFXTextField fx:id="email" focusColor="#7f9a33" layoutX="678.0" layoutY="346.0" prefHeight="25.0" prefWidth="250.0" promptText="E-mail" style="-fx-font-family: &quot;Roboto&quot;; -fx-font-size: 10pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
-      <JFXPasswordField fx:id="password" focusColor="#7f9a33" layoutX="678.0" layoutY="384.0" prefHeight="25.0" prefWidth="250.0" promptText="Contraseña" style="-fx-font-family: Roboto; -fx-font-size: 10pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
-      <JFXPasswordField fx:id="cpassword" focusColor="#7f9a33" layoutX="678.0" layoutY="422.0" prefHeight="25.0" prefWidth="250.0" promptText="Confirmar Contraseña" style="-fx-font-family: Roboto; -fx-font-size: 10pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXPasswordField fx:id="password" focusColor="#7f9a33" layoutX="678.0" layoutY="384.0" prefHeight="25.0" prefWidth="250.0" promptText="Contraseña" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 10pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
+      <JFXPasswordField fx:id="cpassword" focusColor="#7f9a33" layoutX="678.0" layoutY="422.0" prefHeight="25.0" prefWidth="250.0" promptText="Confirmar Contraseña" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 10pt;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" />
       <JFXButton buttonType="RAISED" layoutX="688.0" layoutY="475.0" onAction="#create" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Crear Administrador" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <Label layoutX="32.0" layoutY="125.0" prefHeight="53.0" prefWidth="236.0" style="-fx-font-family: Roboto; -fx-font-size: 30;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Administradores" wrapText="true" />
+      <Label layoutX="32.0" layoutY="125.0" prefHeight="53.0" prefWidth="236.0" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 30;" stylesheets="@../../Resources/Fonts/Roboto/Roboto.css" text="Administradores" wrapText="true" />
    </children>
 </AnchorPane>
