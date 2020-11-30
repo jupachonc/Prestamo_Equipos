@@ -169,9 +169,11 @@ public class PrestamoDAO {
                        + "\" WHERE ID =" + ID + ";";
             statement.executeUpdate(sql);
             
-            
+            sql = "UPDATE prestamo_elemento, elemento SET EstadoElemento = " + state + " WHERE IDElemento = ID AND IDPrestamo = " + ID + ";";
+            statement.executeUpdate(sql);
             
             return true;
+            
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
         } finally {
