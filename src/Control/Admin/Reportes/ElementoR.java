@@ -288,6 +288,7 @@ public class ElementoR implements Initializable {
 
     @FXML
     private void onMacro(ActionEvent event) {
+        Elemento.clear();
         MacroCategoria Mcat = macroLista.getSelectionModel().getSelectedItem();
         Cats = FXCollections.observableList(new LaboratorioDAO().getCats(Mcat));
 
@@ -307,10 +308,11 @@ public class ElementoR implements Initializable {
 
     @FXML
     private void onCats(ActionEvent event) {
+        Elemento.clear();
 
         Categoria cat = catLista.getSelectionModel().getSelectedItem();
 
-        Elemento = FXCollections.observableList(new LaboratorioDAO().getElements(cat));
+        Elemento = FXCollections.observableList(new LaboratorioDAO().getElementsA(cat));
 
         idColumn.setCellValueFactory(
                 new TreeItemPropertyValueFactory<>("ID")
