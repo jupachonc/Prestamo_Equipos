@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 public class PrestamoDAO {
     
@@ -107,16 +108,19 @@ public class PrestamoDAO {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            
+           
             String sql;
+            
+            /*
             sql = "SELECT * FROM reservas WHERE DATE(TiempoDeReserva) = curdate() AND EstudianteDocumento = " + est.getDocumento() + " AND EstadoReserva = 0;";
             
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
             
             while (resultSet.next()) {
-                prestamos.add(new Prestamo(resultSet.getInt("ID"), -1, resultSet.getString("TiempodeReserva"), "", "Reserva"));
+                prestamos.add(new Prestamo(resultSet.getInt("ID"), 0, -1, resultSet.getString("TiempodeReserva"), "", "Reserva"));
             }
+            */
             
             if(lab == null){
                 sql = "SELECT * FROM prestamo, laboratorio WHERE IDEstudiante = " + est.getDocumento()
@@ -134,7 +138,9 @@ public class PrestamoDAO {
             resultSet.beforeFirst();
             
             while (resultSet.next()) {
-                prestamos.add(new Prestamo(resultSet.getInt("ID"), resultSet.getInt("EstadoPrestamo"), resultSet.getString("TiempodeInicio"), resultSet.getString("Comentarios"), resultSet.getString("Nombre")));
+                prestamos.add(new Prestamo(resultSet.getInt("ID"), resultSet.getInt("AdministradorDocumento"), resultSet.getInt("ReservasID"),
+                                           resultSet.getInt("EstadoPrestamo"), resultSet.getString("TiempodeInicio"), resultSet.getString("Comentarios"),
+                                           resultSet.getString("Nombre")));
             }
             
         } catch (SQLException ex) {
@@ -152,6 +158,45 @@ public class PrestamoDAO {
         return prestamos;
 
     }
+    
+    public ArrayList<Elemento> getHistorySpecific(int ID) {
+         
+        ArrayList<Elemento> prestamos = new ArrayList<>();
+        ResultSet resultSet;
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            
+            String sql;
+            sql = "SELECT * FROM prestamo_elemento, elemento, categoria WHERE IDElemento = elemento.ID "
+                + "AND CategoriaID = categoria.ID AND IDPrestamo = " + ID + ";";
+            
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+            
+            while (resultSet.next()) {
+                Elemento iterator = new Elemento(resultSet.getInt("elemento.ID"), resultSet.getString("elemento.Nombre"),
+                                                 resultSet.getString("elemento.Descripción"), resultSet.getInt("EstadoElemento"));
+                iterator.setCatName(resultSet.getString("categoria.Nombre"));
+                prestamos.add(iterator);
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return prestamos;
+
+    }
+    
     
     public boolean makeDevolution(int ID, int state, String comms){
         ResultSet resultSet = null;

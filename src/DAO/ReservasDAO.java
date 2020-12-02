@@ -140,8 +140,6 @@ public class ReservasDAO {
         return false;
     }
     
-    
-    
     public boolean makeReserve(ObservableList<Categoria> cats, int LabID, int userID) {
         ResultSet resultSet = null;
         int id;

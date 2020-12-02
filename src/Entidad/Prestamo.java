@@ -5,11 +5,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Prestamo extends RecursiveTreeObject<Prestamo> {
-    private final int ID;
+    private final int ID, adminID, reserveID;
     private final String tiempoReserva;
     private final EstadoPrestamo estado;
     private final String comentarios;
-    private String Lab;
+    private final String Lab;
     public ArrayList<Categoria> catList;
     
     enum EstadoPrestamo{
@@ -46,12 +46,18 @@ public class Prestamo extends RecursiveTreeObject<Prestamo> {
         }
     }
 
-    public Prestamo(int ID, int estado, String tiempoReserva, String comentarios, String Lab) {
+    public Prestamo(int ID, int adminID, int reserveID, int estado, String tiempoReserva, String comentarios, String Lab) {
         this.ID = ID;
         this.estado = EstadoPrestamo.getFromID(estado);
         this.tiempoReserva = tiempoReserva;
         this.comentarios = comentarios;
         this.Lab = Lab;
+        this.adminID = adminID;
+        this.reserveID = reserveID;
+    }
+
+    public int getAdminID() {
+        return adminID;
     }
 
     public int getID() {
@@ -77,4 +83,9 @@ public class Prestamo extends RecursiveTreeObject<Prestamo> {
     public String getTiempoReserva() {
         return tiempoReserva;
     }
+
+    public int getReserveID() {
+        return reserveID;
+    }
+    
 }

@@ -40,8 +40,10 @@ import javafx.util.StringConverter;
 
 public class UserHistoryController implements Initializable {
     private Usuario user = LoginController.getUsuario();
+    public static Laboratorio currLab;
+    public static Prestamo pres;
     private ObservableList<Laboratorio> dataLabs;
-    private ObservableList<Prestamo> dataPres;
+    private static ObservableList<Prestamo> dataPres;
     
     @FXML
     private JFXButton backToMenu1;
@@ -90,7 +92,7 @@ public class UserHistoryController implements Initializable {
     }
     
     private void getReserveTable() {
-        Laboratorio currLab = labList.getSelectionModel().getSelectedItem();
+        currLab = labList.getSelectionModel().getSelectedItem();
         dataPres = FXCollections.observableList(new PrestamoDAO().getHistory(user, currLab, datePickerInit.getValue().toString(), datePickerEnd.getValue().toString()));
         
         JFXTreeTableColumn<Prestamo, String> TAnadirp = new JFXTreeTableColumn<>("Ver Préstamo");
@@ -112,7 +114,8 @@ public class UserHistoryController implements Initializable {
                         btn.setButtonType(JFXButton.ButtonType.FLAT);
                         btn.setStyle("-fx-background-color: #1a237e; -fx-text-fill: #ffffff;");
                         btn.setOnAction(event -> {
-                            System.out.println("Pop!");
+                            pres = this.getTreeTableRow().getItem();
+                            goToReview();
                         });
                         setGraphic(btn);
                         setText(null);
@@ -147,6 +150,9 @@ public class UserHistoryController implements Initializable {
 
     }
     
+    private void goToReview() {
+        ToPath("/Frontera/User/UserHistoryReviewUX.fxml");
+    }
     
     private void ToPath(String path) {
         try {
@@ -167,6 +173,9 @@ public class UserHistoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getLabs();
+        if(dataPres != null){
+            historialTable.refresh();
+        }
     }
     
     @FXML

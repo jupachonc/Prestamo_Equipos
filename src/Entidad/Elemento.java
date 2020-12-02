@@ -13,8 +13,7 @@ Estados
 
 public class Elemento extends RecursiveTreeObject<Elemento> { 
     private int ID;
-    private String nombre;
-    private String descripción;
+    private String nombre, descripción, catName;
     private int Estado;
 
     public int getID() {
@@ -52,5 +51,12 @@ public class Elemento extends RecursiveTreeObject<Elemento> {
         this.Estado = Estado;
     }
 
+    public String getCatName() {
+        return catName;
+    }
+
+    public void setCatName(String catName) {
+        this.catName = catName;
+    }
     
 }
