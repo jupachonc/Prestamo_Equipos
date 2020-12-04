@@ -3,9 +3,9 @@ package Control.Admin;
 import static Control.Admin.AdminPrestamo.isNumeric;
 import DAO.PrestamoDAO;
 import DAO.UsuarioDAO;
-import Entidad.Reserva;
+import Entidad.Elemento;
+import Entidad.Prestamo;
 import Entidad.Usuario;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -14,7 +14,6 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +21,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -32,27 +34,23 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 public class AdminPrestamoUser implements Initializable {
 
-    private Usuario estudiante = null;
-    private ObservableList<Reserva> reservas = FXCollections.observableArrayList();
+    private Usuario estudiante;
+    private ObservableList<Elemento> elementos = FXCollections.observableArrayList();
     private ObservableList<String> options = FXCollections.observableArrayList();
-    private int prestamoReserva = 0;
     
     @FXML
-    private JFXTreeTableView<Reserva> reservaTable;
+    private JFXTreeTableView<Elemento> devoTable;
     @FXML
     private JFXTextArea observText;
     @FXML
-    private JFXComboBox<String> optionBox;
+    private TreeTableColumn<Elemento, Integer> idColumn;
     @FXML
-    private TreeTableColumn<Reserva, Integer> idreserva;
+    private TreeTableColumn<Elemento, String> namePrestamo;
     @FXML
-    private TreeTableColumn<Reserva, Timestamp> timereserva;
-    @FXML
-    private TreeTableColumn<Reserva, String> usarreserva;
+    private TreeTableColumn<Elemento, String> descColumn;
     @FXML
     private Label Name;
     @FXML
@@ -83,7 +81,7 @@ public class AdminPrestamoUser implements Initializable {
             }
             
             updateUser();
-            getReservas();
+            getElementos();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
@@ -93,31 +91,39 @@ public class AdminPrestamoUser implements Initializable {
         }
     }
 
-    private void getReservas() {
-        reservas = FXCollections.observableList( new PrestamoDAO().getPrestamos(estudiante) );
+    private void getElementos() {
+        Prestamo prst = new PrestamoDAO().getPrestamo(estudiante);
+        
+        if(prst == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("Este usuario no tiene préstamos activos");
+            alert.setContentText(null);
+            alert.showAndWait();
+            return;
+        }
+        
+        elementos = FXCollections.observableList(new PrestamoDAO().getHistorySpecific(prst.getID()));
 
-            JFXTreeTableColumn<Reserva, String> settingsColumn = new JFXTreeTableColumn<>("Seleccionar");
-            settingsColumn.setPrefWidth(95);
-            Callback<TreeTableColumn<Reserva, String>, TreeTableCell<Reserva, String>> cellFactory
+            JFXTreeTableColumn<Elemento, String> settingsColumn = new JFXTreeTableColumn<>("Estado del Elemento");
+            settingsColumn.setPrefWidth(173);
+            Callback<TreeTableColumn<Elemento, String>, TreeTableCell<Elemento, String>> cellFactory
                     = //
-                    (final TreeTableColumn<Reserva, String> param) -> {
-                        final TreeTableCell<Reserva, String> cell = new TreeTableCell<Reserva, String>() {
+                    (final TreeTableColumn<Elemento, String> param) -> {
+                        final TreeTableCell<Elemento, String> cell = new TreeTableCell<Elemento, String>() {
 
-                    final JFXButton btn = new JFXButton("Seleccionar");
-
+                    final JFXComboBox opts = new JFXComboBox(options);
+                    
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
-                        Reserva rsv = this.getTreeTableRow().getItem();
                         if (empty) {
                             setGraphic(null);
                             setText(null);
                         } else {
-                            btn.setButtonType(JFXButton.ButtonType.FLAT);
-                            btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
-                            btn.setOnAction(event -> {
-                            });
-                            setGraphic(btn);
+                            opts.setStyle("-jfx-label-float: true;");
+                            opts.getSelectionModel().getSelectedIndex();
+                            setGraphic(opts);
                             setText(null);
                         }
                     }
@@ -127,19 +133,23 @@ public class AdminPrestamoUser implements Initializable {
 
             settingsColumn.setCellFactory(cellFactory);
 
-            reservaTable.getColumns().set(2, settingsColumn);
+            devoTable.getColumns().set(3, settingsColumn);
 
-            idreserva.setCellValueFactory(
+            idColumn.setCellValueFactory(
                     new TreeItemPropertyValueFactory<>("ID")
             );
-            timereserva.setCellValueFactory(
-                    new TreeItemPropertyValueFactory<>("tiempoReserva")
+            
+            namePrestamo.setCellValueFactory(
+                    new TreeItemPropertyValueFactory<>("nombre")
+            );
+            descColumn.setCellValueFactory(
+                    new TreeItemPropertyValueFactory<>("descripción")
             );
 
-            TreeItem<Reserva> root = new RecursiveTreeItem<>(reservas, RecursiveTreeObject::getChildren);
+            TreeItem<Elemento> root = new RecursiveTreeItem<>(elementos, RecursiveTreeObject::getChildren);
 
-            reservaTable.setRoot(root);
-            reservaTable.setShowRoot(false);
+            devoTable.setRoot(root);
+            devoTable.setShowRoot(false);
 
     }
 
@@ -148,7 +158,7 @@ public class AdminPrestamoUser implements Initializable {
         LastName.setText(estudiante.getApellido());
         Document.setText(String.valueOf(estudiante.getDocumento()));
     }
-
+    
     @FXML
     private void BackToMenu(ActionEvent event) {
         try {
@@ -170,27 +180,12 @@ public class AdminPrestamoUser implements Initializable {
         options.add("Devolución Completa");
         options.add("Devolución Incompleta");
         options.add("Devolución con Daño");
-                
-        optionBox.setItems(options);
-
-        optionBox.setConverter(new StringConverter<String>() {
-            @Override
-            public String toString(String object) {
-                return object;
-            }
-
-            @Override
-            public String fromString(String string) {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-        });
-
     }
     
     @FXML
     private void makeDevolution(ActionEvent event){
         
-        if(reservas.isEmpty()){
+        if(elementos.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
             alert.setHeaderText("Este usuario no tiene préstamos activos");
@@ -199,8 +194,8 @@ public class AdminPrestamoUser implements Initializable {
             return;
         }
         
-        prestamoReserva = optionBox.getSelectionModel().getSelectedIndex();
-        String commens = observText.getText();
+        //Aquí debería colocar el for each, luego me encargo de revisar el índice.
+        
         
         if(prestamoReserva >= 0){
             if(new PrestamoDAO().makeDevolution(reservas.get(0).getID(), prestamoReserva + 1, commens)){
@@ -218,5 +213,6 @@ public class AdminPrestamoUser implements Initializable {
                 alert.showAndWait();
             }
         }
+        
     }
 }

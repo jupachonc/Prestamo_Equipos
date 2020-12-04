@@ -70,8 +70,8 @@ public class PrestamoDAO {
 
     }
     
-    public ArrayList<Reserva> getPrestamos(Usuario est) {
-        ArrayList<Reserva> reservas = new ArrayList<>();
+    public Prestamo getPrestamo(Usuario est) {
+        Prestamo prest = null;
         ResultSet resultSet = null;
         try {
             connection = DBConnection.getConnection();
@@ -82,8 +82,10 @@ public class PrestamoDAO {
             resultSet.beforeFirst();
             
             while (resultSet.next()) {
-                reservas.add( new Reserva(resultSet.getInt("ID"), resultSet.getInt("EstadoPrestamo"), resultSet.getTimestamp("TiempoDeInicio")) );
+                prest = new Prestamo(resultSet.getInt("ID"), resultSet.getInt("AdministradorDocumento"), resultSet.getInt("ReservasID"),
+                        resultSet.getInt("EstadoPrestamo"), resultSet.getString("TiempoDeInicio"), resultSet.getString("Comentarios"), "Unused");
             }
+            
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
         } finally {
@@ -96,7 +98,7 @@ public class PrestamoDAO {
                 System.out.println("Error en SQL" + ex);
             }
         }
-        return reservas;
+        return prest;
 
     }
     
@@ -195,7 +197,6 @@ public class PrestamoDAO {
         return prestamos;
 
     }
-    
     
     public boolean makeDevolution(int ID, int state, String comms){
         ResultSet resultSet = null;
