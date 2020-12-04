@@ -2,7 +2,6 @@ package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MacroCategoria extends RecursiveTreeObject<MacroCategoria> {

@@ -41,7 +41,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 public class ElementoR implements Initializable {
 
     private Laboratorio lab = AdminMenuController.currentLab;

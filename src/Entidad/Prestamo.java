@@ -1,7 +1,6 @@
 package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Prestamo extends RecursiveTreeObject<Prestamo> {

@@ -8,9 +8,6 @@ package Control;
 import DAO.UsuarioDAO;
 import Entidad.Usuario;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class ValidarLogin {
     
    private UsuarioDAO dao = new UsuarioDAO();

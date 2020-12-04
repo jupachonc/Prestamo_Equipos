@@ -2,9 +2,7 @@ package Control.Admin;
 
 import static Control.Admin.AdminPrestamo.isNumeric;
 import DAO.PrestamoDAO;
-import DAO.ReservasDAO;
 import DAO.UsuarioDAO;
-import Entidad.Elemento;
 import Entidad.Reserva;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
@@ -17,7 +15,6 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

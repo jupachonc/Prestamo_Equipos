@@ -4,7 +4,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Usuario extends RecursiveTreeObject<Usuario> {
 
     private String nombre;

@@ -1,4 +1,3 @@
-
 package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;

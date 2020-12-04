@@ -7,9 +7,6 @@ import Entidad.Laboratorio;
 import Entidad.Prestamo;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -25,11 +22,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class UserHistorialReview implements Initializable {
     private Usuario user = LoginController.getUsuario();

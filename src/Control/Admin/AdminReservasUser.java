@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control.Admin;
 
 import static Control.Admin.AdminPrestamo.isNumeric;
 import DAO.ReservasDAO;
 import DAO.UsuarioDAO;
-import Entidad.Elemento;
 import Entidad.Reserva;
 import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
@@ -38,11 +32,6 @@ import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-/**
- * FXML Controller class
- *
- * @author sebas
- */
 public class AdminReservasUser implements Initializable {
 
     private Usuario estudiante = null;

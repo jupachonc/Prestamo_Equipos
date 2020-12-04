@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import Entidad.Usuario;
@@ -14,10 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import org.apache.commons.codec.digest.DigestUtils;
 
-/**
- *
- * @author nguzman
- */
 public class UsuarioDAO {
 
     static final String DB_URL = "jdbc:mysql://loginapp.c6zrixw9dnvf.us-east-1.rds.amazonaws.com:3306/LoginApp?useSSL=false";

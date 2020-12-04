@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control.Admin;
 
 import Control.LoginController;
@@ -23,11 +18,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author ANDRES CAMILO
- */
 public class AdminGestorClaseController implements Initializable {
     
     private LaboratorioDAO dao = new LaboratorioDAO();

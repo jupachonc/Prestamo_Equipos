@@ -1,31 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control.Admin;
 
-/**
- *
- * @author nguzman
- */
-
 import Control.Admin.AdminInventario; 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import Control.LoginController;
 import DAO.CategoriasDAO;
-import DAO.DAOMacroCategorias;
 import DAO.DBConnection;
 import Entidad.Categoria;
-import Entidad.Laboratorio;
 import Entidad.MacroCategoria;
-import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -52,18 +31,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.control.TreeItem;
 import javafx.util.Callback;
-/**
- * FXML Controller class
- *
- * @author nguzman
- */
+
 public class AdminCategoriasController implements Initializable {
 
     /**

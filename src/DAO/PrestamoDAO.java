@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
 
 public class PrestamoDAO {
     

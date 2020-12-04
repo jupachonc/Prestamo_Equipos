@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control.Admin.Reportes;
 
 import Control.Admin.AdminMenuController;
@@ -38,11 +33,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- * FXML Controller class
- *
- * @author sebas
- */
 public class LabR implements Initializable {
 
     private Laboratorio lab = AdminMenuController.currentLab;

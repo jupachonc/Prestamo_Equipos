@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control.Admin;
 
 import DAO.ElementoDAO;
-import DAO.LaboratorioDAO;
 import Entidad.Categoria;
 import Entidad.Elemento;
-import Entidad.MacroCategoria;
-import Entidad.Usuario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -31,21 +22,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author ANDRES CAMILO
- */
 public class AdminElementosUXController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
     
     private static Categoria cat; 
     private Elemento selectedElement = null;

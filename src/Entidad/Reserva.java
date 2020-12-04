@@ -2,7 +2,6 @@ package Entidad;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.sql.Timestamp;
-import java.util.HashMap;
 
 public class Reserva extends RecursiveTreeObject<Reserva>{
     private int ID;

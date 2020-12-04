@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control.Admin;
 
 import com.jfoenix.controls.JFXButton;
@@ -25,11 +20,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.Workbook;
 
-/**
- * FXML Controller class
- *
- * @author sebas
- */
 public class AdminReportes implements Initializable {
 
     @FXML

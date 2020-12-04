@@ -17,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-
 public class SUMenuController implements Initializable {
 
     private Usuario user = LoginController.getUsuario();
