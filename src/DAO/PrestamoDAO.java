@@ -210,11 +210,33 @@ public class PrestamoDAO {
             coment = coment + " " + comms;
             
             
-            String sql = "UPDATE prestamo SET EstadoPrestamo = " + state + ", Comentarios = \"" + coment  + "\", TiempoDeEntrega = \"" + new Timestamp(new Date().getTime())
+            String sql = "UPDATE prestamo SET EstadoPrestamo = " + state + ", Comentarios = \"" + coment + "\", TiempoDeEntrega = \"" + new Timestamp(new Date().getTime())
                        + "\" WHERE ID =" + ID + ";";
-            statement.executeUpdate(sql);
+            statement.executeUpdate(sql);           
+            return true;
             
-            sql = "UPDATE prestamo_elemento, elemento SET EstadoElemento = " + state + " WHERE IDElemento = ID AND IDPrestamo = " + ID + ";";
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return false;
+    }
+    
+    public boolean makeDevolutionItem(int ID, int state){
+        ResultSet resultSet = null;
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            
+            String sql = "UPDATE elemento SET EstadoElemento = " + state + " WHERE ID = " + ID + ";";
             statement.executeUpdate(sql);
             
             return true;

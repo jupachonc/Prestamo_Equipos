@@ -21,9 +21,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -41,6 +38,8 @@ public class AdminPrestamoUser implements Initializable {
     private ObservableList<Elemento> elementos = FXCollections.observableArrayList();
     private ObservableList<String> options = FXCollections.observableArrayList();
     private int[] devstates;
+    private int finalState = 0;
+    private Prestamo prst;
 
     @FXML
     private JFXTreeTableView<Elemento> devoTable;
@@ -93,7 +92,7 @@ public class AdminPrestamoUser implements Initializable {
     }
 
     private void getElementos() {
-        Prestamo prst = new PrestamoDAO().getPrestamo(estudiante);
+        prst = new PrestamoDAO().getPrestamo(estudiante);
 
         if (prst == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -107,6 +106,10 @@ public class AdminPrestamoUser implements Initializable {
         elementos = FXCollections.observableList(new PrestamoDAO().getHistorySpecific(prst.getID()));
         
         devstates = new int[elementos.size()];
+        
+        for(int i  = 0; i < devstates.length; i++){
+            devstates[i] = -1;
+        }
 
         JFXTreeTableColumn<Elemento, String> settingsColumn = new JFXTreeTableColumn<>("Estado del Elemento");
         settingsColumn.setPrefWidth(173);
@@ -204,28 +207,80 @@ public class AdminPrestamoUser implements Initializable {
             return;
         }
 
-//        for (int i = 0; i < elementos.size(); i++) {
-//            System.out.println(devoTable.g);
-////            int idx = cmb.getSelectionModel().getSelectedIndex();
-////            System.out.println(idx);
-//
-//        }
-
-//        if(prestamoReserva >= 0){
-//            if(new PrestamoDAO().makeDevolution(reservas.get(0).getID(), prestamoReserva + 1, commens)){
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                alert.setTitle("Información");
-//                alert.setHeaderText("Devolución Completa");
-//                alert.setContentText(null);
-//                alert.showAndWait();
-//            }
-//            else{
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setTitle("Información");
-//                alert.setHeaderText("Ha ocurrido un error al actualizar el préstamo.");
-//                alert.setContentText(null);
-//                alert.showAndWait();
-//            }
-//        }
+        if(devstates == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("No tiene estados disponibles");
+            alert.setContentText(null);
+            alert.showAndWait();
+            return;
+        }
+        
+        for(int i  = 0; i < devstates.length; i++){
+            if(devstates[i] == -1){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Información");
+                alert.setHeaderText("No ha seleccionado un estado");
+                alert.setContentText(null);
+                alert.showAndWait();
+                return;
+            }
+        }
+        
+        for(int i  = 0; i < devstates.length; i++){
+            switch(devstates[i]){
+                case(0):
+                    if(!new PrestamoDAO().makeDevolutionItem(elementos.get(i).getID(), 1)){
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Información");
+                        alert.setHeaderText("Ha ocurrido un error.");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                        return;
+                    }
+                    finalState = (finalState == 0) ? 1 : finalState;
+                    break;
+                case(1):
+                    if(!new PrestamoDAO().makeDevolutionItem(elementos.get(i).getID(), 1)){
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Información");
+                        alert.setHeaderText("Ha ocurrido un error.");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                        return;
+                    }
+                    finalState = (finalState < 1) ? 2 : finalState;
+                    break;
+                case(2):
+                    if(!new PrestamoDAO().makeDevolutionItem(elementos.get(i).getID(), 3)){
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Información");
+                        alert.setHeaderText("Ha ocurrido un error.");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                        return;
+                    }
+                    finalState = (finalState < 2) ? 3 : finalState;
+                    break;
+            }
+        }
+        
+        if(!new PrestamoDAO().makeDevolution(prst.getID(), finalState, observText.getText())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("Ha ocurrido un error al tomar el prestamo.");
+            alert.setContentText(null);
+            alert.showAndWait();
+            return;
+        }
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText("La devolución se hizo exitosamente");
+        alert.setContentText(null);
+        alert.showAndWait();
+        BackToMenu(null);
+        return;
+        
     }
 }
