@@ -34,11 +34,11 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="663.0" layoutY="476.0" onAction="#eliminarElemento" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Eliminar" textFill="WHITE">
+      <!--<JFXButton buttonType="RAISED" layoutX="663.0" layoutY="476.0" onAction="#eliminarElemento" prefHeight="25.0" prefWidth="227.0" ripplerFill="#c3c3c3" style="-fx-background-color: #7F9A33; -fx-font-family: &quot;PT Sans&quot;; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-size: 12pt;" stylesheets="@../../../../../proyecto_ingesoft/PrestamoEquipos/src/Resources/Fonts/PT_Sans/PTSansBold.css" text="Eliminar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-      </JFXButton>
+      </JFXButton>-->
       <JFXButton fx:id="volver" layoutX="745.0" layoutY="59.0" onAction="#BackToMenu" prefHeight="40.0" prefWidth="200.0" ripplerFill="#e89a9a" style="-fx-background-color: #1a237e; -jfx-button-type: RAISED; -fx-background-radius: 20pt; -fx-border-radius: 20pt; -fx-font-weight: bold; -fx-font-size: 14pt;" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
@@ -53,10 +53,11 @@
       <JFXComboBox fx:id="comboEstados" layoutX="645.0" layoutY="322.0" onAction="#onSelectItem" prefHeight="33.0" prefWidth="259.0" promptText="Estado" style="-jfx-label-float: true;" stylesheets="@../User/users.css" unFocusColor="#6b6565" />
       <JFXTreeTableView fx:id="elementsTable" layoutX="50.0" layoutY="181.0" onMouseClicked="#seleccionar" prefHeight="285.0" prefWidth="556.0">
          <columns>
-          <TreeTableColumn fx:id="colId" prefWidth="75.0" text="ID" />
-          <TreeTableColumn fx:id="col_Nombre" prefWidth="90.0" text="Nombre" />
-            <TreeTableColumn fx:id="col_Descrip" prefWidth="248.0" text="Descripción " />
-            <TreeTableColumn fx:id="col_Estado" prefWidth="142.0" text="Estado" />
+          <TreeTableColumn fx:id="colId" prefWidth="50.0" text="ID" />
+          <TreeTableColumn fx:id="col_Nombre" prefWidth="130.0" text="Nombre" />
+            <TreeTableColumn fx:id="col_Descrip" prefWidth="190.0" text="Descripción " />
+            <TreeTableColumn fx:id="col_Estado" prefWidth="100.0" text="Estado" />
+            <TreeTableColumn minWidth="85.0" prefWidth="-1.0" text="Eliminar" />
          </columns>
       </JFXTreeTableView>
       <JFXTextField fx:id="txtestado" layoutX="291.0" layoutY="494.0" promptText="estado" />

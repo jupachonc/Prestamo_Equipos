@@ -1,5 +1,6 @@
 package Control.Admin;
 
+import DAO.CategoriasDAO;
 import DAO.ElementoDAO;
 import Entidad.Categoria;
 import Entidad.Elemento;
@@ -9,9 +10,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,11 +23,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class AdminElementosUXController implements Initializable {
     
@@ -134,6 +140,71 @@ public class AdminElementosUXController implements Initializable {
     public void getElementos (){
     
     this.oblist=FXCollections.observableList(new ElementoDAO().getElements(cat.getID()));
+    
+    
+        JFXTreeTableColumn<Elemento, String> settingsColumn = new JFXTreeTableColumn<>("Eliminar");
+        settingsColumn.setPrefWidth(95);
+        Callback<TreeTableColumn<Elemento, String>, TreeTableCell<Elemento, String>> cellFactory
+                = //
+                (final TreeTableColumn<Elemento, String> param) -> {
+                    final TreeTableCell<Elemento, String> cell = new TreeTableCell<Elemento, String>() {
+
+                final JFXButton btn = new JFXButton("Eliminar");
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        btn.setButtonType(JFXButton.ButtonType.FLAT);
+                        btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
+                        btn.setOnAction(event -> {
+
+                            Elemento elem = this.getTreeTableRow().getItem();
+
+                            Alert alertm = new Alert(Alert.AlertType.CONFIRMATION);
+                            alertm.setHeaderText(null);
+                            alertm.setTitle("Confirmación");
+                            alertm.setContentText("Se eliminará " + elem.getNombre());
+                            Optional<ButtonType> action = alertm.showAndWait();
+                            
+                            if (action.get() == ButtonType.OK) {
+
+                                if (dao.delete(elem)) {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Información");
+                                    alert.setHeaderText("Elemento eliminado");
+                                    alert.setContentText(null);
+                                    alert.showAndWait();
+                                    //emptyTable();
+                                    getElementos();
+                                } else {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setTitle("Información");
+                                    alert.setHeaderText("No se pudo eliminar el elemento.");
+                                    alert.setContentText(null);
+                                    alert.showAndWait();
+                                }
+                            }
+
+                        });
+                        setGraphic(btn);
+                        setText(null);
+                    }
+                }
+            };
+                    return cell;
+                };
+        settingsColumn.setCellFactory(cellFactory);
+
+        elementsTable.getColumns().set(4, settingsColumn);
+
+    
+    
+    
+    
     
     this.colId.setCellValueFactory( new TreeItemPropertyValueFactory<>("ID") );
         this.col_Nombre.setCellValueFactory( new TreeItemPropertyValueFactory<>("nombre") );
