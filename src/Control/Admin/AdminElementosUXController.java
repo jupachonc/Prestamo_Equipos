@@ -4,6 +4,7 @@ import DAO.CategoriasDAO;
 import DAO.ElementoDAO;
 import Entidad.Categoria;
 import Entidad.Elemento;
+import Entidad.MacroCategoria;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
@@ -35,6 +36,7 @@ import javafx.util.Callback;
 public class AdminElementosUXController implements Initializable {
     
     private static Categoria cat; 
+    private MacroCategoria mc;
     private Elemento selectedElement = null;
     
     private ObservableList<Elemento> oblist = FXCollections.observableArrayList();
@@ -183,6 +185,7 @@ public class AdminElementosUXController implements Initializable {
                                     alert.showAndWait();
                                     //emptyTable();
                                     getElementos();
+                                    limpiar();
                                 } else {
                                     Alert alert = new Alert(Alert.AlertType.ERROR);
                                     alert.setTitle("Información");
@@ -191,6 +194,7 @@ public class AdminElementosUXController implements Initializable {
                                     alert.showAndWait();
                                 }
                             }
+                            
 
                         });
                         setGraphic(btn);
@@ -300,17 +304,17 @@ getElementos();
                 }
         }    
          
-        this.txtdesc.setText(null);
+        /*this.txtdesc.setText(null);
         this.txtestado.setText(null);
         this.txtid.setText(null);
         this.txtnombre.setText(null);
         this.comboEstados.setValue(null);
         
-        
+        */
+        limpiar();
         
         getElementos();
-        selectedElement = null;
-        this.crearBtn.setVisible(true);
+        
     }
     
         @FXML
@@ -323,7 +327,7 @@ getElementos();
             this.txtdesc.setText(selectedElement.getDescripción());
             this.txtestado.setText(selectedElement.getEstado()+"");
             this.txtnombre.setText(selectedElement.getNombre()); 
-           this.comboEstados.setValue(resolucion(selectedElement.getEstado()));
+           this.comboEstados.setValue(selectedElement.getEstado());
         
         }
     this.crearBtn.setVisible(false);
@@ -336,12 +340,13 @@ getElementos();
         
         
         this.txtestado.setText(resolucion(this.comboEstados.getSelectionModel().getSelectedItem())+"");
+        
 
     }
     
     @FXML
     void BackToMenu(ActionEvent event) {
-          
+        
         ToPath("/Frontera/Admin/AdminCategoriasUX.fxml");
         
     }
@@ -350,7 +355,9 @@ getElementos();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             Parent root1 = (Parent) fxmlLoader.load();
-
+            AdminCategoriasController ca = fxmlLoader.getController();
+            ca.setMacroCategoria(mc);
+            
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -382,6 +389,12 @@ getElementos();
     public void setCategoria(Categoria cat) {
             this.cat = cat;
             getElementos();
+            
+    }
+    
+    public void setMacroCategoria(MacroCategoria mc) {
+            this.mc = mc;
+            
     }
     
     public int resolucion(String a){
@@ -406,7 +419,7 @@ getElementos();
     return b;
     }
     
-    public String resolucion(int a){
+    public String resolucn(int a){
     String b="";
         switch (a){
             case 0:
@@ -425,6 +438,17 @@ getElementos();
     return b;
     }
     
+    public void limpiar(){
     
+        this.txtdesc.setText(null);
+        this.txtestado.setText(null);
+        this.txtid.setText(null);
+        this.txtnombre.setText(null);
+        this.comboEstados.setValue(null);
+        selectedElement = null;
+        this.crearBtn.setVisible(true);
+    
+    
+    }
     
 }

@@ -24,7 +24,7 @@ try {
             con = DBConnection.getConnection();
             String sql="INSERT INTO " + 
                 "elemento (ID , Nombre, Descripción, EstadoElemento, CategoriaID) " + 
-                "VALUES ('" + el.getID()+ "', '" + el.getNombre()+ "', '" + el.getDescripción()+ "', '" + el.getEstado()+" ','"+cat+"' )";
+                "VALUES ('" + el.getID()+ "', '" + el.getNombre()+ "', '" + el.getDescripción()+ "', '" + el.getEstadoElemento()+" ','"+cat+"' )";
             System.out.println(sql);
             con.createStatement().executeUpdate(sql);
         } catch (SQLException ex) {
@@ -53,7 +53,7 @@ public void update(Elemento el){
         try {
             con = DBConnection.getConnection();
             String sql="UPDATE elemento SET " + 
-                "Nombre =  '" + el.getNombre()+ "', Descripción = '" + el.getDescripción()+ "', EstadoElemento = '" + el.getEstado()+ "' WHERE ID = '" + el.getID()+"'";
+                "Nombre =  '" + el.getNombre()+ "', Descripción = '" + el.getDescripción()+ "', EstadoElemento = '" + el.getEstadoElemento()+ "' WHERE ID = '" + el.getID()+"'";
             System.out.println(sql);
             con.createStatement().executeUpdate(sql);
         } catch (SQLException ex) {

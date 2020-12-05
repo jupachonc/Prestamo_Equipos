@@ -159,7 +159,7 @@ public class LabR implements Initializable {
                         cell.setCellValue(elm.getDescripción());
                         ci++;
                         cell = fila.createCell(ci);
-                        cell.setCellValue(getState(elm.getEstado()));
+                        cell.setCellValue(getState(elm.getEstadoElemento()));
                         filaidx++;
                     }
 

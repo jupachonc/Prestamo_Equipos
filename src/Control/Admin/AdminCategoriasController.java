@@ -15,8 +15,10 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -307,6 +309,8 @@ public class AdminCategoriasController implements Initializable {
             
             AdminElementosUXController ac = fxmlLoader.getController();
             ac.setCategoria(selectedCategoria);
+            ac.setMacroCategoria(mc);
+            
             
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
