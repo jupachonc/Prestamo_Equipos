@@ -79,6 +79,9 @@ public class AdminElementosUXController implements Initializable {
      @FXML
     private JFXButton volver;
      
+     @FXML
+    private JFXButton crearBtn;
+     
     @FXML
     private JFXComboBox<String> comboEstados;
     
@@ -242,7 +245,7 @@ public class AdminElementosUXController implements Initializable {
         this.txtnombre.setText(null);
         this.comboEstados.setValue(null);
         
-        
+        this.crearBtn.setVisible(true);
         
         
         
@@ -307,6 +310,7 @@ getElementos();
         
         getElementos();
         selectedElement = null;
+        this.crearBtn.setVisible(true);
     }
     
         @FXML
@@ -322,7 +326,7 @@ getElementos();
            this.comboEstados.setValue(resolucion(selectedElement.getEstado()));
         
         }
-        
+    this.crearBtn.setVisible(false);
 
     }
     
