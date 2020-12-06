@@ -1,7 +1,10 @@
 package DAO;
 
+import static DAO.UsuarioDAO.DB_URL;
 import Entidad.Elemento;
+import Entidad.Usuario;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,6 +20,11 @@ public class ElementoDAO {
     
 Connection con;
 Statement statement;
+
+static final String DB_URL = "jdbc:mysql://loginapp.c6zrixw9dnvf.us-east-1.rds.amazonaws.com:3306/LoginApp?useSSL=false";
+    static final String DB_DRV = "com.mysql.jdbc.Driver";
+    static final String DB_USER = "admin";
+    static final String DB_PASSWD = "H6TWCpw3RbKVhKWf4ZUa";
     
 public void create(Elemento el, int cat){
 
@@ -49,6 +57,43 @@ try {
         return true;
     }
     
+    public boolean existente(int ID) {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM elemento WHERE ID = " + ID  + "\";";
+            System.out.println(sql);
+            resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                return true;
+            } else {
+                sql = "SELECT * FROM administrador WHERE Documento = " + ID + "\";";
+                if (resultSet.next()) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+
+                connection.close();
+
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+
+    }    
+
 public void update(Elemento el){
         try {
             con = DBConnection.getConnection();
@@ -75,9 +120,9 @@ public ArrayList<Elemento> getElements(int id) {
             while (resultSet.next()) {
                 labs.add(new Elemento(resultSet.getInt("ID"), resultSet.getString("Nombre"),
                         resultSet.getString("Descripción"), resultSet.getInt("EstadoElemento")));
-                System.out.println("La mierda esta avanzando ");
+                
                 i++;
-                System.out.println(i + "puta mierda");
+                
             }
 
         } catch (SQLException ex) {

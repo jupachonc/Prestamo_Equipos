@@ -116,6 +116,21 @@ public class AdminElementosUXController implements Initializable {
         String desc = this.txtdesc.getText();
         int estado = Integer.parseInt( this.txtestado.getText());
         
+        if(!dao.existente(id)){
+        
+        
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("error");
+        alert.setContentText("ID de placa no disponoble ");
+        alert.showAndWait();
+        
+        
+        
+        }
+        
+        
+        
         Elemento el = new Elemento(id, nombre, desc, estado);
         
         dao.create(el, cat.getID());
@@ -331,6 +346,7 @@ getElementos();
         
         }
     this.crearBtn.setVisible(false);
+    this.txtid.setVisible(false);
 
     }
     
@@ -447,6 +463,7 @@ getElementos();
         this.comboEstados.setValue(null);
         selectedElement = null;
         this.crearBtn.setVisible(true);
+        this.txtid.setVisible(true);
     
     
     }
