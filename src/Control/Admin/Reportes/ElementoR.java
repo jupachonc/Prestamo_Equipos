@@ -287,7 +287,9 @@ public class ElementoR implements Initializable {
 
     @FXML
     private void onMacro(ActionEvent event) {
+        if(Elemento!=null){
         Elemento.clear();
+        }
         MacroCategoria Mcat = macroLista.getSelectionModel().getSelectedItem();
         Cats = FXCollections.observableList(new LaboratorioDAO().getCats(Mcat));
 
@@ -304,10 +306,12 @@ public class ElementoR implements Initializable {
             }
         });
     }
-
+     
     @FXML
     private void onCats(ActionEvent event) {
+        if(Elemento!=null){
         Elemento.clear();
+        }
 
         Categoria cat = catLista.getSelectionModel().getSelectedItem();
 
