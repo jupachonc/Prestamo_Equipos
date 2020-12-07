@@ -394,7 +394,7 @@ public class LaboratorioDAO {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
             String sql = "SELECT COUNT(*) as amount FROM elemento "
-                    + "WHERE CategoriaID = " + catID + " AND EstadoElemento = 0;";
+                    + "WHERE CategoriaID = " + catID + " AND EstadoElemento = 1;";
 
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();

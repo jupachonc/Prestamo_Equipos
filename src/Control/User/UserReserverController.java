@@ -300,7 +300,7 @@ public class UserReserverController implements Initializable {
     
     @FXML
     private void makeReserve(ActionEvent event) {
-        if(!new ReservasDAO().checkReservasUser(LoginController.getUsuario())){
+        if(!new ReservasDAO().checkReservasUser(LoginController.getUsuario(), labList.getSelectionModel().getSelectedItem().getID())){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
             alert.setHeaderText("Ya tienes una reserva para este laboratorio.");

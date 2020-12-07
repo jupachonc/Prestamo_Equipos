@@ -90,7 +90,7 @@ public class ReservasDAO {
         return reservas;
     }
     
-    public boolean checkReservasUser(Usuario user){
+    public boolean checkReservasUser(Usuario user, int labID){
         ArrayList<Reserva> reservas = new ArrayList<>();
 
         ResultSet resultSet = null;
@@ -98,7 +98,8 @@ public class ReservasDAO {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "SELECT * FROM reservas, categoria_reservas WHERE EstadoReserva = 0 AND EstudianteDocumento = " +  user.getDocumento()+ " AND ID = ReservasID;";
+            String sql = "SELECT * FROM reservas, categoria_reservas WHERE EstadoReserva = 0 AND EstudianteDocumento = " +  user.getDocumento()
+                       + " AND ID = ReservasID  AND DATE(TiempoDeReserva) = curdate() AND LaboratorioID = " + labID + ";";
             resultSet = statement.executeQuery(sql);
             resultSet.beforeFirst();
             
@@ -108,19 +109,9 @@ public class ReservasDAO {
 
             }
             
-            Date date = new Date();
-            Timestamp nw = new Timestamp(date.getTime());
-            date.setHours(0);
-            date.setMinutes(0);
-            Timestamp ts = new Timestamp(date.getTime());
-            
-            for(Reserva rv : reservas) {
-                if (rv.getTiempoReserva().after(ts) && rv.getTiempoReserva().before(nw)) {
-                    return false;
-                }
+            if(reservas.isEmpty()){
+                return true;
             }
-            
-            return true;
         }
         catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
