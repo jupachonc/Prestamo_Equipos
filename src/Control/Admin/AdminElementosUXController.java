@@ -101,8 +101,8 @@ public class AdminElementosUXController implements Initializable {
         
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
-        alert.setTitle("error");
-        alert.setContentText("Debe llenar los espacios obligatorios");
+        alert.setTitle("Error");
+        alert.setContentText("Debe llenar los espacios obligatorios.");
         alert.showAndWait();
         
         
@@ -116,13 +116,13 @@ public class AdminElementosUXController implements Initializable {
         String desc = this.txtdesc.getText();
         int estado = Integer.parseInt( this.txtestado.getText());
         
-        if(!dao.existente(id)){
+        if(dao.existente(id)){
         
         
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
-        alert.setTitle("error");
-        alert.setContentText("ID de placa no disponoble ");
+        alert.setTitle("Error");
+        alert.setContentText("ID de placa no disponible.");
         alert.showAndWait();
         
         
@@ -139,8 +139,8 @@ public class AdminElementosUXController implements Initializable {
         
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
-        alert.setTitle("error");
-        alert.setContentText("formato incorrecto");
+        alert.setTitle("Error");
+        alert.setContentText("Formato incorrecto.");
         alert.showAndWait();
         
         
@@ -195,7 +195,7 @@ public class AdminElementosUXController implements Initializable {
                                 if (dao.delete(elem)) {
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("Información");
-                                    alert.setHeaderText("Elemento eliminado");
+                                    alert.setHeaderText("Elemento eliminado.");
                                     alert.setContentText(null);
                                     alert.showAndWait();
                                     //emptyTable();
@@ -249,8 +249,8 @@ public class AdminElementosUXController implements Initializable {
         if (selectedElement==null){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
-        alert.setTitle("error");
-        alert.setContentText("Debe seleccionar un elemento");
+        alert.setTitle("Error");
+        alert.setContentText("Debe seleccionar un elemento.");
         alert.showAndWait();
         
         }else{
@@ -278,8 +278,8 @@ getElementos();
         if (selectedElement==null){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
-        alert.setTitle("error");
-        alert.setContentText("Debe seleccionar un elemento para modificar");
+        alert.setTitle("Error");
+        alert.setContentText("Debe seleccionar un elemento para modificar.");
         alert.showAndWait();
         
             }else if(this.txtid.getText().length()==0||  this.txtestado.getText().length()==0 || this.txtnombre.getText().length()==0 || this.txtnombre.getText()==" "){
@@ -288,8 +288,8 @@ getElementos();
             //if(this.txtid.getText()== null|| this.txtid.getText()== "" || this.txtestado.getText()==null || this.txtestado.getText()=="" || this.txtnombre.getText()==null || this.txtnombre.getText()==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setTitle("error");
-            alert.setContentText("Debe llenar los espacios obligatorios para modificar");
+            alert.setTitle("Error");
+            alert.setContentText("Debe llenar los espacios obligatorios para modificar.");
             alert.showAndWait();
             
       
@@ -312,8 +312,8 @@ getElementos();
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setTitle("error");
-                alert.setContentText("formato incorrecto al modificar ");
+                alert.setTitle("Error");
+                alert.setContentText("formato incorrecto al modificar. ");
                 alert.showAndWait();
 
                 }

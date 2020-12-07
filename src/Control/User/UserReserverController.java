@@ -149,11 +149,20 @@ public class UserReserverController implements Initializable {
                         btn.setButtonType(JFXButton.ButtonType.FLAT);
                         btn.setStyle("-fx-background-color:  #f44336; -fx-text-fill: #ffffff;");
                         btn.setOnAction(event -> {
+                            
+                            
+                            
                             if(reserveElems.contains(this.getTreeTableRow().getItem())){
                                 int i = reserveElems.indexOf(this.getTreeTableRow().getItem());
                                 int m = reserveElems.get(i).getCantidadMax() + 1;
                                 if(this.getTreeTableRow().getItem().getCantidadMax() >= m || this.getTreeTableRow().getItem().getCantidadLibre() >= m){
                                     reserveElems.get(i).setCantidadMax(m);
+                                }else{
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setHeaderText(null);
+                                    alert.setTitle("Error");
+                                    alert.setContentText("No hay más elementos disponibles.");
+                                    alert.showAndWait();
                                 }
                             }
                             else{
@@ -161,6 +170,12 @@ public class UserReserverController implements Initializable {
                                     Categoria o = this.getTreeTableRow().getItem();
                                     o.setCantidadMax(1);
                                     reserveElems.add(o);
+                                }else{
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setHeaderText(null);
+                                    alert.setTitle("Error");
+                                    alert.setContentText("No hay más elementos disponibles.");
+                                    alert.showAndWait();
                                 }
                             }
                             reserveTable.refresh();

@@ -30,6 +30,7 @@ public class AdminMenuController implements Initializable {
     private ObservableList<Laboratorio> dataLabs;
     private ObservableList<Elemento> dataPrestamo;
     public static Laboratorio currentLab = null;
+    private static int index=-1;
 
     @FXML
     private Label labelname;
@@ -37,6 +38,7 @@ public class AdminMenuController implements Initializable {
     private JFXButton logoutbtn;
     @FXML
     private JFXComboBox<Laboratorio> labList;
+    
 
     /**
      * Initializes the controller class.
@@ -46,9 +48,17 @@ public class AdminMenuController implements Initializable {
         updateUser();
         getLabs();
 
-        if (currentLab != null) {
-            labList.setValue(currentLab);
+        //if (currentLab != null) {
+            //labList.setValue(currentLab);
+          //  labList.getSelectionModel().select(currentLab.getID());
+        //}
+        if(index!=-1){
+        
+        labList.getSelectionModel().select(index);
+        
+        
         }
+        
 
     }
 
@@ -147,6 +157,7 @@ public class AdminMenuController implements Initializable {
     @FXML
     private void onSelectItem(ActionEvent event) {
         currentLab = labList.getSelectionModel().getSelectedItem();
+        index =labList.getSelectionModel().getSelectedIndex();
 
     }
 

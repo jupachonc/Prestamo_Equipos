@@ -64,18 +64,15 @@ try {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = connection.createStatement();
-            String sql = "SELECT * FROM elemento WHERE ID = " + ID  + "\";";
+            String sql = "SELECT * FROM elemento WHERE ID = " + ID  + ";";
             System.out.println(sql);
             resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
                 return true;
             } else {
-                sql = "SELECT * FROM administrador WHERE Documento = " + ID + "\";";
-                if (resultSet.next()) {
-                    return true;
-                }
+                return false;
             }
-            return false;
+           // return false;
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
             return false;
