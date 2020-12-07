@@ -28,7 +28,6 @@ import javafx.stage.Stage;
 
 public class UserHistorialReview implements Initializable {
     private Usuario user = LoginController.getUsuario();
-    private Laboratorio currLab;
     private Prestamo pres;
     private ObservableList<Elemento> dataPres;
     
@@ -47,7 +46,6 @@ public class UserHistorialReview implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currLab = UserHistoryController.currLab;
         pres = UserHistoryController.pres;
         updateSideData();
         getReserveTable();
@@ -75,7 +73,7 @@ public class UserHistorialReview implements Initializable {
     }
     
     private void updateSideData(){        
-        labLabel.setText(currLab.getNombre());
+        labLabel.setText(pres.getLab());
         nombreLabel.setText("" + pres.getAdminID());
         fechaLabel.setText(pres.getTiempoReserva());
         

@@ -34,7 +34,7 @@ import javafx.util.StringConverter;
 
 public class UserHistoryController implements Initializable {
     private Usuario user = LoginController.getUsuario();
-    public static Laboratorio currLab;
+    public Laboratorio currLab;
     public static Prestamo pres;
     private ObservableList<Laboratorio> dataLabs;
     private static ObservableList<Prestamo> dataPres;
