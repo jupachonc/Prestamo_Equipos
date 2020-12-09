@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.AdminGestorClaseController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="970.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Admin.AdminGestorClaseController">
    <children>
       <Circle fill="#a9cd43" layoutX="381.0" layoutY="-347.0" radius="484.0" stroke="#a9cd43" strokeType="INSIDE" />
       <Label alignment="CENTER" layoutX="191.0" layoutY="40.0" prefHeight="40.0" prefWidth="381.0" style="-fx-font-size: 26pt; -fx-font-weight: bold;" stylesheets="@../../Resources/Fonts/PT_Sans/PTSansBold.css" text="Gestión de clases " textFill="WHITE">

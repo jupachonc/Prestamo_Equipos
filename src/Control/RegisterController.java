@@ -47,7 +47,7 @@ public class RegisterController implements Initializable {
     private void Register(ActionEvent event) {
         String nombre = nombres.getText();
         String apellido = apellidos.getText();
-        int intDocumento = Integer.parseInt(documento.getText());
+        String intDocumento = documento.getText();
         String strEmail = email.getText();
         String contrasena = password.getText();
         String reContrasena = confirm_password.getText();

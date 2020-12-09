@@ -31,7 +31,7 @@ public class UsuarioDAO {
                         + object.getDocumento() + ",\"" + object.getEmail() + "\", \""
                         + DigestUtils.sha256Hex(object.getContrasena()) + "\")";
             } else {
-                if (existente(object)) {
+                if (reactivar(object)) {
                     sql = "UPDATE administrador set Password ='" + DigestUtils.sha256Hex(object.getContrasena())
                             + "', Estado = 1 " + "Where Documento = " + object.getDocumento() + ";";;
                 } else {

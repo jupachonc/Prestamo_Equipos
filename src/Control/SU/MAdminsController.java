@@ -152,9 +152,12 @@ public class MAdminsController implements Initializable {
 
     @FXML
     private void create(ActionEvent event) {
-        String respuesta = new ValidarRegistro().verificarRegistro(names.getText(),
-                lastnames.getText(), Integer.parseInt(document.getText()), email.getText(),
+        
+        
+        String respuesta = new ValidarRegistro().verificarRegistro(names.getText().trim(),
+                lastnames.getText().trim(), document.getText().trim(), email.getText().trim(),
                 password.getText(), cpassword.getText(), 1);
+        
         if (respuesta.equals("Usuario registrado") || respuesta.equals("Usuario reactivado con la contraseña asignada")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Información");

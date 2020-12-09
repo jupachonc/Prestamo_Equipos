@@ -52,11 +52,8 @@ public class AdminMenuController implements Initializable {
             //labList.setValue(currentLab);
           //  labList.getSelectionModel().select(currentLab.getID());
         //}
-        if(index!=-1){
-        
-        labList.getSelectionModel().select(index);
-        
-        
+        if(index != -1){
+            labList.getSelectionModel().select(index);
         }
         
 

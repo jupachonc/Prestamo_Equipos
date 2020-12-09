@@ -12,31 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class LaboratorioDAO {
-
     Connection connection;
     Statement statement;
-
-    private ResultSet Query(String sql) {
-        ResultSet resultSet = null;
-        try {
-            connection = DBConnection.getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
-
-        } catch (SQLException ex) {
-            System.out.println("Error en SQL" + ex);
-        } finally {
-            try {
-                System.out.println("cerrando statement...");
-                statement.close();
-                System.out.println("cerrando conexión...");
-                connection.close();
-            } catch (SQLException ex) {
-                System.out.println("Error en SQL" + ex);
-            }
-        }
-        return resultSet;
-    }
 
     public boolean createLab(Laboratorio lab) {
         int resultSet;
@@ -45,8 +22,8 @@ public class LaboratorioDAO {
             resultSet = -1;
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = "INSERT INTO laboratorio (`Nombre`, `Telefono`, `Ubicacion`) Values(\""
-                    + lab.getNombre() + "\"," + lab.getTelefono() + ", \"" + lab.getUbicacion() + "\");";
+            String sql = "INSERT INTO laboratorio (`Nombre`, `Telefono`, `Ubicacion`) Values(\" "
+                       + lab.getNombre() + "\", \"" + lab.getTelefono() + "\", \"" + lab.getUbicacion() + "\");";
             resultSet = statement.executeUpdate(sql);
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
@@ -98,6 +75,37 @@ public class LaboratorioDAO {
         return labs;
     }
 
+    public ArrayList<Laboratorio> getLabsReserve() {
+        ArrayList<Laboratorio> labs = new ArrayList<>();
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM lab_prestamo;";
+            resultSet = statement.executeQuery(sql);
+            resultSet.beforeFirst();
+
+            while (resultSet.next()) {
+                labs.add(new Laboratorio(resultSet.getInt("ID"), resultSet.getString("Nombre"),
+                        resultSet.getString("Telefono"), resultSet.getString("Ubicacion")));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+        return labs;
+    }
+    
     public ArrayList<MacroCategoria> getMCats(int LabID) {
         ArrayList<MacroCategoria> Mcats = new ArrayList<>();
         ResultSet resultSet = null;
@@ -268,7 +276,7 @@ public class LaboratorioDAO {
             resultSet = -1;
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            String sql = String.format("UPDATE laboratorio SET Estado = 0 WHERE ID = %s;", lab.getID());
+            String sql = String.format("UPDATE laboratorio SET Estado = 2 WHERE ID = %s;", lab.getID());
             resultSet = statement.executeUpdate(sql);
             return resultSet > 0;
         } catch (SQLException ex) {

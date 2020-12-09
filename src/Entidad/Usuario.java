@@ -24,9 +24,15 @@ public class Usuario extends RecursiveTreeObject<Usuario> {
         if (str == null || str.isEmpty()) {
             return str;
         }
+        str = str.trim();
         List nc = new ArrayList();
         for (String palabra : str.split(" ")) {
-            nc.add(palabra.substring(0, 1).toUpperCase() + palabra.substring(1, palabra.length()).toLowerCase());
+            if(str.length() > 1){
+                nc.add(palabra.substring(0, 1).toUpperCase() + palabra.substring(1, palabra.length()).toLowerCase());
+            }
+            else{
+                nc.add(palabra.toUpperCase());
+            }
         }
         return String.join(" ", nc);
     }
