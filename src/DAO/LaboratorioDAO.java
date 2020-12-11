@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class LaboratorioDAO {
+
     Connection connection;
     Statement statement;
 
@@ -23,7 +24,7 @@ public class LaboratorioDAO {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
             String sql = "INSERT INTO laboratorio (`Nombre`, `Telefono`, `Ubicacion`) Values(\" "
-                       + lab.getNombre() + "\", \"" + lab.getTelefono() + "\", \"" + lab.getUbicacion() + "\");";
+                    + lab.getNombre() + "\", \"" + lab.getTelefono() + "\", \"" + lab.getUbicacion() + "\");";
             resultSet = statement.executeUpdate(sql);
         } catch (SQLException ex) {
             System.out.println("Error en SQL" + ex);
@@ -105,7 +106,7 @@ public class LaboratorioDAO {
         }
         return labs;
     }
-    
+
     public ArrayList<MacroCategoria> getMCats(int LabID) {
         ArrayList<MacroCategoria> Mcats = new ArrayList<>();
         ResultSet resultSet = null;
@@ -270,6 +271,33 @@ public class LaboratorioDAO {
     }
 
     public boolean disableLab(Laboratorio lab) {
+        int resultSet;
+
+        try {
+            resultSet = -1;
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+            String sql = String.format("UPDATE laboratorio SET Estado = 0 WHERE ID = %s;", lab.getID());
+            resultSet = statement.executeUpdate(sql);
+            return resultSet > 0;
+        } catch (SQLException ex) {
+            System.out.println("Error en SQL" + ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("cerrando statement...");
+                statement.close();
+                System.out.println("cerrando conexión...");
+
+                connection.close();
+
+            } catch (SQLException ex) {
+                System.out.println("Error en SQL" + ex);
+            }
+        }
+    }
+
+    public boolean disableLabP(Laboratorio lab) {
         int resultSet;
 
         try {

@@ -46,7 +46,7 @@ public class AdminGestorClaseController implements Initializable {
     void Gestion(ActionEvent event) {
         if(this.bloquearbtn.isSelected()){
             
-            dao.disableLab(lab);
+            dao.disableLabP(lab);
         
         }else if(this.permitirbtn.isSelected()){
             dao.enableLab(lab);

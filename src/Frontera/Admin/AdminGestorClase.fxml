@@ -16,12 +16,12 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <RadioButton fx:id="bloquearbtn" layoutX="223.0" layoutY="300.0" mnemonicParsing="false" onAction="#desBloq" text="Bloquear prestamos ">
+      <RadioButton fx:id="bloquearbtn" layoutX="223.0" layoutY="300.0" mnemonicParsing="false" onAction="#desBloq" text="Bloquear Préstamos ">
          <font>
             <Font size="18.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="permitirbtn" layoutX="222.0" layoutY="211.0" mnemonicParsing="false" onAction="#desPermitir" text="Permitir prestmamos">
+      <RadioButton fx:id="permitirbtn" layoutX="222.0" layoutY="211.0" mnemonicParsing="false" onAction="#desPermitir" text="Permitir Préstamos">
          <font>
             <Font size="18.0" />
          </font>
